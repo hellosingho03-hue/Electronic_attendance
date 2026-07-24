@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>전자출결시스템 관리자 테스트 페이지</title>
+  <style>
+:root {
+  --navy:#071d42;
+  --navy-2:#0c2c5f;
+  --blue:#1267d6;
+  --blue-2:#eaf3ff;
+  --cyan:#0d9bb8;
+  --green:#12a05c;
+  --green-soft:#e8f7ef;
+  --orange:#f39a18;
+  --orange-soft:#fff5df;
+  --red:#e43d3d;
+  --red-soft:#fff0f0;
+  --purple:#7755d9;
+  --purple-soft:#f1edff;
+  --teal:#0e8f83;
+  --teal-soft:#e8f8f6;
+  --gray-900:#172033;
+  --gray-800:#263247;
+  --gray-700:#46536a;
+  --gray-600:#657187;
+  --gray-500:#8791a4;
+  --gray-400:#b6bfce;
+  --gray-300:#d8dee8;
+  --gray-200:#e8edf4;
+  --gray-100:#f4f7fb;
+  --white:#fff;
+  --shadow:0 10px 30px rgba(12,44,95,.08);
+  --radius:16px;
+  --sidebar:244px;
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#eef3f9;color:var(--gray-900)}
+body{font-size:14px;line-height:1.45}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+.muted{color:var(--gray-600)}
+.small{font-size:12px}
+.tiny{font-size:11px}
+.strong{font-weight:800}
+.nowrap{white-space:nowrap}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.flex{display:flex}
+.flex-1{flex:1}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-6{gap:6px}.gap-8{gap:8px}.gap-10{gap:10px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-20{gap:20px}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+/* Login */
+.login-page{min-height:100vh;display:grid;grid-template-columns:1.08fr .92fr;background:linear-gradient(145deg,#061c41 0%,#0b3a7a 55%,#1267d6 100%)}
+.login-hero{position:relative;overflow:hidden;padding:70px 72px;color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.login-hero:before,.login-hero:after{content:"";position:absolute;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+.login-hero:before{width:520px;height:520px;right:-160px;top:-110px}
+.login-hero:after{width:360px;height:360px;right:90px;bottom:-210px}
+.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:900;letter-spacing:-.5px}
+.brand-mark{width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.hero-copy{max-width:680px;position:relative;z-index:1}
+.hero-copy h1{font-size:52px;line-height:1.12;margin:0 0 22px;letter-spacing:-2px}
+.hero-copy p{font-size:18px;line-height:1.75;color:rgba(255,255,255,.82);margin:0;max-width:620px}
+.hero-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:34px}
+.hero-step{padding:13px 10px;border-radius:12px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);font-size:12px;text-align:center}
+.hero-step b{display:block;font-size:15px;margin-bottom:3px}
+.login-panel{background:#f7f9fc;padding:48px;display:flex;align-items:center;justify-content:center}
+.login-card{width:min(470px,100%);background:#fff;border:1px solid var(--gray-200);border-radius:26px;padding:38px;box-shadow:0 24px 70px rgba(1,19,48,.18)}
+.login-card h2{font-size:28px;margin:0 0 8px;letter-spacing:-.8px}
+.login-card .lead{margin:0 0 26px;color:var(--gray-600)}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-weight:750;font-size:13px;color:var(--gray-800)}
+.input,.select,.textarea{width:100%;border:1px solid var(--gray-300);background:#fff;border-radius:10px;padding:11px 13px;color:var(--gray-900);outline:none;transition:.15s}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(18,103,214,.12)}
+.textarea{min-height:90px;resize:vertical}
+.btn{border:1px solid var(--gray-300);background:#fff;border-radius:10px;padding:10px 14px;font-weight:750;color:var(--gray-800);display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(28,45,78,.08)}
+.btn-primary{background:var(--navy-2);border-color:var(--navy-2);color:#fff}
+.btn-blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn-green{background:var(--green);border-color:var(--green);color:#fff}
+.btn-red{background:var(--red);border-color:var(--red);color:#fff}
+.btn-soft{background:var(--gray-100)}
+.btn-ghost{background:transparent}
+.btn-sm{min-height:32px;padding:6px 10px;font-size:12px;border-radius:8px}
+.btn-lg{min-height:48px;padding:12px 18px;font-size:15px}
+.btn-block{width:100%}
+.demo-box{margin-top:22px;background:var(--gray-100);border-radius:13px;padding:14px;border:1px solid var(--gray-200)}
+.demo-title{font-size:12px;font-weight:800;margin-bottom:8px;color:var(--gray-700)}
+.demo-list{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.demo-account{border:1px solid var(--gray-300);background:#fff;border-radius:8px;padding:8px 10px;text-align:left;font-size:12px}
+.demo-account b{display:block;color:var(--navy-2);margin-bottom:2px}
+
+/* App shell */
+.shell{min-height:100vh;display:grid;grid-template-columns:var(--sidebar) 1fr;grid-template-rows:64px 1fr}
+.topbar{grid-column:1/3;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50;box-shadow:0 4px 18px rgba(0,0,0,.12)}
+.topbar .brand{font-size:18px}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.user-chip{display:flex;align-items:center;gap:10px;padding-left:12px;border-left:1px solid rgba(255,255,255,.18)}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--navy);font-weight:900}
+.sidebar{grid-row:2;background:#0b244b;color:#d9e8ff;padding:18px 14px 28px;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto}
+.role-panel{border-radius:13px;padding:12px;margin-bottom:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.role-panel .role-name{font-weight:900;color:#fff;margin-bottom:3px}
+.role-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:7px}
+.role-developer{--role:var(--purple);--role-soft:var(--purple-soft)}
+.role-pm{--role:var(--blue);--role-soft:var(--blue-2)}
+.role-exam{--role:var(--green);--role-soft:var(--green-soft)}
+.role-building{--role:var(--orange);--role-soft:var(--orange-soft)}
+.role-field{--role:var(--teal);--role-soft:var(--teal-soft)}
+.nav-group{margin:14px 0 5px;padding:0 10px;font-size:11px;color:#7ea2d7;text-transform:uppercase;letter-spacing:.5px;font-weight:800}
+.nav-item{width:100%;border:0;color:#c9dbf5;background:transparent;border-radius:10px;padding:10px 11px;display:flex;align-items:center;gap:10px;text-align:left;margin:3px 0;font-weight:700}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{background:var(--role,var(--blue));color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.18)}
+.nav-icon{width:22px;text-align:center;font-size:16px}
+.content{grid-column:2;grid-row:2;padding:24px 26px 44px;min-width:0}
+.page-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}
+.page-title h1{margin:0;font-size:27px;letter-spacing:-.9px}
+.page-title p{margin:7px 0 0;color:var(--gray-600)}
+.page-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+/* components */
+.card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);box-shadow:var(--shadow)}
+.card-header{padding:17px 18px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-title{font-size:16px;font-weight:900;letter-spacing:-.3px}
+.card-sub{font-size:12px;color:var(--gray-600);margin-top:3px}
+.card-body{padding:18px}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.grid-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.kpi{padding:16px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.kpi .label{font-size:12px;font-weight:800;color:var(--gray-700)}
+.kpi .value{font-size:26px;font-weight:950;line-height:1.15;margin-top:4px;white-space:nowrap}
+.kpi .value small{font-size:12px;font-weight:700;margin-left:3px}
+.kpi-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;flex:0 0 auto}
+.badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:850;white-space:nowrap;border:1px solid transparent}
+.badge-blue{background:var(--blue-2);color:var(--blue)}
+.badge-green{background:var(--green-soft);color:var(--green)}
+.badge-orange{background:var(--orange-soft);color:#d77d00}
+.badge-red{background:var(--red-soft);color:var(--red)}
+.badge-gray{background:var(--gray-100);color:var(--gray-600);border-color:var(--gray-200)}
+.badge-purple{background:var(--purple-soft);color:var(--purple)}
+.section-title{font-size:18px;font-weight:900;margin:0 0 12px;letter-spacing:-.4px}
+.toolbar{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:13px;display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.toolbar .field{min-width:145px;flex:1}
+.toolbar .field.narrow{min-width:120px;max-width:180px}
+.toolbar .field.wide{min-width:220px}
+.table-wrap{overflow:auto;border:1px solid var(--gray-200);border-radius:12px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--gray-200);text-align:left;vertical-align:middle}
+th{background:#f5f8fc;color:var(--gray-700);font-size:12px;font-weight:900;white-space:nowrap;position:sticky;top:0;z-index:2}
+td{font-size:12px;color:var(--gray-800)}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:#fbfdff}
+tr.closed td{background:#eef1f5!important;color:#7a8497}
+.progress{height:8px;background:#e8edf4;border-radius:999px;overflow:hidden;min-width:80px}
+.progress > span{display:block;height:100%;background:var(--green);border-radius:999px}
+.progress.orange > span{background:var(--orange)}
+.progress.red > span{background:var(--red)}
+.progress.blue > span{background:var(--blue)}
+.notice{border-radius:12px;padding:13px 15px;display:flex;gap:10px;align-items:flex-start;border:1px solid}
+.notice-info{background:#edf5ff;border-color:#cbe0ff;color:#174f9e}
+.notice-success{background:var(--green-soft);border-color:#bfe8d1;color:#117545}
+.notice-warning{background:var(--orange-soft);border-color:#ffd891;color:#8b5b06}
+.notice-danger{background:var(--red-soft);border-color:#ffc7c7;color:#a52626}
+
+/* stepper */
+.stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:15px}
+.step{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:12px;display:flex;align-items:center;gap:9px;position:relative;min-width:0}
+.step.active{border-color:var(--blue);box-shadow:0 0 0 2px rgba(18,103,214,.08)}
+.step.done{background:#f0fbf5;border-color:#c7ebd6}
+.step-num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--gray-200);font-weight:900;color:var(--gray-700);flex:0 0 auto}
+.step.active .step-num{background:var(--blue);color:#fff}.step.done .step-num{background:var(--green);color:#fff}
+.step-label{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* settings */
+.setting-row{display:grid;grid-template-columns:1.25fr 1.8fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-200)}
+.setting-row:last-child{border-bottom:0}
+.setting-name{font-weight:850}
+.setting-desc{font-size:12px;color:var(--gray-600)}
+.switch{position:relative;width:48px;height:26px;display:inline-block}
+.switch input{display:none}
+.switch span{position:absolute;inset:0;background:#b9c1ce;border-radius:999px;transition:.2s}
+.switch span:after{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:.2s}
+.switch input:checked+span{background:var(--green)}
+.switch input:checked+span:after{transform:translateX(22px)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--gray-200);padding:0 18px;background:#fff;border-radius:14px 14px 0 0;overflow:auto}
+.tab{border:0;background:transparent;padding:13px 12px;color:var(--gray-600);font-weight:800;white-space:nowrap;border-bottom:3px solid transparent}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.term-preview{background:linear-gradient(135deg,#eef5ff,#f9fbff);border:1px solid #d8e7fb;border-radius:14px;padding:18px}
+.term-token{display:flex;gap:8px;align-items:center;margin:7px 0}
+.term-token .from{min-width:110px;color:var(--gray-600)}
+.term-token .to{font-weight:900;color:var(--blue)}
+
+/* Upload */
+.dropzone{border:2px dashed #a8c7ef;background:#f6faff;border-radius:16px;padding:28px;text-align:center;transition:.15s}
+.dropzone.drag{border-color:var(--blue);background:#eaf3ff}
+.dropzone .drop-icon{font-size:34px;margin-bottom:8px}
+.validation-pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.validation-stage{border:1px solid var(--gray-200);background:#fff;border-radius:11px;padding:10px;text-align:center;font-size:12px;font-weight:800}
+.validation-stage.running{border-color:var(--blue);color:var(--blue);background:var(--blue-2)}
+.validation-stage.ok{border-color:#bde8cf;color:var(--green);background:var(--green-soft)}
+.validation-stage.error{border-color:#ffc7c7;color:var(--red);background:var(--red-soft)}
+.mapping-grid{display:grid;grid-template-columns:1fr 1fr 110px;gap:0;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden}
+.mapping-grid>div{padding:10px 12px;border-right:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);font-size:12px}
+.mapping-grid>div:nth-child(3n){border-right:0}
+.mapping-grid .head{background:#f5f8fc;font-weight:900;color:var(--gray-700)}
+.mapping-grid>div:nth-last-child(-n+3){border-bottom:0}
+.result-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.result-box{border:1px solid var(--gray-200);border-radius:12px;padding:12px;text-align:center;background:#fff}
+.result-box b{font-size:23px;display:block}
+.error-link{color:var(--red);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+/* dashboard */
+.dashboard-grid{display:grid;grid-template-columns:1.08fr 1.38fr 1fr;gap:14px}
+.chart-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:16px;min-width:0}
+.chart-title{font-size:14px;font-weight:900;margin-bottom:12px}
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:22px;min-height:210px}
+.donut{width:164px;height:164px;border-radius:50%;background:conic-gradient(var(--green) 0 56%, var(--red) 56% 100%);position:relative;flex:0 0 auto}
+.donut:after{content:"";position:absolute;inset:33px;border-radius:50%;background:#fff}
+.donut-label{position:absolute;inset:0;display:grid;place-items:center;z-index:1;text-align:center;font-size:12px;color:var(--gray-600)}
+.donut-label b{font-size:28px;color:var(--gray-900);display:block;line-height:1.1}
+.legend{display:flex;flex-direction:column;gap:9px;min-width:0}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:12px;white-space:nowrap}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.segment-bar{display:flex;height:138px;border-radius:14px;overflow:hidden;margin-top:16px}
+.segment{display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;min-width:42px}
+.segment small{display:block;font-size:11px;font-weight:700;margin-top:2px}
+.room-rank{display:flex;flex-direction:column;gap:9px}
+.rank-row{display:grid;grid-template-columns:minmax(115px,1fr) 1.4fr 50px;gap:9px;align-items:center;font-size:12px}
+.line-chart{height:210px;position:relative;border-left:1px solid var(--gray-300);border-bottom:1px solid var(--gray-300);background:repeating-linear-gradient(to top,transparent 0,transparent 41px,#edf0f5 42px)}
+.line-chart svg{width:100%;height:100%;overflow:visible}
+.line-chart-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--gray-500);margin-top:6px}
+.incident-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.incident-card{display:flex;align-items:center;gap:10px;border:1px solid var(--gray-200);border-radius:12px;padding:12px;background:#fff;min-width:0}
+.incident-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;flex:0 0 auto}
+.incident-card b{font-size:19px;display:block}
+
+/* PDF */
+.pdf-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.align-buttons{display:flex;gap:5px}
+.align-btn{width:34px;height:30px;border:1px solid var(--gray-300);background:#fff;border-radius:7px;font-weight:900}
+.align-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.preview-sheet{background:#f1f3f6;padding:18px;border-radius:14px;min-height:610px;display:flex;align-items:center;justify-content:center}
+.paper{width:100%;max-width:570px;aspect-ratio:1/1.414;background:#fff;box-shadow:0 10px 28px rgba(0,0,0,.13);padding:28px;display:flex;flex-direction:column}
+.paper-title{text-align:center;font-size:18px;font-weight:900;margin:12px 0 16px}
+.paper-meta{display:flex;justify-content:space-between;font-size:10px;margin-bottom:8px}
+.paper-table{width:100%;border-collapse:collapse;min-width:0}
+.paper-table th,.paper-table td{border:1px solid #555;padding:4px;font-size:8px;background:#fff;color:#111;position:static}
+.paper-footer{margin-top:auto;border-top:1px solid #ddd;padding-top:12px;font-size:10px;display:grid;gap:8px}
+.signer-list{max-height:220px;overflow:auto;border:1px solid var(--gray-200);border-radius:10px}
+.signer-row{display:grid;grid-template-columns:26px 1fr 100px 100px;gap:8px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--gray-200);font-size:12px}
+.signer-row:last-child{border-bottom:0}
+
+/* Modal / toast */
+.modal-backdrop{position:fixed;inset:0;background:rgba(7,23,52,.56);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal{width:min(760px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.modal-header{padding:18px 20px;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center}
+.modal-header h3{margin:0;font-size:18px}
+.modal-body{padding:20px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--gray-200);display:flex;justify-content:flex-end;gap:8px}
+.close-x{width:32px;height:32px;border:0;border-radius:8px;background:var(--gray-100);font-size:18px}
+.toast-root{position:fixed;right:22px;bottom:22px;z-index:300;display:flex;flex-direction:column;gap:10px}
+.toast{background:#fff;border:1px solid var(--gray-200);border-left:5px solid var(--blue);box-shadow:0 14px 36px rgba(0,0,0,.15);border-radius:11px;padding:12px 14px;min-width:280px;max-width:420px;animation:slideIn .2s ease}
+.toast.success{border-left-color:var(--green)}.toast.error{border-left-color:var(--red)}.toast.warning{border-left-color:var(--orange)}
+@keyframes slideIn{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* responsive */
+@media(max-width:1200px){
+  :root{--sidebar:210px}
+  .grid-6{grid-template-columns:repeat(3,1fr)}
+  .dashboard-grid{grid-template-columns:1fr 1fr}
+  .dashboard-grid>.chart-card:last-child{grid-column:1/3}
+  .incident-cards{grid-template-columns:repeat(2,1fr)}
+  .pdf-layout{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .login-page{grid-template-columns:1fr}.login-hero{display:none}.login-panel{min-height:100vh;padding:24px}
+  .shell{grid-template-columns:1fr;grid-template-rows:64px auto 1fr}
+  .topbar{grid-column:1;grid-row:1}.sidebar{grid-column:1;grid-row:2;position:static;height:auto;display:flex;gap:6px;overflow:auto;padding:8px}.role-panel,.nav-group{display:none}.nav-item{white-space:nowrap;width:auto;margin:0}
+  .content{grid-column:1;grid-row:3;padding:18px}
+  .grid-2,.grid-3,.grid-4,.grid-5,.grid-6{grid-template-columns:1fr}
+  .dashboard-grid{grid-template-columns:1fr}.dashboard-grid>.chart-card:last-child{grid-column:auto}
+  .stepper{grid-template-columns:1fr}
+  .validation-pipeline{grid-template-columns:1fr}
+  .result-summary{grid-template-columns:repeat(2,1fr)}
+  .page-header{flex-direction:column}.page-actions{justify-content:flex-start}
+}
+
+</style>
+
+</head>
+<body>
+  <noscript><div style="padding:24px;font-family:Arial,sans-serif">이 테스트 페이지는 JavaScript를 사용합니다. 브라우저에서 JavaScript를 허용해 주세요.</div></noscript>
+  <div id="app" aria-live="polite"></div>
+  <div id="toast-root" class="toast-root" aria-live="assertive"></div>
+  <div id="modal-root"></div>
+<script>
+/* Electronic Attendance prototype - static SPA, GitHub Pages ready */
+(() => {
+  'use strict';
+
+  const ROLES = {
+    developer: {name:'개발자', color:'purple', account:'admin', password:'1234', home:'developer-home'},
+    pm: {name:'담당 PM', color:'blue', account:'pm', password:'1234', home:'pm-home'},
+    exam: {name:'전형관리자', color:'green', account:'exam', password:'1234', home:'dashboard'},
+    building: {name:'고사장·건물관리자', color:'orange', account:'building', password:'1234', home:'dashboard'},
+    field: {name:'현장관리자', color:'teal', account:'field', password:'1234', home:'field-attendance'}
+  };
+
+  const defaultState = {
+    session:null,
+    ui:{uploadType:'candidate'},
+    school:{id:'dongguk', name:'동국대학교'},
+    selection:'2026학년도 수시 논술',
+    terms:{
+      examSite:'고사장', examRoom:'고사실', middleManager:'중간관리자',
+      examManager:'전형관리자', fieldManager:'현장관리자', incident:'사고자'
+    },
+    features:{
+      closing:true, reserveRoom:true, splitInvigilator:true, answerSheet:true,
+      incidentId:true, incidentExit:true, incidentNoise:true, incidentFraud:true,
+      photoCompare:true, invigilatorAssignment:false, remainingSeat:true
+    },
+    basic:{
+      examName:'2026학년도 수시 논술', examDate:'2025-11-16',
+      sessions:[
+        {use:true,name:'1교시',start:'09:30',end:'11:00',close:'11:20'},
+        {use:true,name:'2교시',start:'13:00',end:'14:30',close:'14:50'},
+        {use:true,name:'3교시',start:'16:30',end:'18:00',close:'18:20'}
+      ]
+    },
+    pdf:{pageSize:30, signaturePolicy:'selected', align:{school:'left',date:'right',footer:'center',sign:'right'}, selectedSigners:['S001','S002','S099']},
+    accounts:[
+      {id:'pm',name:'박상호 PM',role:'pm',scope:'동국대학교 / 전체 전형',status:'사용'},
+      {id:'exam',name:'김민성',role:'exam',scope:'2026 수시 논술 전체',status:'사용'},
+      {id:'building',name:'이서준',role:'building',scope:'학림관·혜화관',status:'사용'},
+      {id:'field',name:'최유진',role:'field',scope:'학림관 J411 / 1교시',status:'사용'}
+    ],
+    uploads:{candidate:null,invigilator:null,photos:null},
+    close:{status:'before',closedAt:null},
+    data:{
+      total:15928, attended:8914, waiting:0, absent:7014, rate:56.0, incidentCount:60,
+      roomCount:271, hallCount:5, buildingCount:12, capacity:16120,
+      sessions:[
+        {name:'1교시(09:30)',assigned:5273,attended:2937,rate:55.7},
+        {name:'2교시(13:00)',assigned:5762,attended:3266,rate:56.7},
+        {name:'3교시(16:30)',assigned:4893,attended:2711,rate:55.4}
+      ],
+      roomBands:[
+        {label:'70% 이상',count:9,pct:3.3,color:'#0ea55b'},
+        {label:'60~69%',count:91,pct:33.6,color:'#79bf55'},
+        {label:'50~59%',count:107,pct:39.5,color:'#f2b31d'},
+        {label:'40~49%',count:47,pct:17.3,color:'#f07d16'},
+        {label:'40% 미만',count:17,pct:6.3,color:'#e43d3d'}
+      ],
+      lowRooms:[
+        {site:'학림관',room:'J411',session:'1교시',assigned:53,attended:14,absent:39,rate:26.4,progress:100,incident:1,signature:'완료',closed:false},
+        {site:'학림관',room:'J308',session:'1교시',assigned:43,attended:13,absent:30,rate:30.2,progress:100,incident:0,signature:'완료',closed:false},
+        {site:'학림관',room:'J414',session:'1교시',assigned:53,attended:17,absent:36,rate:32.1,progress:94,incident:1,signature:'미완료',closed:false},
+        {site:'학림관',room:'J410',session:'1교시',assigned:53,attended:17,absent:36,rate:32.1,progress:88,incident:0,signature:'완료',closed:false},
+        {site:'학림관',room:'J409',session:'1교시',assigned:52,attended:17,absent:35,rate:32.7,progress:82,incident:2,signature:'미완료',closed:false},
+        {site:'혜화관',room:'423',session:'1교시',assigned:42,attended:32,absent:10,rate:76.2,progress:100,incident:0,signature:'완료',closed:true},
+        {site:'혜화관',room:'431',session:'1교시',assigned:32,attended:24,absent:8,rate:75.0,progress:100,incident:0,signature:'완료',closed:true}
+      ],
+      incidentTypes:[
+        {type:'신분증 미소지',count:57,icon:'🪪'},
+        {type:'중도퇴실',count:1,icon:'🚪'},
+        {type:'소음발생',count:0,icon:'📣'},
+        {type:'부정행위',count:2,icon:'⚠️'}
+      ]
+    }
+  };
+
+  let state = loadState();
+  const demoRole = new URLSearchParams(location.search).get('role');
+  if (demoRole && ROLES[demoRole]) {
+    const names={developer:'개발자',pm:'박상호 PM',exam:'김민성',building:'이서준',field:'최유진'};
+    state.session={role:demoRole,id:ROLES[demoRole].account,name:names[demoRole]};
+  }
+  let route = location.hash.replace(/^#\/?/,'') || (state.session ? ROLES[state.session.role].home : 'login');
+
+  function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+  function loadState(){
+    try {
+      const saved = JSON.parse(localStorage.getItem('ea-prototype-state') || 'null');
+      return saved ? deepMerge(clone(defaultState), saved) : clone(defaultState);
+    } catch(e){ return clone(defaultState); }
+  }
+  function deepMerge(target, source){
+    if(!source || typeof source!=='object') return target;
+    Object.keys(source).forEach(k=>{
+      if(source[k] && typeof source[k]==='object' && !Array.isArray(source[k])) target[k]=deepMerge(target[k]||{},source[k]);
+      else target[k]=source[k];
+    });
+    return target;
+  }
+  function save(){ try{ localStorage.setItem('ea-prototype-state', JSON.stringify(state)); }catch(e){ /* file preview or private mode: keep in memory */ } }
+  function reset(){ try{ localStorage.removeItem('ea-prototype-state'); }catch(e){} state=clone(defaultState); route='login'; render(); }
+  function esc(v=''){ return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+  function fmt(n){ return Number(n||0).toLocaleString('ko-KR'); }
+  function term(key){ return state.terms[key] || key; }
+  function roleInfo(){ return state.session ? ROLES[state.session.role] : null; }
+  function isRole(...roles){ return state.session && roles.includes(state.session.role); }
+  function navTo(r){ route=r; location.hash='#/'+r; render(); window.scrollTo(0,0); }
+  function toast(msg,type='info'){
+    const root=document.getElementById('toast-root'); const el=document.createElement('div');
+    el.className='toast '+type; el.innerHTML=esc(msg); root.appendChild(el); setTimeout(()=>el.remove(),3400);
+  }
+  function modal(title,body,footer=''){
+    const root=document.getElementById('modal-root');
+    root.innerHTML=`<div class="modal-backdrop" data-close-modal><section class="modal" role="dialog" aria-modal="true"><div class="modal-header"><h3>${title}</h3><button class="close-x" data-close-modal>×</button></div><div class="modal-body">${body}</div>${footer?`<div class="modal-footer">${footer}</div>`:''}</section></div>`;
+    root.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',e=>{if(el.classList.contains('modal-backdrop') && e.target!==el)return; closeModal();}));
+    root.querySelectorAll('[data-route]').forEach(el=>el.addEventListener('click',()=>{const next=el.dataset.route;closeModal();navTo(next);}));
+  }
+  function closeModal(){ document.getElementById('modal-root').innerHTML=''; }
+
+  const icons={home:'⌂',org:'▦',account:'♙',settings:'⚙',upload:'⇧',dashboard:'◉',incident:'!',close:'🔒',download:'⇩',attendance:'✓',photo:'▣',pdf:'▤',term:'Aa'};
+
+  function menus(){
+    const common=[];
+    if(isRole('developer')) return [
+      ['개발자 업무',[['developer-home','홈','home'],['developer-org','학교·전형 관리','org'],['developer-accounts','담당 PM 계정','account'],['terminology','명칭 템플릿','term']]],
+      ['공통',[['audit','감사 로그','download']]]
+    ];
+    if(isRole('pm')) return [
+      ['담당 PM 업무',[['pm-home','준비 현황','home'],['accounts','대학 관리자 계정','account'],['settings-basic','세팅','settings'],['upload','업로드·자동검증','upload'],['dashboard','운영 대시보드','dashboard'],['incidents','특이사항','incident'],['downloads','결과파일','download']]],
+      ['설정 바로가기',[['terminology','학교별 명칭','term'],['settings-pdf','PDF 출력 편집','pdf']]]
+    ];
+    if(isRole('exam')) return [
+      ['전형 운영',[['dashboard','그래프형 대시보드','dashboard'],['incidents','특이사항 학생','incident'],['close','마감·해제','close'],['pdf-output','PDF·서명 출력','pdf'],['downloads','결과파일','download']]]
+    ];
+    if(isRole('building')) return [
+      ['담당 범위 조회',[['dashboard','운영 대시보드','dashboard'],['room-list',`${term('examRoom')}별 현황`,'org'],['incidents','특이사항 조회','incident']]]
+    ];
+    if(isRole('field')) return [
+      ['현장 운영',[['field-attendance','출결 입력','attendance'],['incidents','특이사항 등록','incident'],['photo-compare','사진 비교','photo'],['field-sign','감독관 서명','pdf']]]
+    ];
+    return common;
+  }
+
+  function allowedRoutesFor(role){
+    const routes={
+      developer:['developer-home','developer-org','developer-accounts','terminology','audit'],
+      pm:['pm-home','accounts','settings-basic','settings-features','settings-locations','settings-pdf','settings-photos','terminology','upload','dashboard','room-list','incidents','photo-compare','downloads'],
+      exam:['dashboard','room-list','incidents','photo-compare','close','pdf-output','downloads'],
+      building:['dashboard','room-list','incidents'],
+      field:['field-attendance','incidents','photo-compare','field-sign']
+    };
+    return routes[role]||[];
+  }
+  function routeAllowed(r){ return !state.session || r==='login' || allowedRoutesFor(state.session.role).includes(r); }
+
+  function shell(content,title,subtitle='',actions=''){
+    const role=roleInfo();
+    return `<div class="shell role-${role.color}">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">출</span><span>전자출결시스템</span></div>
+        <div class="topbar-actions">
+          <button class="btn btn-sm btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.25)" data-action="reset-demo">데모 초기화</button>
+          <div class="user-chip"><div><div class="strong">${esc(state.session.name)}</div><div class="tiny" style="color:#9fb8dc">${esc(role.name)} · ${esc(state.school.name)}</div></div><div class="avatar">${esc(state.session.name.slice(0,1))}</div></div>
+          <button class="btn btn-sm btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.25)" data-action="logout">로그아웃</button>
+        </div>
+      </header>
+      <aside class="sidebar">
+        <div class="role-panel"><div class="role-name"><span class="role-dot" style="background:var(--role)"></span>${esc(role.name)}</div><div class="tiny">${esc(scopeLabel())}</div></div>
+        ${menus().map(([group,items])=>`<div class="nav-group">${group}</div>${items.map(([r,label,ic])=>`<button class="nav-item ${route===r?'active':''}" data-route="${r}"><span class="nav-icon">${icons[ic]||'•'}</span><span>${esc(label)}</span></button>`).join('')}`).join('')}
+      </aside>
+      <main class="content">
+        <div class="page-header"><div class="page-title"><h1>${title}</h1><p>${subtitle}</p></div><div class="page-actions">${actions}</div></div>
+        ${content}
+      </main>
+    </div>`;
+  }
+  function scopeLabel(){
+    if(isRole('developer')) return '전체 학교·전형 기반정보';
+    if(isRole('pm')) return `${state.selection} 준비·운영`;
+    if(isRole('exam')) return `${state.selection} 전체`;
+    if(isRole('building')) return `${term('examSite')} 학림관·혜화관`;
+    return `${term('examRoom')} 학림관 J411`;
+  }
+
+  function render(){
+    const app=document.getElementById('app');
+    if(!state.session && route!=='login') route='login';
+    if(state.session && route!=='login' && !routeAllowed(route)){
+      const denied=shell(`<div class="notice notice-danger"><span>!</span><div><b>접근 권한이 없습니다.</b><br>${esc(roleInfo().name)} 계정의 담당 범위에서 제공되지 않는 화면입니다.</div></div>`,'접근 제한','권한 밖 메뉴와 직접 URL 접근은 서버 권한 기준으로 차단합니다.',`<button class="btn btn-primary" data-route="${ROLES[state.session.role].home}">내 홈으로</button>`);
+      app.innerHTML=denied;bindPageEvents();return;
+    }
+    let html='';
+    switch(route){
+      case 'login': html=loginPage(); break;
+      case 'developer-home': html=developerHome(); break;
+      case 'developer-org': html=developerOrg(); break;
+      case 'developer-accounts': html=accountPage(true); break;
+      case 'pm-home': html=pmHome(); break;
+      case 'accounts': html=accountPage(false); break;
+      case 'settings-basic': html=settingsPage('basic'); break;
+      case 'settings-features': html=settingsPage('features'); break;
+      case 'settings-locations': html=settingsPage('locations'); break;
+      case 'settings-pdf': html=settingsPage('pdf'); break;
+      case 'settings-photos': html=settingsPage('photos'); break;
+      case 'terminology': html=terminologyPage(); break;
+      case 'upload': html=uploadPage(); break;
+      case 'dashboard': html=dashboardPage(); break;
+      case 'room-list': html=roomListPage(); break;
+      case 'incidents': html=incidentsPage(); break;
+      case 'photo-compare': html=photoComparePage(); break;
+      case 'field-attendance': html=fieldAttendancePage(); break;
+      case 'field-sign': html=fieldSignPage(); break;
+      case 'close': html=closePage(); break;
+      case 'pdf-output': html=pdfOutputPage(); break;
+      case 'downloads': html=downloadsPage(); break;
+      case 'audit': html=auditPage(); break;
+      default: html=state.session?shell(`<div class="notice notice-warning">접근할 수 없는 화면입니다.</div>`,'접근 제한','','') : loginPage();
+    }
+    app.innerHTML=html;
+    bindPageEvents();
+  }
+
+  function loginPage(){
+    return `<div class="login-page">
+      <section class="login-hero">
+        <div class="brand"><span class="brand-mark">출</span><span>전자출결시스템</span></div>
+        <div class="hero-copy"><h1>세팅부터 마감까지<br>한 흐름으로 연결합니다.</h1><p>공통 로그인 후 계정 권한에 따라 개발자, 담당 PM, 전형관리자, ${term('examSite')}·건물관리자, ${term('fieldManager')} 화면으로 자동 이동하는 관리자 테스트 페이지입니다.</p>
+          <div class="hero-flow">${['계정·기반정보','학교별 세팅','업로드·자동검증','그래프형 운영','마감·출력'].map((s,i)=>`<div class="hero-step"><b>0${i+1}</b>${s}</div>`).join('')}</div>
+        </div>
+        <div class="small" style="color:rgba(255,255,255,.68)">Prototype · 데이터는 브라우저 localStorage에 저장됩니다.</div>
+      </section>
+      <section class="login-panel"><div class="login-card">
+        <h2>관리자 공통 로그인</h2><p class="lead">학교·전형은 로그인 계정에 연결된 범위가 자동 적용됩니다.</p>
+        <form id="login-form" class="stack">
+          <div class="field"><label for="login-id">아이디</label><input class="input" id="login-id" autocomplete="username" value="admin" /></div>
+          <div class="field"><label for="login-pw">비밀번호</label><input class="input" id="login-pw" type="password" autocomplete="current-password" value="1234" /></div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">로그인</button>
+        </form>
+        <div class="demo-box"><div class="demo-title">테스트 계정 · 클릭하면 자동 입력</div><div class="demo-list">
+          ${Object.entries(ROLES).map(([key,r])=>`<button class="demo-account" data-demo-account="${r.account}"><b>${r.name}</b>${r.account} / 1234</button>`).join('')}
+        </div></div>
+        <div class="notice notice-info small" style="margin-top:14px"><span>ⓘ</span><div><b>최초 개발자 계정</b><br>아이디 admin / 비밀번호 1234</div></div>
+      </div></section>
+    </div>`;
+  }
+
+  function developerHome(){
+    const content=`
+      <div class="grid grid-4">
+        ${kpi('등록 학교','12','개','🏫','var(--purple-soft)','var(--purple)')}
+        ${kpi('운영 전형','28','개','▦','var(--blue-2)','var(--blue)')}
+        ${kpi('담당 PM','16','명','♙','var(--green-soft)','var(--green)')}
+        ${kpi('연결 확인 필요','2','건','!','var(--red-soft)','var(--red)')}
+      </div>
+      <div class="grid grid-2" style="margin-top:14px">
+        <section class="card"><div class="card-header"><div><div class="card-title">개발자 업무 순서</div><div class="card-sub">학교·전형과 담당 PM 기반정보를 먼저 준비합니다.</div></div></div><div class="card-body">
+          ${processList([
+            ['1','학교 등록','서비스 대상 학교를 생성하고 사용 상태를 관리합니다.'],
+            ['2','전형 생성','시험연도·전형명을 학교에 연결합니다.'],
+            ['3','담당 PM 배정','학교 고정값과 담당 전형을 PM 계정에 연결합니다.'],
+            ['4','명칭 템플릿','학교가 사용할 기본 명칭 세트를 사전 구성합니다.']
+          ])}
+        </div></section>
+        <section class="card"><div class="card-header"><div><div class="card-title">확인 필요 항목</div><div class="card-sub">담당 PM이 세팅을 시작하기 전 조치가 필요합니다.</div></div><button class="btn btn-sm" data-route="developer-org">전체 보기</button></div><div class="card-body">
+          ${statusLine('A대학교 2026 수시','담당 PM 미배정','red')}
+          ${statusLine('B대학교 정시 논술','전형 사용기간 미입력','orange')}
+          ${statusLine('동국대학교 수시 논술','기반정보 정상','green')}
+        </div></section>
+      </div>`;
+    return shell(content,'개발자 홈','전체 학교·전형·담당 PM의 기반 구성을 관리합니다.',`<button class="btn btn-primary" data-route="developer-org">학교·전형 등록</button>`);
+  }
+
+  function developerOrg(){
+    const rows=[
+      ['동국대학교','2026학년도 수시 논술','2025-11-16','박상호 PM','사용'],
+      ['A대학교','2026학년도 정시 면접','2026-01-10','미배정','준비'],
+      ['B대학교','2026학년도 편입 필기','2025-12-21','이유진 PM','사용']
+    ];
+    const content=`<div class="toolbar"><div class="field wide"><label>학교 검색</label><input class="input" placeholder="학교명 검색"></div><div class="field"><label>상태</label><select class="select"><option>전체</option><option>사용</option><option>준비</option></select></div><button class="btn btn-primary">+ 학교 등록</button><button class="btn">+ 전형 생성</button></div>
+      <section class="card"><div class="card-header"><div><div class="card-title">학교·전형 목록</div><div class="card-sub">학교값은 담당 PM이 선택하지 않으며 개발자가 계정에 고정 배정합니다.</div></div></div><div class="card-body"><div class="table-wrap"><table><thead><tr><th>학교</th><th>전형</th><th>시험일</th><th>담당 PM</th><th>상태</th><th>관리</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.slice(0,4).map(v=>`<td>${esc(v)}</td>`).join('')}<td><span class="badge ${r[4]==='사용'?'badge-green':'badge-orange'}">${r[4]}</span></td><td><button class="btn btn-sm">상세</button></td></tr>`).join('')}</tbody></table></div></div></section>`;
+    return shell(content,'학교·전형 관리','학교를 등록하고 전형 및 담당 PM 연결을 관리합니다.',`<button class="btn btn-primary">+ 신규 등록</button>`);
+  }
+
+  function accountPage(developerOnly){
+    const allowed=developerOnly?['pm']:['exam','building','field'];
+    const accounts=state.accounts.filter(a=>allowed.includes(a.role));
+    const content=`
+      <div class="grid ${developerOnly?'grid-3':'grid-3'}" style="margin-bottom:14px">
+        ${allowed.map(r=>rolePermissionCard(r)).join('')}
+      </div>
+      <section class="card"><div class="card-header"><div><div class="card-title">${developerOnly?'담당 PM':'대학 관리자'} 계정 목록</div><div class="card-sub">권한은 역할과 담당 범위를 서버 기준으로 제한하는 구조입니다.</div></div><button class="btn btn-primary" data-action="open-account-modal">+ 계정 생성</button></div><div class="card-body"><div class="table-wrap"><table><thead><tr><th>아이디</th><th>이름</th><th>역할</th><th>담당 범위</th><th>상태</th><th>관리</th></tr></thead><tbody>${accounts.map(a=>`<tr><td><b>${esc(a.id)}</b></td><td>${esc(a.name)}</td><td>${roleBadge(a.role)}</td><td>${esc(a.scope)}</td><td><span class="badge badge-green">${a.status}</span></td><td><button class="btn btn-sm">상세</button> <button class="btn btn-sm">초기화</button></td></tr>`).join('')}</tbody></table></div></div></section>`;
+    return shell(content,developerOnly?'담당 PM 계정 관리':'대학 관리자 계정 관리',developerOnly?'개발자가 학교·전형 범위를 지정하여 담당 PM을 생성합니다.':'담당 PM이 전형관리자, 고사장·건물관리자, 현장관리자를 역할별로 생성합니다.',`<button class="btn btn-primary" data-action="open-account-modal">+ 계정 생성</button>`);
+  }
+
+  function rolePermissionCard(role){
+    const map={
+      pm:['담당 PM','계정·세팅·업로드·자동검증','학교 고정 / 담당 전형','수정 가능'],
+      exam:['전형관리자','전체 전형 대시보드·사고·마감·해제','담당 전형 전체','마감·해제 가능'],
+      building:[`${term('examSite')}·건물관리자`,'배정·응시·응시율·사고 조회','담당 고사장/건물','조회 전용'],
+      field:[term('fieldManager'),'출결·특이사항·사진·서명 입력','담당 교시/고사실','현장 입력']
+    }[role];
+    return `<div class="card role-${ROLES[role].color}" style="border-top:4px solid var(--role)"><div class="card-body"><div class="flex justify-between items-center"><div class="card-title">${map[0]}</div>${roleBadge(role)}</div><div class="small muted" style="margin-top:10px">${map[1]}</div><div class="small" style="margin-top:12px"><b>범위</b> · ${map[2]}<br><b>권한</b> · ${map[3]}</div></div></div>`;
+  }
+
+  function pmHome(){
+    const stages=[
+      {name:'계정',done:true,detail:'운영 관리자 3명 배정'},
+      {name:'세팅',done:true,detail:'기능·장소·PDF 저장'},
+      {name:'업로드',done:false,detail:'수험생 파일 검증 필요'},
+      {name:'운영',done:false,detail:'검증 완료 후 진입'},
+      {name:'마감',done:false,detail:'전형관리자 실행'}
+    ];
+    const content=`
+      ${stepper(2)}
+      <div class="grid grid-5">${stages.map((s,i)=>`<div class="card"><div class="card-body"><div class="flex justify-between"><span class="badge ${s.done?'badge-green':'badge-gray'}">${s.done?'완료':'대기'}</span><b>0${i+1}</b></div><div class="card-title" style="margin-top:12px">${s.name}</div><div class="small muted" style="margin-top:6px">${s.detail}</div></div></div>`).join('')}</div>
+      <div class="grid grid-2" style="margin-top:14px"><section class="card"><div class="card-header"><div><div class="card-title">다음 작업</div><div class="card-sub">수험생 파일을 선택하면 업로드와 검증이 자동 실행됩니다.</div></div></div><div class="card-body"><div class="notice notice-warning"><span>!</span><div><b>업로드 미완료</b><br>수험생 데이터가 운영 기준정보와 매칭되지 않았습니다.</div></div><button class="btn btn-primary btn-block" style="margin-top:13px" data-route="upload">업로드·자동검증 시작</button></div></section>
+      <section class="card"><div class="card-header"><div><div class="card-title">학교·전형 적용 범위</div><div class="card-sub">학교는 개발자 배정값이며 PM은 전형만 선택합니다.</div></div></div><div class="card-body">${infoRows([['학교',state.school.name+' (고정)'],['전형',state.selection],['시험일',state.basic.examDate],['운영 상태','준비 중']])}</div></section></div>`;
+    return shell(content,'담당 PM 준비 현황','세팅과 업로드·자동검증을 완료한 뒤 운영 관리자에게 인계합니다.',`<button class="btn" data-route="settings-basic">세팅</button><button class="btn btn-primary" data-route="upload">업로드·자동검증</button>`);
+  }
+
+  function settingsNav(active){
+    return `<div class="tabs">${[
+      ['basic','시험 기본정보','settings-basic'],['features','학교별 기능','settings-features'],['locations',`${term('examSite')}·${term('examRoom')}`,'settings-locations'],['pdf','PDF 출력 편집','settings-pdf'],['photos','수험생 사진','settings-photos']
+    ].map(([k,l,r])=>`<button class="tab ${active===k?'active':''}" data-route="${r}">${l}</button>`).join('')}</div>`;
+  }
+  function settingsPage(tab){
+    let body='';
+    if(tab==='basic') body=settingsBasic();
+    if(tab==='features') body=settingsFeatures();
+    if(tab==='locations') body=settingsLocations();
+    if(tab==='pdf') body=settingsPdf();
+    if(tab==='photos') body=settingsPhotos();
+    const content=`${stepper(1)}<section class="card">${settingsNav(tab)}<div class="card-body">${body}</div></section>`;
+    return shell(content,'학교별 세팅',`${state.school.name} · ${state.selection} 운영 기준을 순서대로 설정합니다.`,`<button class="btn" data-route="terminology">학교별 명칭</button><button class="btn btn-primary" data-action="save-settings">저장</button>`);
+  }
+  function settingsBasic(){
+    return `<div class="notice notice-info" style="margin-bottom:14px"><span>ⓘ</span><div><b>학교는 계정 고정값입니다.</b><br>담당 PM은 학교를 변경하지 않고 전형만 선택합니다.</div></div>
+      <div class="grid grid-3"><div class="field"><label>학교</label><input class="input" value="${esc(state.school.name)}" disabled></div><div class="field"><label>전형</label><select class="select"><option>${esc(state.selection)}</option></select></div><div class="field"><label>시험일</label><input class="input" type="date" id="exam-date" value="${state.basic.examDate}"></div></div>
+      <h3 class="section-title" style="margin-top:22px">교시 설정 · 최대 3교시</h3>
+      <div class="table-wrap"><table style="min-width:720px"><thead><tr><th>사용</th><th>교시명</th><th>시작시간</th><th>종료시간</th><th>출결 마감시간</th><th>입력 기준</th></tr></thead><tbody>${state.basic.sessions.map((s,i)=>`<tr><td><label class="switch"><input type="checkbox" data-session-use="${i}" ${s.use?'checked':''}><span></span></label></td><td><input class="input" data-session-name="${i}" value="${esc(s.name)}"></td><td><input class="input" type="time" data-session-start="${i}" value="${s.start}"></td><td><input class="input" type="time" data-session-end="${i}" value="${s.end}"></td><td><input class="input" type="time" data-session-close="${i}" value="${s.close}"></td><td class="small muted">시작 &lt; 종료 ≤ 출결 마감</td></tr>`).join('')}</tbody></table></div>`;
+  }
+  function settingsFeatures(){
+    const rows=[
+      ['closing','마감 기능','전형관리자가 운영 데이터를 잠그고 필요 시 해제합니다.'],
+      ['reserveRoom','예비고사실 사용','현장 사유로 학생을 예비고사실로 이동할 수 있습니다.'],
+      ['splitInvigilator','정·부 감독관 구분','감독관 역할과 PDF 서명 대상을 정/부로 구분합니다.'],
+      ['answerSheet','답안지 관리','배부·회수·인계 수량을 마감 전 점검합니다.'],
+      ['invigilatorAssignment','감독관 고사실 배정','OFF이면 감독관 파일에서 고사실 배정을 필수로 검증하지 않습니다.'],
+      ['remainingSeat','고사실별 잔여좌석','정원-배정 인원을 계산해 대시보드와 장소 목록에 표시합니다.'],
+      ['photoCompare','수험생 사진 비교','사전 사진과 현장 촬영 사진을 나란히 비교합니다.']
+    ];
+    return `<div class="flex justify-between items-center" style="margin-bottom:12px"><div><div class="section-title" style="margin:0">기능별 ON/OFF</div><div class="small muted">학교 운영정책에 필요한 기능만 사용합니다.</div></div><label class="flex items-center gap-8 strong"><span>전체 기능</span><span class="switch"><input id="feature-all" type="checkbox" checked><span></span></span></label></div>
+      ${rows.map(([k,n,d])=>settingRow(k,n,d)).join('')}
+      <h3 class="section-title" style="margin-top:22px">사고유형 선택</h3>
+      ${[['incidentId','신분증 미소지자'],['incidentExit','중도퇴실'],['incidentNoise','소음발생'],['incidentFraud','부정행위']].map(([k,n])=>settingRow(k,n,`${n} 등록·집계·특이사항 화면을 사용합니다.`)).join('')}`;
+  }
+  function settingsLocations(){
+    const rows=state.data.lowRooms.slice(0,5);
+    return `<div class="grid grid-4" style="margin-bottom:14px">${kpi(`총 ${term('examSite')}`,state.data.hallCount,'개','🏫','var(--blue-2)','var(--blue)')}${kpi('총 건물',state.data.buildingCount,'개','▥','var(--purple-soft)','var(--purple)')}${kpi(`총 ${term('examRoom')}`,state.data.roomCount,'개','▦','var(--green-soft)','var(--green)')}${kpi('총 정원',fmt(state.data.capacity),'명','♙','var(--orange-soft)','var(--orange)')}</div>
+      <div class="notice notice-info" style="margin-bottom:12px"><span>ⓘ</span><div>${term('examSite')} → 건물 → ${term('examRoom')} 구조로 등록합니다. 운영 데이터가 있는 장소는 삭제하지 않고 사용중지 처리합니다.</div></div>
+      <div class="table-wrap"><table><thead><tr><th>${term('examSite')}</th><th>건물</th><th>${term('examRoom')}코드</th><th>${term('examRoom')}</th><th>정원</th>${state.features.remainingSeat?'<th>잔여좌석</th>':''}<th>상태</th><th>관리</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>본교 ${i<3?'제1':'제2'}${term('examSite')}</td><td>${r.site}</td><td>${11080+i}</td><td>${r.room}</td><td>${r.assigned+5}</td>${state.features.remainingSeat?`<td><b>${5}</b>석</td>`:''}<td><span class="badge badge-green">사용</span></td><td><button class="btn btn-sm">수정</button></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  function settingsPdf(){
+    const signerRows=signers().map(s=>`<label class="signer-row"><input type="checkbox" data-signer="${s.id}" ${state.pdf.selectedSigners.includes(s.id)?'checked':''}><span><b>${s.name}</b><br><span class="tiny muted">${s.id}</span></span><span>${roleNameKorean(s.role)}</span><span>${s.room||'무배정'}</span></label>`).join('');
+    return `<div class="pdf-layout"><div class="stack">
+      <section><h3 class="section-title">출력 기본설정</h3><div class="grid grid-2"><div class="field"><label>페이지당 학생 수</label><div class="flex gap-8">${[20,30,40].map(n=>`<button class="btn ${state.pdf.pageSize===n?'btn-blue':''}" data-pdf-page="${n}">${n}명</button>`).join('')}</div></div><div class="field"><label>서명 정책</label><select class="select" id="signature-policy"><option value="primary" ${state.pdf.signaturePolicy==='primary'?'selected':''}>정감독관만</option><option value="all" ${state.pdf.signaturePolicy==='all'?'selected':''}>정·부 감독관 모두</option><option value="selected" ${state.pdf.signaturePolicy==='selected'?'selected':''}>서명 가능 감독관 직접 선택</option><option value="none" ${state.pdf.signaturePolicy==='none'?'selected':''}>서명 미사용</option></select></div></div></section>
+      <section><div class="flex justify-between items-center"><h3 class="section-title" style="margin:0">서명 가능 감독관 선택</h3><button class="btn btn-sm" data-action="add-standby">+ 예비감독관 추가</button></div><p class="small muted">예비감독관은 ${term('examRoom')}에 배정되지 않아도 별도 서명자로 선택할 수 있습니다.</p><div class="signer-list">${signerRows}</div></section>
+      <section><h3 class="section-title">항목 정렬</h3>${alignSetting('school','학교명 노출')}${alignSetting('date','날짜 표기')}${alignSetting('footer','하단 문구')}${alignSetting('sign','감독관 서명')}</section>
+    </div><div>${pdfPreview()}</div></div>`;
+  }
+  function settingsPhotos(){
+    return `<div class="dropzone" data-dropzone="photos"><div class="drop-icon">🖼️</div><div class="card-title">수험생 사전 사진 ZIP 업로드</div><p class="muted">파일명은 수험번호.jpg 형식을 권장합니다. 선택 즉시 수험번호와 자동 매칭합니다.</p><input type="file" id="photo-file" accept=".zip,.jpg,.jpeg,.png" hidden><button class="btn btn-primary" data-action="choose-photo">파일 선택</button></div>
+      <div class="grid grid-3" style="margin-top:14px">${kpi('등록 대상','15,928','명','♙','var(--blue-2)','var(--blue)')}${kpi('사진 매칭','15,611','명','✓','var(--green-soft)','var(--green)')}${kpi('미매칭','317','명','!','var(--red-soft)','var(--red)')}</div>
+      <div class="notice notice-info" style="margin-top:14px"><span>ⓘ</span><div>운영 중 신분증 미소지 등 본인 확인이 필요한 학생은 사전 사진과 현장 촬영 사진을 버튼으로 비교할 수 있습니다.</div></div>`;
+  }
+
+  function terminologyPage(){
+    const terms=[
+      ['examSite','기본 명칭: 고사장','고사장'],['examRoom','기본 명칭: 고사실','고사실'],['middleManager','기본 명칭: 중간관리자','복도관리자'],['examManager','기본 명칭: 전형관리자','전형관리자'],['fieldManager','기본 명칭: 현장관리자','현장관리자'],['incident','기본 명칭: 사고자','특이사항 학생']
+    ];
+    const content=`<div class="grid grid-2"><section class="card"><div class="card-header"><div><div class="card-title">학교별 명칭 수정</div><div class="card-sub">학교의 실제 운영 용어에 맞춰 메뉴·필터·출력 문구를 변경합니다.</div></div></div><div class="card-body stack">${terms.map(([k,l,ph])=>`<div class="field"><label>${l}</label><input class="input" data-term="${k}" value="${esc(state.terms[k])}" placeholder="${ph}"></div>`).join('')}<button class="btn btn-primary" data-action="save-terms">명칭 저장·전체 화면 반영</button></div></section>
+      <section class="term-preview"><h3 class="section-title">실시간 적용 예시</h3><div class="notice notice-info"><span>Aa</span><div>저장하면 메뉴, 표 제목, 필터, PDF 출력 문구에 학교별 명칭이 적용됩니다.</div></div>${terms.map(([k,l])=>`<div class="term-token"><span class="from">${l.split(': ')[1]}</span><span>→</span><span class="to" data-term-preview="${k}">${esc(state.terms[k])}</span></div>`).join('')}<div class="card" style="margin-top:18px"><div class="card-body"><b>화면 문구 예시</b><p class="muted">${term('examSite')} 선택 · ${term('examRoom')}별 응시율 · ${term('middleManager')} 배정 · ${term('incident')} 현황</p></div></div></section></div>`;
+    return shell(content,'학교별 명칭 관리','학교에서 사용하는 실제 용어로 메뉴와 화면 문구를 변경합니다.',`<button class="btn btn-primary" data-action="save-terms">저장</button>`);
+  }
+
+  function uploadPage(){
+    const type=state.ui?.uploadType||'candidate';
+    const upload=state.uploads[type];
+    const isCandidate=type==='candidate';
+    const title=isCandidate?'수험생':'감독관';
+    const cols=isCandidate?requiredCandidateColumns():requiredInvigilatorColumns();
+    const assignmentNote=!isCandidate&&!state.features.invigilatorAssignment
+      ? `<div class="notice notice-info" style="margin-bottom:12px"><span>ⓘ</span><div><b>${term('examRoom')} 배정은 선택값입니다.</b><br>현재 학교 설정이 OFF이므로 감독관 ID·이름·역할만 검증하며, 미배정 감독관도 정상 등록됩니다.</div></div>`:'';
+    const sampleLink=isCandidate?`<a class="btn" href="sample-data/00.전체 수험생 출결 목록_20251116.xlsx" download>샘플 파일</a>`:'';
+    const content=`${stepper(2)}
+      <div class="tabs" style="border-radius:14px 14px 0 0"><button class="tab ${type==='candidate'?'active':''}" data-upload-type="candidate">수험생</button><button class="tab ${type==='invigilator'?'active':''}" data-upload-type="invigilator">감독관</button><button class="tab" data-route="settings-photos">사진 ZIP</button></div>
+      <section class="card" style="border-radius:0 0 16px 16px"><div class="card-body">
+        ${assignmentNote}
+        <div class="grid grid-2"><div>
+          <div class="dropzone" id="upload-drop"><div class="drop-icon">📄</div><div class="card-title">${title} 엑셀 파일을 클릭하거나 끌어놓으세요</div><p class="muted">파일 선택 즉시 읽기 → 컬럼 매칭 → 필수값 → 기준정보 → 중복 검증이 자동 실행됩니다.</p><input type="file" id="excel-file" accept=".xlsx,.xls,.csv" hidden><button class="btn btn-primary" data-action="choose-excel">파일 선택</button><div class="small muted" style="margin-top:8px">별도의 ‘검증 실행’ 버튼은 없습니다.</div></div>
+          <div class="validation-pipeline" id="validation-pipeline">${['파일 읽기','컬럼 매칭','필수값 확인','기준정보 매칭','결과 생성'].map((stage,i)=>`<div class="validation-stage ${upload?'ok':''}">${upload?'✓ ':''}${stage}</div>`).join('')}</div>
+        </div><div>
+          <div class="card-title">${title} 파일 필수·선택 컬럼</div><p class="small muted">${isCandidate?'교시 시작·종료시간은 파일에 없으면 세팅값으로 자동 보완합니다.':state.features.invigilatorAssignment?`${term('examRoom')} 배정 컬럼까지 필수로 확인합니다.`:`${term('examRoom')} 배정 컬럼은 선택이며 무배정·예비감독관 등록을 허용합니다.`}</p>
+          <div class="mapping-grid" style="margin-top:10px"><div class="head">엑셀 컬럼</div><div class="head">시스템 필드</div><div class="head">검증</div>
+            ${cols.map(c=>`<div>${c.source}</div><div>${c.target}</div><div><span class="badge ${c.required?'badge-blue':'badge-gray'}">${c.required?'필수':c.auto?'자동보완':'선택'}</span></div>`).join('')}
+          </div>
+        </div></div>
+        <div id="upload-result" style="margin-top:16px">${upload?uploadResult(upload):'<div class="notice notice-info"><span>ⓘ</span><div>파일을 선택하면 자동 매칭 결과와 오류 행이 이 영역에 표시됩니다.</div></div>'}</div>
+      </div></section>`;
+    return shell(content,'업로드·자동검증',`${title} 파일을 선택하는 즉시 컬럼 매칭과 데이터 오류를 함께 확인합니다.`,sampleLink);
+  }
+
+  function requiredCandidateColumns(){
+    return [
+      {source:'고사일',target:'시험일',required:true},{source:'교시',target:'교시명',required:true},{source:'시작시간',target:'교시 시작시간',required:false,auto:true},{source:'종료시간',target:'교시 종료시간',required:false,auto:true},
+      {source:'고사실코드',target:`${term('examRoom')} 코드`,required:true},{source:'고사실',target:term('examRoom'),required:true},{source:'수험번호',target:'수험생 ID',required:true},{source:'수험생명/성명',target:'학생 이름',required:true},
+      {source:'생년월일',target:'생년월일',required:true},{source:'전형',target:'전형',required:true},{source:'계열',target:'계열',required:true},{source:'모집단위',target:'모집단위',required:true},{source:'사진파일명',target:'사전 사진 연결',required:false}
+    ];
+  }
+
+  function requiredInvigilatorColumns(){
+    const assigned=state.features.invigilatorAssignment;
+    return [
+      {source:'감독관ID',target:'감독관 ID',required:true},{source:'감독관명',target:'감독관 이름',required:true},{source:'감독관구분',target:'정/부/예비감독관',required:true},
+      {source:'연락처',target:'연락처',required:false},{source:'교시',target:'담당 교시',required:assigned},{source:'고사실코드',target:`배정 ${term('examRoom')} 코드`,required:assigned},{source:'고사실',target:`배정 ${term('examRoom')}`,required:assigned},
+      {source:'서명사용여부',target:'PDF 서명 가능 여부',required:false}
+    ];
+  }
+
+  function uploadResult(u){
+    return `<div class="result-summary"><div class="result-box"><span class="muted small">전체 행</span><b>${fmt(u.total)}</b></div><div class="result-box"><span class="muted small">정상 매칭</span><b style="color:var(--green)">${fmt(u.ok)}</b></div><div class="result-box"><span class="muted small">확인 필요</span><b style="color:var(--orange)">${fmt(u.warn)}</b></div><div class="result-box"><span class="muted small">오류</span><b style="color:var(--red)">${fmt(u.errors.length)}</b></div></div>
+      <div class="grid grid-2" style="margin-top:14px"><section class="card" style="box-shadow:none"><div class="card-header"><div class="card-title">자동 컬럼 매칭</div><span class="badge badge-green">${u.matched}개 매칭</span></div><div class="card-body small">${u.columns.map(c=>`<div class="flex justify-between" style="padding:7px 0;border-bottom:1px solid var(--gray-200)"><span>${esc(c.source)}</span><span>→ <b>${esc(c.target)}</b></span></div>`).join('')}</div></section>
+      <section class="card" style="box-shadow:none"><div class="card-header"><div class="card-title">오류·확인 필요</div><span class="badge ${u.errors.length?'badge-red':'badge-green'}">${u.errors.length}건</span></div><div class="card-body">${u.errors.length?u.errors.map((e,i)=>`<div class="notice ${e.level==='오류'?'notice-danger':'notice-warning'}" style="margin-bottom:8px"><div class="flex-1"><b>${e.level} · ${e.message}</b><div class="small">${e.row}행 / ${e.column} / 입력값: ${esc(e.value)}</div></div><button class="btn btn-sm" data-error-index="${i}">상세</button></div>`).join(''):'<div class="notice notice-success"><span>✓</span><div>모든 데이터가 정상 매칭되었습니다. 운영 반영이 가능합니다.</div></div>'}</div></section></div>
+      <div class="flex justify-between items-center" style="margin-top:14px"><div class="small muted">파일: ${esc(u.name)} · 검증시각 ${esc(u.time)}</div><button class="btn ${u.errors.some(e=>e.level==='오류')?'':'btn-green'}" ${u.errors.some(e=>e.level==='오류')?'disabled':''} data-action="apply-upload">운영 데이터 반영</button></div>`;
+  }
+
+  function dashboardPage(){
+    const d=state.data; const limited=isRole('building');
+    const rooms=limited?d.lowRooms.filter(r=>['학림관','혜화관'].includes(r.site)):d.lowRooms;
+    const remaining=state.features.remainingSeat? kpi('잔여좌석','192','석','▦','var(--blue-2)','var(--blue)') : '';
+    const actions=`<button class="btn" data-route="room-list">엑셀형 보기</button>${isRole('exam')&&state.features.closing?`<button class="btn btn-primary" data-route="close">${state.close.status==='closed'?'마감 해제':'마감 관리'}</button>`:''}`;
+    const content=`
+      <div class="toolbar"><div class="field"><label>시험일</label><select class="select"><option>2025.11.16</option></select></div><div class="field"><label>모집전형</label><select class="select"><option>수시 논술</option></select></div><div class="field"><label>교시</label><select class="select"><option>전체</option><option>1교시</option><option>2교시</option><option>3교시</option></select></div><div class="field"><label>${term('examSite')}</label><select class="select"><option>${limited?'학림관·혜화관':'전체'}</option></select></div><button class="btn btn-primary">조회</button><button class="btn">초기화</button></div>
+      <div class="grid ${state.features.remainingSeat?'grid-6':'grid-5'}">
+        ${kpi('배정 인원',fmt(d.total),'명','♙','var(--blue-2)','var(--blue)')}${kpi('응시 인원',fmt(d.attended),'명','✓','var(--green-soft)','var(--green)')}${kpi('결시 인원',fmt(d.absent),'명','×','var(--red-soft)','var(--red)')}${kpi('응시율',d.rate.toFixed(1),'%','◔','var(--purple-soft)','var(--purple)')}${kpi(term('incident'),fmt(d.incidentCount),'건','!','var(--orange-soft)','var(--orange)')}${remaining}
+      </div>
+      <div class="dashboard-grid" style="margin-top:14px">
+        <section class="chart-card"><div class="chart-title">전체 응시율</div>${donutChart(d.rate,d.attended,d.absent)}</section>
+        <section class="chart-card"><div class="flex justify-between"><div class="chart-title">${term('examRoom')}별 응시율 커트라인 분포</div><span class="small muted">총 ${d.roomCount}개 ${term('examRoom')}</span></div>${segmentBar(d.roomBands)}</section>
+        <section class="chart-card"><div class="flex justify-between"><div class="chart-title">우선 확인 ${term('examRoom')} TOP 5</div><span class="badge badge-red">낮은 응시율</span></div><div class="room-rank">${rooms.slice(0,5).map(r=>rankRow(r)).join('')}</div></section>
+      </div>
+      <div class="grid grid-2" style="margin-top:14px"><section class="chart-card"><div class="chart-title">교시별 응시율</div>${sessionBars()}</section><section class="chart-card"><div class="chart-title">사고 유형 현황</div><div class="incident-cards">${state.data.incidentTypes.map((x,i)=>`<div class="incident-card"><div class="incident-icon" style="background:${['var(--orange-soft)','var(--blue-2)','var(--purple-soft)','var(--red-soft)'][i]}">${x.icon}</div><div><span class="small muted">${x.type}</span><b>${x.count}<small>건</small></b></div></div>`).join('')}</div></section></div>
+      <section class="card" style="margin-top:14px"><div class="card-header"><div><div class="card-title">${term('examRoom')} 진행 현황 요약</div><div class="card-sub">진행률·응시율·사고·감독관 서명·마감 상태를 함께 확인합니다.</div></div><button class="btn btn-sm" data-route="room-list">전체 목록</button></div><div class="card-body">${roomTable(rooms.slice(0,5))}</div></section>`;
+    return shell(content,'그래프형 운영 대시보드',`${limited?'담당 '+term('examSite')+'·건물 범위':'전형 전체'}의 응시율과 느린 고사실을 우선 확인합니다.`,actions);
+  }
+
+  function roomListPage(){
+    const rooms=state.data.lowRooms;
+    return shell(`<div class="toolbar"><div class="field"><label>교시</label><select class="select"><option>전체</option></select></div><div class="field"><label>${term('examSite')}</label><select class="select"><option>전체</option></select></div><div class="field wide"><label>검색</label><input class="input" placeholder="고사장/고사실 검색"></div><button class="btn btn-primary">조회</button></div><section class="card"><div class="card-header"><div><div class="card-title">엑셀형 운영현황</div><div class="card-sub">마감된 행은 회색 음영과 자물쇠로 표시합니다.</div></div><button class="btn">엑셀 다운로드</button></div><div class="card-body">${roomTable(rooms,true)}</div></section>`,`${term('examRoom')}별 운영현황`,`고사실별 진행률과 응시율을 표 형태로 확인합니다.`,`<button class="btn" data-route="dashboard">그래프형 보기</button>`);
+  }
+
+  function incidentsPage(){
+    const readOnly=isRole('building');
+    const fieldOnly=isRole('field');
+    let rows=[
+      ['21330061','김하늘','학림관 J411','1교시','신분증 미소지','사진 비교 필요','10:02'],
+      ['21410057','박서준','학림관 J409','1교시','부정행위','전형관리자 확인','10:18'],
+      ['21890862','이민지','혜화관 423','1교시','중도퇴실','처리 완료','10:42'],
+      ['21930211','최유나','학림관 J414','1교시','신분증 미소지','현장사진 등록','10:50']
+    ];
+    if(fieldOnly) rows=rows.filter(r=>r[2]==='학림관 J411');
+    const manage=(i)=>readOnly
+      ? '<button class="btn btn-sm">조회</button>'
+      : `<button class="btn btn-sm" data-action="incident-detail">상세</button>${i===0?' <button class="btn btn-sm" data-route="photo-compare">사진 비교</button>':''}`;
+    const content=`<div class="grid grid-4" style="margin-bottom:14px">${state.data.incidentTypes.map((x,i)=>kpi(x.type,x.count,'건',x.icon,['var(--orange-soft)','var(--blue-2)','var(--purple-soft)','var(--red-soft)'][i],['#d77d00','var(--blue)','var(--purple)','var(--red)'][i])).join('')}</div>
+      <section class="card"><div class="card-header"><div><div class="card-title">특이사항 학생 모아보기</div><div class="card-sub">${readOnly?'담당 범위의 사고 현황을 조회합니다.':'사고유형, 교시, 고사장별로 간추려 후속조치를 관리합니다.'}</div></div><button class="btn">${readOnly?'담당 범위 다운로드':'집계 다운로드'}</button></div><div class="card-body"><div class="toolbar" style="box-shadow:none;margin-top:0"><div class="field"><label>유형</label><select class="select"><option>전체</option><option>신분증 미소지</option><option>중도퇴실</option><option>소음발생</option><option>부정행위</option></select></div><div class="field"><label>처리상태</label><select class="select"><option>전체</option><option>확인 필요</option><option>처리 완료</option></select></div><button class="btn btn-primary">조회</button></div><div class="table-wrap"><table><thead><tr><th>수험번호</th><th>성명</th><th>고사실</th><th>교시</th><th>유형</th><th>처리상태</th><th>발생시각</th><th>관리</th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${r.map((v,j)=>`<td>${j===5?`<span class="badge ${v==='처리 완료'?'badge-green':'badge-orange'}">${v}</span>`:esc(v)}</td>`).join('')}<td>${manage(i)}</td></tr>`).join('')}</tbody></table></div></div></section>`;
+    const action=fieldOnly?'<button class="btn btn-primary">+ 특이사항 등록</button>':'';
+    return shell(content,'특이사항 학생',fieldOnly?`담당 ${term('examRoom')}에서 발생한 특이사항을 등록·조회합니다.`:readOnly?'담당 고사장·건물 범위의 특이사항을 조회합니다.':'신분증 미소지, 중도퇴실, 소음발생, 부정행위 학생을 별도 관리합니다.',action);
+  }
+
+  function photoComparePage(){
+    const content=`<div class="grid grid-2"><section class="card"><div class="card-header"><div><div class="card-title">사전 등록 사진</div><div class="card-sub">세팅 단계에서 수험번호 기준으로 업로드한 사진</div></div><span class="badge badge-green">매칭 완료</span></div><div class="card-body text-center"><div style="height:330px;border-radius:14px;background:linear-gradient(145deg,#dce8f7,#f6f9fd);display:grid;place-items:center;font-size:100px">👤</div><div class="small muted" style="margin-top:10px">파일명 21330061.jpg · 등록 2025.11.10</div></div></section>
+      <section class="card"><div class="card-header"><div><div class="card-title">현장 촬영 사진</div><div class="card-sub">신분증 미소지 사유로 현장에서 촬영</div></div><span class="badge badge-orange">확인 필요</span></div><div class="card-body text-center"><div style="height:330px;border-radius:14px;background:linear-gradient(145deg,#f3e7db,#fffaf5);display:grid;place-items:center;font-size:100px">🧑</div><div class="small muted" style="margin-top:10px">촬영 10:02 · 학림관 J411 · 현장관리자 최유진</div></div></section></div>
+      <section class="card" style="margin-top:14px"><div class="card-body"><div class="grid grid-3"><div>${infoRows([['수험번호','21330061'],['성명','김하늘'],['사고유형','신분증 미소지']])}</div><div class="field"><label>확인 결과</label><div class="flex gap-8"><button class="btn btn-green">동일인 확인</button><button class="btn">추가 확인 필요</button></div></div><div class="field"><label>확인 메모</label><textarea class="textarea" placeholder="확인 근거 또는 추가 조치 입력"></textarea></div></div></div></section>`;
+    return shell(content,'수험생 사진 비교','사전 사진과 현장 촬영 사진을 나란히 비교하고 관리자가 확인 결과를 저장합니다.',`<button class="btn" data-route="incidents">목록으로</button><button class="btn btn-primary">확인 결과 저장</button>`);
+  }
+
+  function fieldAttendancePage(){
+    const students=[['21330061','김하늘','미처리'],['21330062','이서준','응시'],['21330063','박민지','응시'],['21330064','최지훈','결시'],['21330065','정수아','미처리']];
+    const content=`<div class="grid grid-4" style="margin-bottom:14px">${kpi('배정','53','명','♙','var(--blue-2)','var(--blue)')}${kpi('응시','14','명','✓','var(--green-soft)','var(--green)')}${kpi('결시','37','명','×','var(--red-soft)','var(--red)')}${kpi('미처리','2','명','!','var(--orange-soft)','var(--orange)')}</div><section class="card"><div class="card-header"><div><div class="card-title">학림관 J411 · 1교시</div><div class="card-sub">학생별 응시·결시를 선택하고 필요 시 특이사항을 등록합니다.</div></div><span class="badge badge-orange">진행률 96.2%</span></div><div class="card-body"><div class="table-wrap"><table><thead><tr><th>수험번호</th><th>성명</th><th>현재 상태</th><th>출결 처리</th><th>특이사항</th></tr></thead><tbody>${students.map(s=>`<tr><td>${s[0]}</td><td>${s[1]}</td><td>${statusBadge(s[2])}</td><td><button class="btn btn-sm btn-green">응시</button> <button class="btn btn-sm btn-red">결시</button></td><td><button class="btn btn-sm" data-route="incidents">등록</button></td></tr>`).join('')}</tbody></table></div></div></section>`;
+    return shell(content,'현장 출결 입력',`배정된 ${term('examRoom')}의 학생 출결과 특이사항만 처리할 수 있습니다.`,`<button class="btn" data-route="field-sign">감독관 서명</button>`);
+  }
+
+  function fieldSignPage(){
+    return shell(`<div class="grid grid-2"><section class="card"><div class="card-header"><div><div class="card-title">서명 대상 감독관</div><div class="card-sub">PDF 설정에서 선택한 감독관만 서명할 수 있습니다.</div></div></div><div class="card-body">${signers().filter(s=>state.pdf.selectedSigners.includes(s.id)).map(s=>`<div class="setting-row"><div><div class="setting-name">${s.name}</div><div class="setting-desc">${roleNameKorean(s.role)} · ${s.room||'무배정 예비감독관'}</div></div><div><span class="badge ${s.id==='S001'?'badge-green':'badge-orange'}">${s.id==='S001'?'서명 완료':'서명 대기'}</span></div><button class="btn btn-sm btn-primary">${s.id==='S001'?'서명 보기':'서명하기'}</button></div>`).join('')}</div></section><section class="card"><div class="card-header"><div class="card-title">서명 영역</div></div><div class="card-body"><div style="height:300px;border:2px dashed var(--gray-300);border-radius:14px;display:grid;place-items:center;color:var(--gray-500)">마우스 또는 터치로 서명</div><button class="btn btn-primary btn-block" style="margin-top:12px">서명 저장</button></div></section></div>`,'감독관 서명',`정·부·예비감독관 중 PDF 세팅에서 선택한 감독관이 서명합니다.`,'');
+  }
+
+  function closePage(){
+    const closed=state.close.status==='closed';
+    const checks=[['출결 미처리','0명',true],['특이사항 미확인','0건',true],['답안지 인계','271/271실',true],['감독관 서명','269/271실',false],['업로드 데이터','최종 버전 검증 완료',true]];
+    const content=`<div class="grid grid-3" style="margin-bottom:14px">${kpi('현재 상태',closed?'마감':'마감 전','',closed?'🔒':'◷',closed?'var(--gray-200)':'var(--orange-soft)',closed?'var(--gray-700)':'var(--orange)')}${kpi('대상 전형','수시 논술','','▦','var(--blue-2)','var(--blue)')}${kpi('점검 항목','5','개','✓','var(--green-soft)','var(--green)')}</div>
+      <section class="card"><div class="card-header"><div><div class="card-title">마감 전 자동점검</div><div class="card-sub">학교별 ON/OFF 기능에 따라 필수 점검 항목이 달라집니다.</div></div><button class="btn" data-action="run-close-check">점검 새로고침</button></div><div class="card-body">${checks.map(c=>`<div class="setting-row"><div><div class="setting-name">${c[0]}</div><div class="setting-desc">${c[1]}</div></div><span class="badge ${c[2]?'badge-green':'badge-red'}">${c[2]?'정상':'확인 필요'}</span><button class="btn btn-sm">상세</button></div>`).join('')}</div></section>
+      <div class="notice ${closed?'notice-success':'notice-warning'}" style="margin-top:14px"><span>${closed?'✓':'!'}</span><div><b>${closed?'마감 완료':'마감 전 상태'}</b><br>${closed?'운영 입력이 잠겼으며 결과파일과 PDF를 생성할 수 있습니다.':'감독관 서명 미완료 2실을 처리한 뒤 마감할 수 있습니다.'}</div></div>`;
+    return shell(content,'마감 관리','전형관리자만 마감과 마감 해제를 실행할 수 있습니다.',closed?`<button class="btn btn-red" data-action="reopen">마감 해제</button>`:`<button class="btn btn-primary" data-action="close-exam">마감 실행</button>`);
+  }
+
+  function pdfOutputPage(){
+    return shell(`<div class="pdf-layout"><section class="card"><div class="card-header"><div><div class="card-title">출력 범위</div><div class="card-sub">세팅된 PDF 템플릿과 서명 정책을 적용합니다.</div></div></div><div class="card-body stack"><div class="field"><label>출력물</label><select class="select"><option>수험생 출결 명부</option><option>감독관 명부</option><option>감독관 서명 확인 목록</option></select></div><div class="grid grid-2"><div class="field"><label>교시</label><select class="select"><option>전체</option></select></div><div class="field"><label>${term('examSite')}</label><select class="select"><option>전체</option></select></div></div>${infoRows([['페이지당 학생 수',state.pdf.pageSize+'명'],['서명 정책',signaturePolicyLabel()],['서명 가능 감독관',state.pdf.selectedSigners.length+'명'],['마감 상태',state.close.status==='closed'?'마감':'마감 전']])}<button class="btn btn-primary btn-block">PDF 생성</button></div></section><div>${pdfPreview()}</div></div>`,'PDF·서명 출력','학교별 PDF 편집 설정과 선택된 감독관 서명을 적용해 출력물을 생성합니다.',`<button class="btn" data-route="settings-pdf">PDF 설정 보기</button>`);
+  }
+
+  function downloadsPage(){
+    const files=[
+      ['00.전체 수험생 출결 목록_20251116.xlsx','전체 수험생 출결 목록','15,928행'],
+      ['01.계열별출결집계_20251116.xlsx','계열별 출결 집계','계열 기준'],
+      ['02.사고자집계_20251116.xlsx','사고자 집계','60건'],
+      ['03.고사실별출결집계_20251116.xlsx',`${term('examRoom')}별 출결 집계`,'271실'],
+      ['04.과목별별출결집계_20251116.xlsx','과목별 출결 집계','과목 기준'],
+      ['05.교시별출결집계_20251116.xlsx','교시별 출결 집계','3교시'],
+      ['06.모집단위별출결집계_20251116.xlsx','모집단위별 출결 집계','모집단위 기준'],
+      ['07.타고사장 수험생 목록_20251116.xlsx','타고사장 수험생 목록','대상자 목록']
+    ];
+    return shell(`<div class="grid grid-3">${files.map(([f,n,d])=>`<section class="card"><div class="card-body"><div class="flex justify-between"><div class="kpi-icon" style="background:var(--green-soft);color:var(--green)">X</div><span class="badge badge-green">생성 완료</span></div><div class="card-title" style="margin-top:13px">${n}</div><div class="small muted" style="margin:5px 0 14px">${d}</div><a class="btn btn-block" href="sample-data/${encodeURIComponent(f)}" download>개별 다운로드</a></div></section>`).join('')}<section class="card"><div class="card-body"><div class="flex justify-between"><div class="kpi-icon" style="background:var(--purple-soft);color:var(--purple)">✍</div><span class="badge badge-blue">추가 파일</span></div><div class="card-title" style="margin-top:13px">감독관 서명 확인 목록</div><div class="small muted" style="margin:5px 0 14px">정·부·예비감독관 서명 상태</div><button class="btn btn-block">생성</button></div></section></div>`,'운영 결과파일 다운로드','마감된 최종 데이터를 목적별 파일로 개별 다운로드합니다.',`<button class="btn btn-primary">전체 ZIP 다운로드</button>`);
+  }
+
+  function auditPage(){
+    return shell(`<section class="card"><div class="card-header"><div><div class="card-title">변경·다운로드 감사 로그</div><div class="card-sub">계정·설정·업로드·운영·마감·출력의 주요 작업을 추적합니다.</div></div></div><div class="card-body"><div class="table-wrap"><table><thead><tr><th>일시</th><th>계정</th><th>기능</th><th>대상</th><th>작업</th><th>상세</th></tr></thead><tbody>${[['2025-11-16 08:20','pm','업로드','수험생 파일','교체·자동검증'],['2025-11-16 09:02','field','출결','학림관 J411','응시 처리'],['2025-11-16 10:02','field','사진','21330061','현장사진 등록'],['2025-11-16 18:40','exam','마감','수시 논술','마감 실행']].map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}<td><button class="btn btn-sm">보기</button></td></tr>`).join('')}</tbody></table></div></div></section>`,'감사 로그','주요 변경과 다운로드 이력을 역할별 범위 안에서 조회합니다.','');
+  }
+
+  /* helpers */
+  function kpi(label,value,unit,icon,bg,color){ return `<div class="kpi"><div><div class="label">${label}</div><div class="value">${value}<small>${unit}</small></div></div><div class="kpi-icon" style="background:${bg};color:${color}">${icon}</div></div>`; }
+  function stepper(active){ return `<div class="stepper">${['세팅','업로드·자동검증','운영','마감','출력'].map((s,i)=>`<div class="step ${i<active?'done':i===active?'active':''}"><span class="step-num">${i<active?'✓':i+1}</span><span class="step-label">${s}</span></div>`).join('')}</div>`; }
+  function settingRow(key,name,desc){ return `<div class="setting-row"><div><div class="setting-name">${name}</div><div class="setting-desc">${desc}</div></div><div></div><label class="switch"><input type="checkbox" data-feature="${key}" ${state.features[key]?'checked':''}><span></span></label></div>`; }
+  function alignSetting(key,label){ return `<div class="setting-row"><div><div class="setting-name">${label}</div><div class="setting-desc">출력 위치를 간단한 버튼으로 선택합니다.</div></div><div></div><div class="align-buttons">${[['left','≡'],['center','≡'],['right','≡']].map(([v,ic],i)=>`<button class="align-btn ${state.pdf.align[key]===v?'active':''}" data-align-key="${key}" data-align-value="${v}" style="text-align:${v}">${ic}</button>`).join('')}</div></div>`; }
+  function processList(items){ return items.map(([n,t,d])=>`<div class="flex gap-12" style="padding:10px 0;border-bottom:1px solid var(--gray-200)"><span class="step-num" style="background:var(--role);color:#fff">${n}</span><div><b>${t}</b><div class="small muted">${d}</div></div></div>`).join(''); }
+  function statusLine(title,desc,color){ return `<div class="flex justify-between items-center" style="padding:11px 0;border-bottom:1px solid var(--gray-200)"><div><b>${title}</b><div class="small muted">${desc}</div></div><span class="badge badge-${color}">${color==='green'?'정상':'확인'}</span></div>`; }
+  function infoRows(rows){ return rows.map(r=>`<div class="flex justify-between" style="padding:9px 0;border-bottom:1px solid var(--gray-200)"><span class="muted">${r[0]}</span><b>${r[1]}</b></div>`).join(''); }
+  function roleBadge(role){ const r=ROLES[role]; return `<span class="badge" style="background:var(--${r.color}-soft,${r.color==='blue'?'var(--blue-2)':'var(--gray-100)'});color:${r.color==='blue'?'var(--blue)':r.color==='green'?'var(--green)':r.color==='orange'?'#d77d00':r.color==='teal'?'var(--teal)':'var(--purple)'}">${r.name}</span>`; }
+  function roleNameKorean(role){ return role==='primary'?'정감독관':role==='sub'?'부감독관':'예비감독관'; }
+  function signers(){ return [
+    {id:'S001',name:'김민수',role:'primary',room:'학림관 J411'},
+    {id:'S002',name:'박지현',role:'sub',room:'학림관 J411'},
+    {id:'S003',name:'이준호',role:'primary',room:'학림관 J409'},
+    {id:'S004',name:'최서연',role:'sub',room:'학림관 J409'},
+    {id:'S099',name:'한예비',role:'standby',room:''}
+  ]; }
+  function signaturePolicyLabel(){ return {primary:'정감독관만',all:'정·부 감독관 모두',selected:'직접 선택',none:'서명 미사용'}[state.pdf.signaturePolicy]; }
+  function pdfPreview(){
+    const a=state.pdf.align;
+    return `<div class="preview-sheet"><div class="paper"><div class="paper-meta"><span style="text-align:${a.school}">${state.school.name}</span><span style="text-align:${a.date}">${state.basic.examDate}</span></div><div class="paper-title">${state.selection} 수험생 출결 명부</div><table class="paper-table"><thead><tr><th>순번</th><th>수험번호</th><th>성명</th><th>${term('examRoom')}</th><th>상태</th><th>확인</th></tr></thead><tbody>${Array.from({length:8},(_,i)=>`<tr><td>${i+1}</td><td>21${330061+i}</td><td>${['김하늘','이서준','박민지','최지훈','정수아','한유진','윤태호','오세림'][i]}</td><td>J411</td><td>${i===3?'결시':'응시'}</td><td></td></tr>`).join('')}</tbody></table><div class="paper-footer"><div style="text-align:${a.footer}">해당 목록을 평가하였음을 확인합니다.</div><div style="text-align:${a.sign}">정감독관 ________　부감독관 ________　예비감독관 ________</div><div class="text-center">1 / ${Math.ceil(state.data.total/state.pdf.pageSize)}</div></div></div></div>`;
+  }
+  function donutChart(rate,att,abs){ return `<div class="donut-wrap"><div class="donut" style="background:conic-gradient(var(--green) 0 ${rate}%,var(--red) ${rate}% 100%)"><div class="donut-label"><div>전체 응시율<b>${rate.toFixed(1)}%</b></div></div></div><div class="legend"><div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span>응시 <b>${fmt(att)}명</b></div><div class="legend-row"><span class="legend-dot" style="background:var(--red)"></span>결시 <b>${fmt(abs)}명</b></div><div class="small muted">응시율 = 응시인원 ÷ 배정인원</div></div></div>`; }
+  function segmentBar(bands){ return `<div class="segment-bar">${bands.map(b=>`<div class="segment" style="width:${Math.max(b.pct,5)}%;background:${b.color}"><div>${b.count}실<small>${b.pct}%</small></div></div>`).join('')}</div><div class="flex justify-between" style="margin-top:10px;gap:6px;flex-wrap:wrap">${bands.map(b=>`<span class="small"><span class="legend-dot" style="display:inline-block;background:${b.color};margin-right:4px"></span>${b.label}</span>`).join('')}</div>`; }
+  function rankRow(r){ const c=r.rate<40?'red':r.rate<50?'orange':'blue'; return `<div class="rank-row"><span>${r.site} ${r.room}</span><div class="progress ${c}"><span style="width:${r.rate}%"></span></div><b class="text-right">${r.rate}%</b></div>`; }
+  function sessionBars(){ return `<div style="height:220px;display:flex;align-items:flex-end;justify-content:space-around;border-left:1px solid var(--gray-300);border-bottom:1px solid var(--gray-300);padding:0 24px 0 34px;background:repeating-linear-gradient(to top,transparent 0,transparent 43px,#edf0f5 44px)">${state.data.sessions.map(s=>`<div style="width:24%;text-align:center"><b>${s.rate}%</b><div style="height:${s.rate*2.5}px;max-height:165px;background:linear-gradient(#3c8ef5,#1267d6);border-radius:7px 7px 0 0;margin:7px auto 8px"></div><span class="small">${s.name.split('(')[0]}</span></div>`).join('')}</div>`; }
+  function roomTable(rooms,full=false){ return `<div class="table-wrap"><table><thead><tr><th>${term('examSite')}</th><th>${term('examRoom')}</th><th>교시</th><th>배정</th><th>응시</th><th>결시</th>${state.features.remainingSeat?'<th>잔여좌석</th>':''}<th>진행률</th><th>응시율</th><th>사고</th><th>감독관 서명</th><th>마감</th></tr></thead><tbody>${rooms.map(r=>`<tr class="${r.closed?'closed':''}"><td>${r.site}</td><td><b>${r.room}</b></td><td>${r.session}</td><td>${r.assigned}</td><td>${r.attended}</td><td>${r.absent}</td>${state.features.remainingSeat?`<td>${Math.max(0,5-(r.incident||0))}석</td>`:''}<td><div class="flex items-center gap-8"><div class="progress ${r.progress<80?'orange':''}"><span style="width:${r.progress}%"></span></div><span>${r.progress}%</span></div></td><td>${rateBadge(r.rate)}</td><td>${r.incident?`<span class="badge badge-red">${r.incident}건</span>`:'0'}</td><td><span class="badge ${r.signature==='완료'?'badge-green':'badge-orange'}">${r.signature}</span></td><td>${r.closed?'<span class="badge badge-gray">🔒 마감</span>':'<span class="badge badge-blue">마감 전</span>'}</td></tr>`).join('')}</tbody></table></div>`; }
+  function rateBadge(rate){ const c=rate>=70?'green':rate>=60?'blue':rate>=50?'orange':'red'; const l=rate>=70?'70% 이상':rate>=60?'60~69%':rate>=50?'50~59%':rate>=40?'40~49%':'40% 미만'; return `<span class="badge badge-${c}">${rate.toFixed(1)}% · ${l}</span>`; }
+  function statusBadge(s){ return `<span class="badge ${s==='응시'?'badge-green':s==='결시'?'badge-red':'badge-orange'}">${s}</span>`; }
+
+  /* interactions */
+  function bindPageEvents(){
+    document.querySelectorAll('[data-route]').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.route)));
+    document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',e=>{if(e.target.matches('[data-close-modal]')) closeModal();}));
+    const lf=document.getElementById('login-form'); if(lf) lf.addEventListener('submit',handleLogin);
+    document.querySelectorAll('[data-demo-account]').forEach(el=>el.addEventListener('click',()=>{document.getElementById('login-id').value=el.dataset.demoAccount;document.getElementById('login-pw').value='1234';}));
+    document.querySelectorAll('[data-upload-type]').forEach(el=>el.addEventListener('click',()=>{state.ui.uploadType=el.dataset.uploadType;save();render();}));
+    bindActions(); bindInputs(); bindUpload();
+  }
+  function handleLogin(e){
+    e.preventDefault(); const id=document.getElementById('login-id').value.trim(); const pw=document.getElementById('login-pw').value;
+    const found=Object.entries(ROLES).find(([,r])=>r.account===id&&r.password===pw);
+    if(!found){ toast('아이디 또는 비밀번호를 확인해주세요.','error'); return; }
+    const [role,r]=found; const names={developer:'개발자',pm:'박상호 PM',exam:'김민성',building:'이서준',field:'최유진'};
+    state.session={role,id,name:names[role]}; save(); navTo(r.home); toast(`${r.name} 계정으로 로그인했습니다.`,'success');
+  }
+  function bindActions(){
+    document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>{
+      const a=el.dataset.action;
+      if(a==='logout'){state.session=null;save();navTo('login');}
+      if(a==='reset-demo'){if(confirm('데모 설정과 데이터를 초기화할까요?')) reset();}
+      if(a==='save-settings'){saveSettings();}
+      if(a==='save-terms'){saveTerms();}
+      if(a==='choose-excel') document.getElementById('excel-file')?.click();
+      if(a==='choose-photo') document.getElementById('photo-file')?.click();
+      if(a==='open-account-modal') openAccountModal();
+      if(a==='add-standby') addStandby();
+      if(a==='apply-upload') {toast('검증 완료 데이터를 운영 기준에 반영했습니다.','success');}
+      if(a==='incident-detail') openIncidentModal();
+      if(a==='close-exam') closeExam();
+      if(a==='reopen') reopenExam();
+      if(a==='run-close-check') toast('마감 전 점검을 최신 데이터로 갱신했습니다.','success');
+    }));
+    document.querySelectorAll('[data-error-index]').forEach(el=>el.addEventListener('click',()=>openErrorModal(Number(el.dataset.errorIndex))));
+    document.querySelectorAll('[data-pdf-page]').forEach(el=>el.addEventListener('click',()=>{state.pdf.pageSize=Number(el.dataset.pdfPage);save();render();}));
+    document.querySelectorAll('[data-align-key]').forEach(el=>el.addEventListener('click',()=>{state.pdf.align[el.dataset.alignKey]=el.dataset.alignValue;save();render();}));
+  }
+  function bindInputs(){
+    document.querySelectorAll('[data-feature]').forEach(el=>el.addEventListener('change',()=>{state.features[el.dataset.feature]=el.checked;save();}));
+    document.querySelectorAll('[data-term]').forEach(el=>el.addEventListener('input',()=>{const p=document.querySelector(`[data-term-preview="${el.dataset.term}"]`);if(p)p.textContent=el.value;}));
+    document.querySelectorAll('[data-signer]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.signer; state.pdf.selectedSigners=el.checked?[...new Set([...state.pdf.selectedSigners,id])]:state.pdf.selectedSigners.filter(x=>x!==id); save();}));
+    const sp=document.getElementById('signature-policy'); if(sp) sp.addEventListener('change',()=>{state.pdf.signaturePolicy=sp.value;save();render();});
+    const all=document.getElementById('feature-all'); if(all) all.addEventListener('change',()=>{Object.keys(state.features).forEach(k=>state.features[k]=all.checked);save();render();});
+    const photo=document.getElementById('photo-file'); if(photo) photo.addEventListener('change',()=>{if(photo.files[0]){state.uploads.photos={name:photo.files[0].name,time:new Date().toLocaleString('ko-KR')};save();toast('사진 파일을 읽고 수험번호 매칭을 시작했습니다.','success');}});
+  }
+  function saveSettings(){
+    const date=document.getElementById('exam-date'); if(date) state.basic.examDate=date.value;
+    state.basic.sessions.forEach((s,i)=>{
+      const use=document.querySelector(`[data-session-use="${i}"]`); const n=document.querySelector(`[data-session-name="${i}"]`); const st=document.querySelector(`[data-session-start="${i}"]`); const en=document.querySelector(`[data-session-end="${i}"]`); const cl=document.querySelector(`[data-session-close="${i}"]`);
+      if(use)s.use=use.checked;if(n)s.name=n.value;if(st)s.start=st.value;if(en)s.end=en.value;if(cl)s.close=cl.value;
+    }); save(); toast('학교·전형별 세팅을 저장했습니다.','success');
+  }
+  function saveTerms(){ document.querySelectorAll('[data-term]').forEach(el=>state.terms[el.dataset.term]=el.value.trim()||defaultState.terms[el.dataset.term]); save(); toast('학교별 명칭을 전체 화면에 반영했습니다.','success'); render(); }
+  function bindUpload(){
+    const input=document.getElementById('excel-file'); const drop=document.getElementById('upload-drop');
+    if(input) input.addEventListener('change',()=>{if(input.files[0]) processExcel(input.files[0]);});
+    if(drop){['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('drag')}));['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('drag')}));drop.addEventListener('drop',ev=>{const f=ev.dataTransfer.files[0];if(f)processExcel(f);});}
+  }
+  async function processExcel(file){
+    const type=state.ui?.uploadType||'candidate';
+    const isCandidate=type==='candidate';
+    const stages=[...document.querySelectorAll('.validation-stage')];
+    stages.forEach((stage,i)=>{stage.className='validation-stage';stage.textContent=['파일 읽기','컬럼 매칭','필수값 확인','기준정보 매칭','결과 생성'][i];});
+    let rows=[],headers=[];
+    try{
+      stages[0].classList.add('running');
+      const hasXlsx=await ensureXlsx();
+      if(hasXlsx){
+        const buf=await file.arrayBuffer(); const wb=XLSX.read(buf,{type:'array'}); const ws=wb.Sheets[wb.SheetNames[0]];
+        rows=XLSX.utils.sheet_to_json(ws,{defval:''}); headers=rows.length?Object.keys(rows[0]):[];
+      } else if(isCandidate){
+        rows=Array.from({length:120},(_,i)=>({고사일:'20251116',교시:'1교시(09:30)',고사실코드:i%17===0?'':11001+(i%7),고사실:'학림관J'+(301+i%7),수험번호:21330000+i,수험생명:i%29===0?'':`학생${i+1}`,생년월일:'20070101',전형:'수시',계열:'인문',모집단위:'경영학과'})); headers=Object.keys(rows[0]);
+      } else {
+        rows=Array.from({length:48},(_,i)=>({감독관ID:`S${String(i+1).padStart(3,'0')}`,감독관명:`감독관${i+1}`,감독관구분:i%9===0?'예비감독관':i%2===0?'부감독관':'정감독관',교시:'1교시',고사실코드:state.features.invigilatorAssignment?(11001+i%7):'',고사실:state.features.invigilatorAssignment?`학림관J${301+i%7}`:'',서명사용여부:'Y'})); headers=Object.keys(rows[0]);
+      }
+      await wait(160); stages[0].className='validation-stage ok';stages[0].textContent='✓ 파일 읽기';
+      stages[1].classList.add('running'); await wait(160);
+      const aliases=isCandidate
+        ? {학생이름:['수험생명','성명','이름'],시험일:['고사일','시험일'],고사실코드:['고사실코드','ROOM_CD'],수험번호:['수험번호','USER_ID'],교시:['교시','PERIOD_NM']}
+        : {감독관ID:['감독관ID','SUPV_ID','감독관 아이디'],감독관명:['감독관명','SUPV_NM','성명'],감독관구분:['감독관구분','역할','ROLE'],교시:['교시','PERIOD_NM'],고사실코드:['고사실코드','ROOM_CD']};
+      const columns=[]; Object.entries(aliases).forEach(([target,list])=>{const src=list.find(x=>headers.includes(x));if(src)columns.push({source:src,target});});
+      stages[1].className='validation-stage ok';stages[1].textContent='✓ 컬럼 매칭';
+      stages[2].classList.add('running'); await wait(160);
+      const errors=[]; const get=(row,names)=>{for(const name of names)if(row[name]!==undefined)return row[name];return ''};
+      rows.forEach((row,idx)=>{
+        if(isCandidate){
+          const room=get(row,['고사실코드','ROOM_CD']); const id=get(row,['수험번호','USER_ID']); const name=get(row,['수험생명','성명','이름']); const sess=get(row,['교시','PERIOD_NM']);
+          if(!room) errors.push({level:'오류',row:idx+2,column:'고사실코드',value:'(빈 값)',expected:'등록된 고사실코드',message:'필수값이 비어 있습니다.',solution:'원본 파일의 고사실코드를 입력한 뒤 파일을 다시 선택하세요.'});
+          if(!id) errors.push({level:'오류',row:idx+2,column:'수험번호',value:'(빈 값)',expected:'중복되지 않는 수험번호',message:'수험번호가 없습니다.',solution:'학생 식별값을 입력하세요.'});
+          if(!name) errors.push({level:'확인',row:idx+2,column:'수험생명',value:'(빈 값)',expected:'학생 이름',message:'학생 이름이 비어 있습니다.',solution:'개인정보 마스킹 정책인지 확인하거나 이름을 입력하세요.'});
+          if(sess && !String(sess).includes('교시')) errors.push({level:'확인',row:idx+2,column:'교시',value:sess,expected:'1교시/2교시/3교시',message:'교시명이 세팅값과 다릅니다.',solution:'교시명을 세팅과 동일하게 맞추세요.'});
+        } else {
+          const id=get(row,['감독관ID','SUPV_ID','감독관 아이디']); const name=get(row,['감독관명','SUPV_NM','성명']); const role=get(row,['감독관구분','역할','ROLE']); const room=get(row,['고사실코드','ROOM_CD']);
+          if(!id) errors.push({level:'오류',row:idx+2,column:'감독관ID',value:'(빈 값)',expected:'중복되지 않는 감독관 ID',message:'감독관 ID가 없습니다.',solution:'감독관 식별값을 입력하세요.'});
+          if(!name) errors.push({level:'오류',row:idx+2,column:'감독관명',value:'(빈 값)',expected:'감독관 이름',message:'감독관 이름이 없습니다.',solution:'성명을 입력하세요.'});
+          if(role && !['정감독관','부감독관','예비감독관','정','부','예비'].includes(String(role))) errors.push({level:'확인',row:idx+2,column:'감독관구분',value:role,expected:'정감독관/부감독관/예비감독관',message:'감독관 역할 명칭을 확인해주세요.',solution:'허용된 역할 명칭으로 수정하세요.'});
+          if(state.features.invigilatorAssignment && !room) errors.push({level:'오류',row:idx+2,column:'고사실코드',value:'(빈 값)',expected:`배정 ${term('examRoom')} 코드`,message:`학교 설정상 ${term('examRoom')} 배정이 필수입니다.`,solution:'배정 코드를 입력하거나 학교별 기능에서 감독관 고사실 배정을 OFF로 변경하세요.'});
+        }
+      });
+      stages[2].className=errors.some(e=>e.level==='오류')?'validation-stage error':'validation-stage ok'; stages[2].textContent=(errors.length?'! ':'✓ ')+'필수값 확인';
+      stages[3].classList.add('running'); await wait(160); stages[3].className='validation-stage ok';stages[3].textContent='✓ 기준정보 매칭';
+      stages[4].classList.add('running'); await wait(160); stages[4].className=errors.some(e=>e.level==='오류')?'validation-stage error':'validation-stage ok';stages[4].textContent=(errors.length?'! ':'✓ ')+'결과 생성';
+      const result={type,name:file.name,total:rows.length,ok:Math.max(0,rows.length-errors.length),warn:errors.filter(e=>e.level==='확인').length,matched:columns.length,columns,errors:errors.slice(0,12),time:new Date().toLocaleString('ko-KR')};
+      state.uploads[type]=result;save();document.getElementById('upload-result').innerHTML=uploadResult(result);
+      document.querySelectorAll('[data-error-index]').forEach(el=>el.addEventListener('click',()=>openErrorModal(Number(el.dataset.errorIndex))));
+      if(errors.length) toast(`자동검증 완료: 확인할 항목 ${errors.length}건`,'warning'); else {toast('업로드와 자동검증이 완료되었습니다.','success');showValidationSuccess(result);}
+    }catch(err){
+      console.error(err); toast('파일을 읽지 못했습니다. 형식과 암호 설정을 확인해주세요.','error'); if(stages[0])stages[0].className='validation-stage error';
+    }
+  }
+  function openErrorModal(i){
+    const current=state.uploads[state.ui?.uploadType||'candidate']; const e=current?.errors[i]; if(!e)return;
+    modal('업로드 오류 상세',`<div class="notice ${e.level==='오류'?'notice-danger':'notice-warning'}"><span>!</span><div><b>${e.message}</b><br>${e.row}행의 ${e.column} 값을 확인하세요.</div></div><div style="margin-top:14px">${infoRows([['원본 파일',current.name],['시트','Sheet1'],['행',e.row+'행'],['오류 컬럼',e.column],['입력값',e.value],['예상 기준값',e.expected],['권장 조치',e.solution]])}</div>`,`<button class="btn" data-close-modal>닫기</button><button class="btn btn-primary" data-close-modal>원본 수정 후 다시 선택</button>`);
+  }
+  function showValidationSuccess(u){ modal('검증 완료',`<div class="notice notice-success"><span>✓</span><div><b>모든 데이터가 정상 매칭되었습니다.</b><br>${fmt(u.total)}행을 운영 데이터로 반영할 수 있습니다.</div></div>${infoRows([['파일',u.name],['정상 매칭',fmt(u.ok)+'행'],['컬럼 매칭',u.matched+'개'],['다음 단계','운영 데이터 반영']])}`,`<button class="btn" data-close-modal>닫기</button><button class="btn btn-green" data-close-modal>운영 데이터 반영</button>`); }
+  function openAccountModal(){
+    const roleOptions=isRole('developer')?'<option value="pm">담당 PM</option>':'<option value="exam">전형관리자</option><option value="building">고사장·건물관리자</option><option value="field">현장관리자</option>';
+    modal('계정 생성',`<div class="grid grid-2"><div class="field"><label>아이디</label><input class="input" id="new-account-id" placeholder="영문/숫자"></div><div class="field"><label>이름</label><input class="input" id="new-account-name"></div><div class="field"><label>역할</label><select class="select" id="new-account-role">${roleOptions}</select></div><div class="field"><label>담당 범위</label><input class="input" id="new-account-scope" value="${isRole('developer')?state.school.name+' / '+state.selection:state.selection}"></div></div><div class="notice notice-info" style="margin-top:14px"><span>ⓘ</span><div>초기 비밀번호는 1234로 발급되며 첫 로그인 시 변경을 권장합니다.</div></div>`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-primary" id="create-account-btn">계정 생성</button>`);
+    setTimeout(()=>document.getElementById('create-account-btn')?.addEventListener('click',()=>{const id=document.getElementById('new-account-id').value.trim();const name=document.getElementById('new-account-name').value.trim();const role=document.getElementById('new-account-role').value;const scope=document.getElementById('new-account-scope').value.trim();if(!id||!name){toast('아이디와 이름을 입력해주세요.','error');return;}state.accounts.push({id,name,role,scope,status:'사용'});save();closeModal();render();toast('계정을 생성했습니다.','success');}),0);
+  }
+  function addStandby(){ modal('예비감독관 추가',`<div class="grid grid-2"><div class="field"><label>감독관 ID</label><input class="input" value="S100"></div><div class="field"><label>이름</label><input class="input" placeholder="예비감독관 이름"></div></div><div class="notice notice-info" style="margin-top:14px"><span>ⓘ</span><div>예비감독관은 고사실 미배정 상태로 등록되며 PDF 서명 가능자 목록에서 별도 선택할 수 있습니다.</div></div>`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-primary" data-close-modal>추가</button>`); }
+  function openIncidentModal(){ modal('특이사항 상세',`${infoRows([['수험번호','21330061'],['성명','김하늘'],['고사실','학림관 J411'],['유형','신분증 미소지'],['발생시각','10:02'],['등록자','현장관리자 최유진']])}<div class="field" style="margin-top:14px"><label>처리 메모</label><textarea class="textarea">현장 사진 촬영 완료. 사전 사진과 비교 필요.</textarea></div>`,`<button class="btn" data-close-modal>닫기</button><button class="btn" data-route="photo-compare" data-close-modal>사진 비교</button><button class="btn btn-primary" data-close-modal>처리 완료</button>`); }
+  function closeExam(){ modal('마감할 수 없습니다',`<div class="notice notice-danger"><span>!</span><div><b>감독관 서명 미완료 2실</b><br>학림관 J414, J409의 서명을 확인한 뒤 다시 마감해주세요.</div></div><div style="margin-top:14px">${infoRows([['마감 대상',state.selection],['미처리 출결','0명'],['미확인 특이사항','0건'],['감독관 서명','269/271실']])}</div>`,`<button class="btn" data-close-modal>닫기</button><button class="btn btn-primary" data-route="pdf-output" data-close-modal>서명 확인으로 이동</button>`); }
+  function reopenExam(){ state.close.status='before';state.close.closedAt=null;save();render();toast('마감을 해제했습니다. 변경 후 자동검증과 마감을 다시 진행하세요.','warning'); }
+  function ensureXlsx(timeoutMs=2500){
+    if(window.XLSX) return Promise.resolve(true);
+    if(window.__xlsxLoading) return window.__xlsxLoading;
+    window.__xlsxLoading=new Promise(resolve=>{
+      const script=document.createElement('script');
+      let settled=false;
+      const finish=(ok)=>{if(settled)return;settled=true;resolve(ok);};
+      script.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+      script.async=true; script.onload=()=>finish(!!window.XLSX); script.onerror=()=>finish(false);
+      document.head.appendChild(script);
+      setTimeout(()=>finish(!!window.XLSX),timeoutMs);
+    });
+    return window.__xlsxLoading;
+  }
+  function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+
+  window.addEventListener('hashchange',()=>{route=location.hash.replace(/^#\/?/,'')||'login';render();});
+  render();
+})();
+
+</script>
+</body>
+</html>
