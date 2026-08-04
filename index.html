@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v1.8.0</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v1.8.1</title>
   <style>
 :root {
   --navy:#071d42;
@@ -565,6 +565,38 @@ body.dark .feature-compact-row:has(input:checked),body.dark .validation-option:h
 .photo-access-banner{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:var(--purple-soft);color:var(--purple);font-size:11px;font-weight:800;margin-bottom:12px}
 body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini-button{background:#111d2c}.dark .clickable-row:hover td{background:#17304d!important}
 
+
+/* v1.8.1 settings, PDF preview, photo comparison and download refinements */
+.date-weekday-wrap{grid-template-columns:minmax(160px,.8fr) minmax(150px,1.2fr);align-items:stretch}
+.weekday-chip{padding:0 12px;white-space:nowrap;font-size:12px}
+.session-setting-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:22px 0 10px}
+.session-close-mode{min-width:240px;margin:0}
+.session-close-disabled{opacity:.58;background:var(--gray-100)}
+.close-time-cell{display:flex;align-items:center;gap:7px;min-width:165px}
+.close-time-cell .input{min-width:112px}
+.pdf-preview-panel{position:sticky;top:82px;align-self:start}
+.pdf-preview-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px;padding:10px;border:1px solid var(--gray-200);border-radius:12px;background:var(--white)}
+.align-btn{width:38px;font-size:11px;letter-spacing:-.3px}
+.align-btn[disabled]{cursor:not-allowed;opacity:.35}
+.photo-compare-layout{display:grid;grid-template-columns:minmax(250px,.62fr) minmax(0,1.8fr);gap:14px;align-items:start}
+.photo-candidate-list{display:grid;gap:8px}
+.photo-candidate-button{width:100%;border:1px solid var(--gray-200);background:var(--white);border-radius:12px;padding:11px;text-align:left;color:inherit;display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:10px;align-items:center}
+.photo-candidate-button:hover{border-color:var(--blue);background:var(--blue-2)}
+.photo-candidate-button.active{border-color:var(--blue);background:var(--blue-2);box-shadow:0 0 0 2px rgba(18,103,214,.08)}
+.photo-candidate-thumb{width:42px;height:50px;border-radius:9px;overflow:hidden;background:var(--gray-100)}
+.photo-candidate-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-candidate-main{min-width:0}.photo-candidate-main b{display:block}.photo-candidate-main span{display:block;font-size:10px;color:var(--gray-600);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.photo-image-frame{position:relative;border:1px solid var(--gray-200);background:#e9eef5;border-radius:14px;overflow:hidden;aspect-ratio:4/5;max-height:400px}
+.photo-image-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-image-stamp{position:absolute;left:10px;right:10px;bottom:10px;padding:7px 9px;border-radius:9px;background:rgba(7,29,66,.82);color:#fff;font-size:10px;font-weight:800;backdrop-filter:blur(4px)}
+.photo-comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.photo-selected-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding:10px 12px;border:1px solid var(--blue);background:var(--blue-2);border-radius:11px}
+.download-card{position:relative}.download-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.download-select-label{display:inline-flex;align-items:center;gap:7px;padding:5px 8px;border:1px solid var(--gray-300);border-radius:8px;background:var(--gray-100);font-size:11px;font-weight:850}.download-check{position:static;width:18px;height:18px;accent-color:var(--blue);margin:0}.download-card .card-title{padding-right:0}
+body.dark .pdf-preview-actions,body.dark .photo-candidate-button,body.dark .download-select-label{background:#111d2c}
+body.dark .photo-candidate-button.active{background:#17304d}
+@media(max-width:1100px){.photo-compare-layout{grid-template-columns:1fr}.photo-candidate-list{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-candidate-button{grid-template-columns:36px minmax(0,1fr)}.photo-candidate-button>.badge{display:none}.pdf-preview-panel{position:static}}
+@media(max-width:760px){.photo-candidate-list,.photo-comparison-grid{grid-template-columns:1fr}.date-weekday-wrap{grid-template-columns:1fr}.session-setting-head{align-items:stretch;flex-direction:column}.session-close-mode{min-width:0;width:100%}}
+
 </style>
 
 </head>
@@ -578,8 +610,8 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.8.0';
-  const BUILD_ID = '20260804-180';
+  const APP_VERSION = '1.8.1';
+  const BUILD_ID = '20260804-181';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -602,9 +634,9 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
   };
 
   const defaultState = {
-    schemaVersion:8,
+    schemaVersion:9,
     session:null,
-    ui:{uploadType:'candidate',darkMode:false,auditSchool:'all',auditExam:'all',incidentFilter:'all',dashboardSite:'all',dashboardSession:'all',orgStatus:'all',mobileView:'overview'},
+    ui:{uploadType:'candidate',darkMode:false,auditSchool:'all',auditExam:'all',incidentFilter:'all',dashboardSite:'all',dashboardSession:'all',orgStatus:'all',mobileView:'overview',photoCandidate:'21330061'},
     school:{id:'dongguk',code:'DGU001',name:'동국대학교'},
     schools:[
       {id:'dongguk',code:'DGU001',name:'동국대학교',status:'사용'},
@@ -632,7 +664,7 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
       photoMatch:false,invigilatorRole:true,invigilatorRoom:false
     },
     basic:{
-      examName:'2026학년도 수시 논술', examDate:'2025-11-16',
+      examName:'2026학년도 수시 논술', examDate:'2025-11-16', closeTimeUse:true,
       sessions:[
         {use:true,name:'1교시',start:'09:30',end:'11:00',close:'11:20'},
         {use:true,name:'2교시',start:'13:00',end:'14:30',close:'14:50'},
@@ -716,6 +748,8 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     return target;
   }
   state.pdf.use=Object.assign({school:true,date:true,footer:true,sign:true},state.pdf.use||{});
+  if(typeof state.basic.closeTimeUse!=='boolean') state.basic.closeTimeUse=true;
+  state.ui.photoCandidate=state.ui.photoCandidate||'21330061';
   function save(){ try{ localStorage.setItem('ea-prototype-state', JSON.stringify(state)); }catch(e){ /* file preview or private mode: keep in memory */ } }
   function reset(){ try{ localStorage.removeItem('ea-prototype-state'); }catch(e){} state=clone(defaultState); route='login'; render(); }
   function esc(v=''){ return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
@@ -1150,10 +1184,11 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
   }
   function formatExamDateWithWeekday(v){ const d=new Date(v+'T00:00:00'); return Number.isNaN(d.getTime())?v:`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} (${['일','월','화','수','목','금','토'][d.getDay()]})`; }
   function settingsBasic(){
+    const closeTimeUse=state.basic.closeTimeUse!==false;
     return `<div class="notice notice-info" style="margin-bottom:14px"><span>ⓘ</span><div><b>학교는 계정 고정값입니다.</b><br>담당 PM은 학교를 변경하지 않고 전형만 선택합니다.</div></div>
-      <div class="grid grid-3"><div class="field"><label>학교</label><input class="input" value="${esc(state.school.name)}" disabled></div><div class="field"><label>전형</label><select class="select"><option>${esc(state.selection)}</option></select></div><div class="field"><label>시험일</label><div class="date-weekday-wrap"><input class="input" type="date" id="exam-date" value="${state.basic.examDate}"><span class="weekday-chip" id="exam-weekday">${weekdayOnly(state.basic.examDate)}</span></div><div class="small muted" style="margin-top:6px">화면 표기 · ${formatExamDateWithWeekday(state.basic.examDate)}</div></div></div>
-      <h3 class="section-title" style="margin-top:22px">교시 설정 · 최대 3교시</h3>
-      <div class="table-wrap"><table style="min-width:780px"><thead><tr><th>사용</th><th>교시명</th><th>시작시간</th><th>종료시간</th><th>출결 마감시간</th><th>입력 기준</th></tr></thead><tbody>${state.basic.sessions.map((s,i)=>`<tr><td><label class="switch"><input type="checkbox" data-session-use="${i}" ${s.use?'checked':''}><span></span></label></td><td><input class="input" data-session-name="${i}" value="${esc(s.name)}"></td><td><input class="input" type="time" data-session-start="${i}" value="${s.start}"></td><td><input class="input" type="time" data-session-end="${i}" value="${s.end}"></td><td><select class="select" data-session-close="${i}">${closeTimeOptions(s.end,s.close)}</select></td><td class="small muted">종료시간 이후 선택값</td></tr>`).join('')}</tbody></table></div>`;
+      <div class="grid grid-3"><div class="field"><label>학교</label><input class="input" value="${esc(state.school.name)}" disabled></div><div class="field"><label>전형</label><select class="select"><option>${esc(state.selection)}</option></select></div><div class="field"><label>시험일</label><div class="date-weekday-wrap"><input class="input" type="date" id="exam-date" value="${state.basic.examDate}"><output class="weekday-chip" id="exam-date-display">${formatExamDateWithWeekday(state.basic.examDate)}</output></div><div class="small muted" style="margin-top:6px">날짜를 선택하면 오른쪽에 요일이 괄호로 함께 표시됩니다.</div></div></div>
+      <div class="session-setting-head"><div><h3 class="section-title">교시 설정 · 최대 3교시</h3><div class="small muted">출결 마감시간 설정을 사용할지 먼저 선택한 뒤, 사용 시 교시별 실제 마감시간을 입력합니다.</div></div><div class="field session-close-mode"><label>출결 마감시간 설정</label><select class="select" id="close-time-use"><option value="on" ${closeTimeUse?'selected':''}>사용</option><option value="off" ${!closeTimeUse?'selected':''}>미사용</option></select></div></div>
+      <div class="table-wrap"><table style="min-width:820px"><thead><tr><th>사용</th><th>교시명</th><th>시작시간</th><th>종료시간</th><th>출결 마감시간</th><th>입력 기준</th></tr></thead><tbody>${state.basic.sessions.map((s,i)=>`<tr class="${closeTimeUse?'':'session-close-disabled'}"><td><label class="switch"><input type="checkbox" data-session-use="${i}" ${s.use?'checked':''}><span></span></label></td><td><input class="input" data-session-name="${i}" value="${esc(s.name)}"></td><td><input class="input" type="time" data-session-start="${i}" value="${s.start}"></td><td><input class="input" type="time" data-session-end="${i}" value="${s.end}"></td><td><div class="close-time-cell"><input class="input" type="time" data-session-close="${i}" value="${s.close}" ${closeTimeUse?'':'disabled'}>${closeTimeUse?'':'<span class="badge badge-gray">미사용</span>'}</div></td><td class="small muted">${closeTimeUse?'교시별 입력 종료 시각':'종료시간까지만 입력 가능'}</td></tr>`).join('')}</tbody></table></div>`;
   }
   function settingsFeatures(){
     const featureRows=[
@@ -1194,11 +1229,11 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
       ['primary','정감독관만','해당 고사실 정감독관 1명'],['all','정·부 감독관','해당 고사실 정·부 모두'],['selected','직접 선택','배정 여부와 관계없이 선택'],['none','서명 미사용','서명 영역을 출력하지 않음']
     ];
     return `<div class="pdf-layout"><div class="stack">
-      <section class="pdf-control-card"><div class="setting-section-head"><div><h3 class="setting-section-title">출력 기본</h3><div class="setting-section-desc">페이지 인원과 하단 문구를 설정합니다.</div></div><span class="badge badge-blue">미리보기 즉시 반영</span></div><div class="grid grid-2"><div class="field"><label>페이지당 학생 수</label><div class="flex gap-8">${[20,30,40].map(n=>`<button class="btn ${state.pdf.pageSize===n?'btn-blue':''}" data-pdf-page="${n}">${n}명</button>`).join('')}</div></div><div class="field"><label>하단 문구</label><input class="input" id="pdf-footer-text" value="${esc(state.pdf.footerText)}" placeholder="출력물 하단 안내문구"></div></div></section>
-      <section class="pdf-control-card"><div class="setting-section-head"><div><h3 class="setting-section-title">감독관 서명 정책</h3><div class="setting-section-desc">서명 대상과 출력 시 역할명 표시 여부를 설정합니다.</div></div><label class="flex items-center gap-8 strong small"><span>정·부 역할명 표시</span><span class="switch"><input id="pdf-role-label" type="checkbox" ${state.pdf.showRoleLabel?'checked':''}><span></span></span></label></div><div class="pdf-policy-grid" style="margin-top:10px">${policies.map(([v,n,d])=>`<button class="policy-btn ${state.pdf.signaturePolicy===v?'active':''}" data-signature-policy="${v}"><b>${n}</b><span>${d}</span></button>`).join('')}</div><div class="inline-meta" style="margin-top:10px"><span class="badge badge-gray">현재 적용</span><b class="small">${signaturePolicyLabel()}</b><span class="small muted">· ${state.pdf.signaturePolicy==='selected'?'직접 선택 시 모두 감독관으로 표기':`역할명 ${state.pdf.showRoleLabel?'표시':'숨김'}`} · 미리보기 서명자 ${selectedPreviewSigners().length}명</span></div></section>
-      <section class="pdf-control-card"><div class="flex justify-between items-center"><div><h3 class="setting-section-title">서명 가능 감독관</h3><div class="setting-section-desc">직접 선택 정책에서 사용하며 예비감독관도 선택할 수 있습니다.</div></div><button class="btn btn-sm" data-action="add-standby">+ 예비감독관</button></div><div class="signer-list-compact" style="margin-top:10px">${signerRows}</div></section>
-      <section class="pdf-control-card"><h3 class="setting-section-title">출력 정렬</h3>${alignSetting('school','학교명')}${alignSetting('date','출력일')}${alignSetting('footer','하단 문구')}${alignSetting('sign','감독관 서명')}</section>
-    </div><div>${pdfPreview()}</div></div>`;
+      <section class="pdf-control-card"><div class="setting-section-head"><div><h3 class="setting-section-title">출력 기본</h3><div class="setting-section-desc">페이지 인원과 하단 문구를 설정합니다.</div></div><span class="badge badge-blue">미리보기 즉시 반영</span></div><div class="grid grid-2"><div class="field"><label>페이지당 학생 수</label><div class="flex gap-8">${[20,30,40].map(n=>`<button type="button" class="btn ${state.pdf.pageSize===n?'btn-blue':''}" data-pdf-page="${n}">${n}명</button>`).join('')}</div></div><div class="field"><label>하단 문구</label><input class="input" id="pdf-footer-text" value="${esc(state.pdf.footerText)}" placeholder="출력물 하단 안내문구"></div></div></section>
+      <section class="pdf-control-card"><div class="setting-section-head"><div><h3 class="setting-section-title">감독관 서명 정책</h3><div class="setting-section-desc">서명 대상과 출력 시 역할명 표시 여부를 설정합니다.</div></div><label class="flex items-center gap-8 strong small"><span>정·부 역할명 표시</span><span class="switch"><input id="pdf-role-label" type="checkbox" ${state.pdf.showRoleLabel?'checked':''}><span></span></span></label></div><div class="pdf-policy-grid" style="margin-top:10px">${policies.map(([v,n,d])=>`<button type="button" class="policy-btn ${state.pdf.signaturePolicy===v?'active':''}" data-signature-policy="${v}"><b>${n}</b><span>${d}</span></button>`).join('')}</div><div class="inline-meta" style="margin-top:10px"><span class="badge badge-gray">현재 적용</span><b class="small">${signaturePolicyLabel()}</b><span class="small muted">· ${state.pdf.signaturePolicy==='selected'?'직접 선택 시 모두 감독관으로 표기':`역할명 ${state.pdf.showRoleLabel?'표시':'숨김'}`} · 미리보기 서명자 ${selectedPreviewSigners().length}명</span></div></section>
+      <section class="pdf-control-card"><div class="flex justify-between items-center"><div><h3 class="setting-section-title">서명 가능 감독관</h3><div class="setting-section-desc">직접 선택 정책에서 사용하며 예비감독관도 선택할 수 있습니다.</div></div><button type="button" class="btn btn-sm" data-action="add-standby">+ 예비감독관</button></div><div class="signer-list-compact" style="margin-top:10px">${signerRows}</div></section>
+      <section class="pdf-control-card"><div class="setting-section-head"><div><h3 class="setting-section-title">출력 정렬</h3><div class="setting-section-desc">사용 여부와 좌·중앙·우 정렬을 변경하면 오른쪽 미리보기에 즉시 반영됩니다.</div></div><span class="badge badge-green">실시간 반영</span></div>${alignSetting('school','학교명')}${alignSetting('date','출력일')}${alignSetting('footer','하단 문구')}${alignSetting('sign','감독관 서명')}</section>
+    </div><div class="pdf-preview-panel"><div id="pdf-preview-host">${pdfPreview()}</div>${pdfActionButtons()}</div></div>`;
   }
   function terminologyPage(){
     const hasBuilding=state.accounts.some(a=>a.role==='building'&&a.status==='사용');
@@ -1358,14 +1393,18 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     if(fieldOnly) rows=rows.filter(r=>r[2]==='학림관 J411');
     if(state.ui.incidentFilter!=='all') rows=rows.filter(r=>r[4]===state.ui.incidentFilter);
     const countFor=value=>value==='all'?rows.length:state.data.incidentTypes.find(x=>x.type===value)?.count||0;
-    const manage=(r,i)=>readOnly?'<button class="btn btn-sm">조회</button>':`<button class="btn btn-sm" data-action="incident-detail">상세</button>${canCompare&&(r[4]==='신분증 미소지'||r[5].includes('사진'))?' <button class="btn btn-sm" data-route="photo-compare">사진 비교</button>':''}`;
+    const manage=(r,i)=>readOnly?'<button class="btn btn-sm">조회</button>':`<button class="btn btn-sm" data-action="incident-detail">상세</button>${canCompare&&(r[4]==='신분증 미소지'||r[5].includes('사진'))?` <button class="btn btn-sm" data-action="open-photo-candidate" data-photo-candidate="${r[0]}">사진 비교</button>`:''}`;
     const content=`${isRole('pm','exam')?'<div class="photo-access-banner"><span>담당 PM과 전형관리자는 특이사항에서 사전사진·현장사진 비교 화면을 함께 조회할 수 있습니다.</span><button class="btn btn-sm" data-route="photo-compare">사진 비교 화면</button></div>':''}<div class="grid grid-4" style="margin-bottom:14px">${state.data.incidentTypes.filter(x=>enabled.some(([v])=>v===x.type)).map((x,i)=>kpi(x.type,x.count,'건',x.icon,['var(--orange-soft)','var(--blue-2)','var(--purple-soft)','var(--red-soft)'][i%4],['#d77d00','var(--blue)','var(--purple)','var(--red)'][i%4])).join('')}</div><section class="card"><div class="card-header"><div><div class="card-title">특이사항 학생 모아보기</div><div class="card-sub">${readOnly?'담당 범위의 사고 현황을 조회합니다.':'세팅에서 ON으로 설정한 유형만 버튼으로 표시하고 즉시 필터링합니다.'}</div></div><button class="btn">${readOnly?'담당 범위 다운로드':'집계 다운로드'}</button></div><div class="card-body"><div class="incident-filter-bar"><b class="small">유형</b>${enabled.map(([value,label])=>`<button class="incident-filter-btn ${state.ui.incidentFilter===value?'active':''}" data-incident-filter="${value}">${label}<span class="count">${countFor(value)}건</span></button>`).join('')}<div class="field narrow" style="margin-left:auto"><label>처리상태</label><select class="select"><option>전체</option><option>확인 필요</option><option>처리 완료</option></select></div></div><div class="table-wrap"><table><thead><tr><th>수험번호</th><th>성명</th><th>고사실</th><th>교시</th><th>유형</th><th>처리상태</th><th>발생시각</th><th>관리</th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${r.map((v,j)=>`<td>${j===5?`<span class="badge ${v.includes('완료')?'badge-green':'badge-orange'}">${v}</span>`:esc(v)}</td>`).join('')}<td>${manage(r,i)}</td></tr>`).join('')||'<tr><td colspan="8" class="text-center muted">선택한 유형의 특이사항이 없습니다.</td></tr>'}</tbody></table></div></div></section>`;
     const action=fieldOnly?'<button class="btn btn-primary">+ 특이사항 등록</button>':'';
     return shell(content,'특이사항 학생',fieldOnly?`담당 ${term('examRoom')}에서 발생한 특이사항을 등록·조회합니다.`:readOnly?'담당 고사장·건물 범위의 특이사항을 조회합니다.':'신분증 미소지, 중도퇴실, 소음발생, 부정행위 학생을 유형 버튼으로 관리합니다.',action);
   }
   function photoComparePage(){
-    const content=`<div class="photo-access-banner"><span>조회 권한 · 담당 PM / ${term('examManager')} / ${term('fieldManager')}</span><button class="btn btn-sm" data-route="incidents">특이사항 목록</button></div><div class="grid grid-2"><section class="card"><div class="card-header"><div><div class="card-title">사전 등록 사진</div><div class="card-sub">업로드 단계에서 수험번호 기준으로 매칭한 사진</div></div></div><div class="card-body"><div class="photo-box">사전 사진<br><span>21330061.jpg</span></div>${infoRows([['수험번호','21330061'],['성명','김하늘'],['생년월일','2007.03.14'],['사진 등록','수험생 사진 ZIP 자동매칭']])}</div></section><section class="card"><div class="card-header"><div><div class="card-title">현장 촬영 사진</div><div class="card-sub">신분증 미소지 등 특이사항 처리 과정에서 촬영</div></div></div><div class="card-body"><div class="photo-box live">현장 사진<br><span>2025.11.16 10:02 촬영</span></div>${infoRows([['촬영 고사실','학림관 J411'],['촬영자',term('fieldManager')+' 최유진'],['사유','신분증 미소지'],['확인 상태','추가 확인 필요']])}</div></section></div><section class="card" style="margin-top:14px"><div class="card-header"><div><div class="card-title">관리자 확인 결과</div><div class="card-sub">자동 판정이 아닌 관리자 육안 확인 결과를 저장합니다.</div></div></div><div class="card-body"><div class="grid grid-2"><label class="policy-btn active"><input type="radio" name="photo-check" checked> <b>동일인 확인</b><span>사전사진과 현장사진이 동일한 학생으로 확인됨</span></label><label class="policy-btn"><input type="radio" name="photo-check"> <b>추가 확인 필요</b><span>전형관리자 또는 담당 PM의 추가 검토 필요</span></label></div><div class="field" style="margin-top:12px"><label>확인 메모</label><textarea class="textarea">얼굴 특징과 수험정보를 대조하여 동일인으로 확인함.</textarea></div></div></section>`;
-    return shell(content,'수험생 사진 비교','사전 사진과 현장 촬영 사진을 나란히 비교하고 권한 관리자가 확인 결과를 저장합니다.',`<button class="btn" data-route="incidents">목록으로</button><button class="btn btn-primary">확인 결과 저장</button>`);
+    const candidates=photoCompareCandidates();
+    if(!candidates.some(c=>c.id===state.ui.photoCandidate)) state.ui.photoCandidate=candidates[0].id;
+    const selected=candidates.find(c=>c.id===state.ui.photoCandidate)||candidates[0];
+    const list=candidates.map(c=>`<button type="button" class="photo-candidate-button ${c.id===selected.id?'active':''}" data-action="select-photo-candidate" data-photo-candidate="${c.id}"><span class="photo-candidate-thumb"><img src="${mockCandidatePhoto(c,false)}" alt="${esc(c.name)} 사전 사진"></span><span class="photo-candidate-main"><b>${esc(c.name)} · ${c.id}</b><span>${esc(c.room)} · ${esc(c.session)} · ${esc(c.status)}</span></span><span class="badge ${c.status.includes('확인')?'badge-orange':'badge-blue'}">${esc(c.status)}</span></button>`).join('');
+    const content=`<div class="photo-access-banner"><span>조회 권한 · 담당 PM / ${term('examManager')} / ${term('fieldManager')} · 신분증 미소지자를 선택하면 사진이 변경됩니다.</span><button class="btn btn-sm" data-route="incidents">특이사항 목록</button></div><div class="photo-compare-layout"><section class="card"><div class="card-header"><div><div class="card-title">신분증 미소지자</div><div class="card-sub">학생을 선택해 사전·현장 사진을 비교합니다.</div></div><span class="badge badge-orange">${candidates.length}명</span></div><div class="card-body"><div class="photo-candidate-list">${list}</div></div></section><div><div class="photo-selected-summary"><div><b>${esc(selected.name)} · ${selected.id}</b><div class="small muted">${esc(selected.room)} · ${esc(selected.session)} · ${esc(selected.memo)}</div></div><span class="badge badge-orange">${esc(selected.status)}</span></div><div class="photo-comparison-grid"><section class="card"><div class="card-header"><div><div class="card-title">사전 등록 사진</div><div class="card-sub">업로드 단계에서 수험번호 기준으로 매칭한 사진</div></div></div><div class="card-body"><div class="photo-image-frame"><img src="${mockCandidatePhoto(selected,false)}" alt="${esc(selected.name)} 사전 등록 사진"><div class="photo-image-stamp">${selected.id}.jpg · 사진 ZIP 자동매칭</div></div>${infoRows([['수험번호',selected.id],['성명',selected.name],['생년월일',selected.birth],['사진 등록','수험생 사진 ZIP 자동매칭']])}</div></section><section class="card"><div class="card-header"><div><div class="card-title">현장 촬영 사진</div><div class="card-sub">신분증 미소지 특이사항 처리 중 촬영한 사진</div></div></div><div class="card-body"><div class="photo-image-frame"><img src="${mockCandidatePhoto(selected,true)}" alt="${esc(selected.name)} 현장 촬영 사진"><div class="photo-image-stamp">${esc(selected.time)} · ${esc(selected.room)}</div></div>${infoRows([['촬영 고사실',selected.room],['촬영자',selected.actor],['사유','신분증 미소지'],['확인 상태',selected.status]])}</div></section></div><section class="card" style="margin-top:14px"><div class="card-header"><div><div class="card-title">관리자 확인 결과</div><div class="card-sub">자동 판정이 아닌 관리자 육안 확인 결과를 저장합니다.</div></div></div><div class="card-body"><div class="grid grid-2"><label class="policy-btn active"><input type="radio" name="photo-check" checked> <b>동일인 확인</b><span>사전사진과 현장사진이 동일한 학생으로 확인됨</span></label><label class="policy-btn"><input type="radio" name="photo-check"> <b>추가 확인 필요</b><span>전형관리자 또는 담당 PM의 추가 검토 필요</span></label></div><div class="field" style="margin-top:12px"><label>확인 메모</label><textarea class="textarea">얼굴 특징과 수험정보를 대조하여 동일인 여부를 확인합니다.</textarea></div></div></section></div></div>`;
+    return shell(content,'수험생 사진 비교','신분증 미소지자 목록에서 학생을 선택하고 사전 사진과 현장 촬영 사진을 나란히 비교합니다.',`<button class="btn" data-route="incidents">목록으로</button><button class="btn btn-primary">확인 결과 저장</button>`);
   }
   function fieldAttendancePage(){
     const students=[['21330061','김하늘','미처리'],['21330062','이서준','응시'],['21330063','박민지','응시'],['21330064','최지훈','결시'],['21330065','정수아','미처리']];
@@ -1393,9 +1432,8 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     return shell(content,'마감 관리','담당 PM과 전형관리자가 마감할 수 있으며 마감 해제는 전형관리자만 실행합니다.',actions);
   }
   function pdfOutputPage(){
-    return shell(`<div class="pdf-layout"><section class="card"><div class="card-header"><div><div class="card-title">출력 범위</div><div class="card-sub">세팅된 PDF 템플릿과 서명 정책을 적용합니다.</div></div></div><div class="card-body stack"><div class="field"><label>출력물</label><select class="select"><option>수험생 출결 명부</option><option>감독관 명부</option><option>감독관 서명 확인 목록</option></select></div><div class="grid grid-2"><div class="field"><label>교시</label><select class="select"><option>전체</option></select></div><div class="field"><label>${term('examSite')}</label><select class="select"><option>전체</option></select></div></div>${infoRows([['페이지당 학생 수',state.pdf.pageSize+'명'],['서명 정책',signaturePolicyLabel()],['서명 가능 감독관',state.pdf.selectedSigners.length+'명'],['마감 상태',state.close.status==='closed'?'마감':'마감 전']])}<button class="btn btn-primary btn-block">PDF 생성</button></div></section><div>${pdfPreview()}</div></div>`,'PDF·서명 출력','학교별 PDF 편집 설정과 선택된 감독관 서명을 적용해 출력물을 생성합니다.',`<button class="btn" data-route="settings-pdf">PDF 설정 보기</button>`);
+    return shell(`<div class="pdf-layout"><section class="card"><div class="card-header"><div><div class="card-title">출력 범위</div><div class="card-sub">세팅된 PDF 템플릿과 서명 정책을 적용합니다.</div></div></div><div class="card-body stack"><div class="field"><label>출력물</label><select class="select"><option>수험생 출결 명부</option><option>감독관 명부</option><option>감독관 서명 확인 목록</option></select></div><div class="grid grid-2"><div class="field"><label>교시</label><select class="select"><option>전체</option></select></div><div class="field"><label>${term('examSite')}</label><select class="select"><option>전체</option></select></div></div>${infoRows([['페이지당 학생 수',state.pdf.pageSize+'명'],['서명 정책',signaturePolicyLabel()],['서명 가능 감독관',state.pdf.selectedSigners.length+'명'],['마감 상태',state.close.status==='closed'?'마감':'마감 전']])}<div class="notice notice-info"><span>ⓘ</span><div><b>PDF 다운로드와 출력은 별도 기능입니다.</b><br>다운로드는 PDF 파일을 생성하고, 출력은 브라우저 인쇄창을 엽니다.</div></div></div></section><div class="pdf-preview-panel"><div id="pdf-preview-host">${pdfPreview()}</div>${pdfActionButtons()}</div></div>`,'PDF·서명 출력','학교별 PDF 편집 설정과 선택된 감독관 서명을 적용해 출력물을 생성합니다.',`<button class="btn" data-route="settings-pdf">PDF 설정 보기</button>`);
   }
-
   function downloadsPage(){
     const files=[
       ['00.전체 수험생 출결 목록_20251116.xlsx','전체 수험생 출결 목록','15,928행'],
@@ -1408,7 +1446,7 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
       ['07.타고사장 수험생 목록_20251116.xlsx','타고사장 수험생 목록','대상자 목록'],
       ['__signature__','감독관 서명 확인 목록','정·부·예비감독관 서명 상태']
     ];
-    const body=`<div class="download-toolbar"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span><div class="flex gap-8"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP 다운로드</button></div></div><div class="grid grid-3">${files.map(([f,n,d],i)=>`<section class="card download-card" data-download-card><input class="download-check" type="checkbox" data-result-file="${esc(f)}" data-result-name="${esc(n)}"><div class="card-body"><div class="flex justify-between"><div class="kpi-icon" style="background:${f==='__signature__'?'var(--purple-soft)':'var(--green-soft)'};color:${f==='__signature__'?'var(--purple)':'var(--green)'}">${f==='__signature__'?'✍':'X'}</div><span class="badge ${f==='__signature__'?'badge-blue':'badge-green'}">생성 완료</span></div><div class="card-title" style="margin-top:13px">${n}</div><div class="small muted" style="margin:5px 0 14px">${d}</div>${f==='__signature__'?'<button class="btn btn-block" data-action="download-signature-file">개별 다운로드</button>':`<a class="btn btn-block" href="sample-data/${encodeURIComponent(f)}" download>개별 다운로드</a>`}</div></section>`).join('')}</div>`;
+    const body=`<div class="download-toolbar"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span><div class="flex gap-8"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP 다운로드</button></div></div><div class="grid grid-3">${files.map(([f,n,d],i)=>`<section class="card download-card" data-download-card><div class="card-body"><div class="download-card-top"><label class="download-select-label"><input class="download-check" type="checkbox" data-result-file="${esc(f)}" data-result-name="${esc(n)}"><span>선택</span></label><span class="badge ${f==='__signature__'?'badge-blue':'badge-green'}">생성 완료</span></div><div class="kpi-icon" style="margin-top:13px;background:${f==='__signature__'?'var(--purple-soft)':'var(--green-soft)'};color:${f==='__signature__'?'var(--purple)':'var(--green)'}">${f==='__signature__'?'✍':'X'}</div><div class="card-title" style="margin-top:13px">${n}</div><div class="small muted" style="margin:5px 0 14px">${d}</div>${f==='__signature__'?'<button class="btn btn-block" data-action="download-signature-file">개별 다운로드</button>':`<a class="btn btn-block" href="sample-data/${encodeURIComponent(f)}" download>개별 다운로드</a>`}</div></section>`).join('')}</div>`;
     return shell(body,'운영 결과파일 다운로드','필요한 집계파일만 선택하여 하나의 ZIP으로 받거나 개별 다운로드합니다.','');
   }
   function auditPage(){
@@ -1422,7 +1460,11 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
   }
   function stepper(active){ return `<div class="stepper">${['세팅','업로드·자동검증','운영','마감','출력'].map((s,i)=>`<div class="step ${i<active?'done':i===active?'active':''}"><span class="step-num">${i<active?'✓':i+1}</span><span class="step-label">${s}</span></div>`).join('')}</div>`; }
   function settingRow(key,name,desc){ return `<div class="setting-row"><div><div class="setting-name">${name}</div><div class="setting-desc">${desc}</div></div><div></div><label class="switch"><input type="checkbox" data-feature="${key}" ${state.features[key]?'checked':''}><span></span></label></div>`; }
-  function alignSetting(key,label){ const use=state.pdf.use?.[key]!==false; return `<div class="align-use-row ${use?'':'off'}"><span class="switch"><input type="checkbox" data-pdf-use="${key}" ${use?'checked':''}><span></span></span><div><div class="setting-name">${label}</div><div class="setting-desc">사용 여부와 출력 위치를 함께 설정합니다.</div></div><div class="align-buttons">${[['left','≡'],['center','≡'],['right','≡']].map(([v,ic])=>`<button class="align-btn ${state.pdf.align[key]===v?'active':''}" data-align-key="${key}" data-align-value="${v}" style="text-align:${v}" ${use?'':'disabled'}>${ic}</button>`).join('')}</div></div>`; }
+  function alignSetting(key,label){
+    const use=state.pdf.use?.[key]!==false;
+    const labels={left:'좌',center:'중',right:'우'};
+    return `<div class="align-use-row ${use?'':'off'}" data-align-row="${key}"><span class="switch"><input type="checkbox" data-pdf-use="${key}" ${use?'checked':''}><span></span></span><div><div class="setting-name">${label}</div><div class="setting-desc">사용 여부와 출력 위치를 함께 설정합니다.</div></div><div class="align-buttons">${['left','center','right'].map(v=>`<button type="button" class="align-btn ${state.pdf.align[key]===v?'active':''}" data-align-key="${key}" data-align-value="${v}" title="${labels[v]}측 정렬" ${use?'':'disabled'}>${labels[v]}</button>`).join('')}</div></div>`;
+  }
   function processList(items){ return items.map(([n,t,d])=>`<div class="flex gap-12" style="padding:10px 0;border-bottom:1px solid var(--gray-200)"><span class="step-num" style="background:var(--role);color:#fff">${n}</span><div><b>${t}</b><div class="small muted">${d}</div></div></div>`).join(''); }
   function statusLine(title,desc,color){ return `<div class="flex justify-between items-center" style="padding:11px 0;border-bottom:1px solid var(--gray-200)"><div><b>${title}</b><div class="small muted">${desc}</div></div><span class="badge badge-${color}">${color==='green'?'정상':'확인'}</span></div>`; }
   function infoRows(rows){ return rows.map(r=>`<div class="flex justify-between" style="padding:9px 0;border-bottom:1px solid var(--gray-200)"><span class="muted">${r[0]}</span><b>${r[1]}</b></div>`).join(''); }
@@ -1439,17 +1481,73 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     {id:'S099',name:'한예비',role:'standby',room:''}
   ]; }
   function signaturePolicyLabel(){ return {primary:'정감독관만',all:'정·부 감독관 모두',selected:'직접 선택',none:'서명 미사용'}[state.pdf.signaturePolicy]; }
+  function updatePdfPreview(){
+    const host=document.getElementById('pdf-preview-host');
+    if(host) host.innerHTML=pdfPreview();
+  }
+  function pdfActionButtons(){
+    return `<div class="pdf-preview-actions"><button type="button" class="btn" data-action="download-pdf">⇩ PDF 다운로드</button><button type="button" class="btn btn-primary" data-action="print-pdf">🖨 출력</button></div>`;
+  }
+  function loadExternalScript(src,test){
+    if(test()) return Promise.resolve(true);
+    window.__eaScriptLoads=window.__eaScriptLoads||{};
+    if(window.__eaScriptLoads[src]) return window.__eaScriptLoads[src];
+    window.__eaScriptLoads[src]=new Promise(resolve=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>resolve(test());s.onerror=()=>resolve(false);document.head.appendChild(s);});
+    return window.__eaScriptLoads[src];
+  }
+  function printPdfPreview(){
+    const paper=document.querySelector('#pdf-preview-host .paper');
+    if(!paper){toast('출력할 PDF 미리보기를 찾을 수 없습니다.','error');return;}
+    const popup=window.open('','_blank','width=900,height=1000');
+    if(!popup){toast('팝업 차단을 해제한 뒤 다시 출력해주세요.','warning');return;}
+    const styles=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');
+    popup.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${esc(state.selection)} 출력</title><style>${styles}\n@page{size:A4 portrait;margin:10mm}body{background:#fff!important;margin:0;padding:0}.paper{box-shadow:none!important;border:0!important;width:100%!important;min-height:auto!important}.preview-sheet{background:#fff!important;padding:0!important;min-height:auto!important}</style></head><body><div class="preview-sheet">${paper.outerHTML}</div></body></html>`);
+    popup.document.close();
+    setTimeout(()=>{popup.focus();popup.print();},350);
+  }
+  async function downloadPdfPreview(){
+    const paper=document.querySelector('#pdf-preview-host .paper');
+    if(!paper){toast('다운로드할 PDF 미리보기를 찾을 수 없습니다.','error');return;}
+    toast('PDF 파일을 생성하고 있습니다.','success');
+    const canvasReady=await loadExternalScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',()=>!!window.html2canvas);
+    const pdfReady=await loadExternalScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',()=>!!window.jspdf?.jsPDF);
+    if(!canvasReady||!pdfReady){toast('PDF 라이브러리를 불러오지 못했습니다. 출력 버튼에서 PDF로 저장해주세요.','warning');printPdfPreview();return;}
+    try{
+      const canvas=await window.html2canvas(paper,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});
+      const img=canvas.toDataURL('image/png');
+      const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+      const pageW=210,pageH=297,margin=8,maxW=pageW-margin*2,maxH=pageH-margin*2;
+      let w=maxW,h=canvas.height*w/canvas.width;if(h>maxH){h=maxH;w=canvas.width*h/canvas.height;}
+      pdf.addImage(img,'PNG',(pageW-w)/2,margin,w,h,'','FAST');
+      pdf.save(`${state.school.code}_${state.selection.replace(/\s+/g,'_')}_출결명부.pdf`);
+      toast('PDF 다운로드를 시작했습니다.','success');
+    }catch(e){toast('PDF 생성 중 오류가 발생했습니다. 출력 버튼에서 PDF로 저장해주세요.','warning');printPdfPreview();}
+  }
+  function photoCompareCandidates(){
+    return [
+      {id:'21330061',name:'김하늘',birth:'2007.03.14',room:'학림관 J411',session:'1교시',time:'2025.11.16 10:02',actor:`${term('fieldManager')} 최유진`,status:'추가 확인 필요',memo:'신분증 미소지로 현장 사진 촬영',palette:['#d9edf9','#f2c7a4','#263247','#5177b8']},
+      {id:'21930211',name:'최유나',birth:'2007.09.22',room:'학림관 J414',session:'1교시',time:'2025.11.16 10:50',actor:`${term('fieldManager')} 박민수`,status:'현장사진 등록',memo:'사진 비교 후 동일인 확인 예정',palette:['#f8e7d0','#e9b98c','#3a2f35','#b45f72']},
+      {id:'21280044',name:'정다은',birth:'2007.01.08',room:'혜화관 423',session:'2교시',time:'2025.11.16 13:18',actor:`${term('fieldManager')} 이서준`,status:'확인 대기',memo:'신분증 재확인 및 담당 PM 검토 대기',palette:['#dfe9d7','#d8a77d','#1f2937','#4f8b75']}
+    ];
+  }
+  function mockCandidatePhoto(candidate,live=false){
+    const [bg,skin,hair,shirt]=candidate.palette;
+    const tag=live?'현장 촬영':'사전 등록';
+    const faceX=live?148:150,faceY=live?145:140;
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="375" viewBox="0 0 300 375"><rect width="300" height="375" fill="${bg}"/><rect x="18" y="18" width="264" height="339" rx="18" fill="#fff" opacity=".36"/><ellipse cx="${faceX}" cy="${faceY}" rx="64" ry="76" fill="${skin}"/><path d="M85 139c2-70 38-101 67-101 47 0 70 36 67 104-21-24-44-37-67-40-24 17-46 27-67 37z" fill="${hair}"/><circle cx="126" cy="146" r="5" fill="#29303a"/><circle cx="174" cy="146" r="5" fill="#29303a"/><path d="M134 181c12 8 23 8 34 0" fill="none" stroke="#a45f5f" stroke-width="4" stroke-linecap="round"/><path d="M72 350c5-91 47-127 78-127 43 0 75 39 80 127" fill="${shirt}"/><rect x="30" y="302" width="240" height="38" rx="8" fill="#071d42" opacity=".78"/><text x="150" y="326" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff">${candidate.id} · ${tag}</text>${live?'<path d="M24 42h26M24 42v26M276 42h-26M276 42v26M24 286v26h26M276 286v26h-26" stroke="#fff" stroke-width="3" opacity=".75" fill="none"/>':''}</svg>`;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  }
   function pdfPreview(){
     const a=state.pdf.align; const previewSigners=selectedPreviewSigners();
     const visibleRows=state.pdf.pageSize===20?8:state.pdf.pageSize===30?10:12;
     const names=['김하늘','이서준','박민지','최지훈','정수아','한유진','윤태호','오세림','강도윤','조아라','장민호','문채원'];
     const rows=Array.from({length:visibleRows},(_,i)=>`<tr><td>${i+1}</td><td>21${330061+i}</td><td>${names[i%names.length]}</td><td>J411</td><td>${i===3?'결시':'응시'}</td><td></td></tr>`).join('');
-    const schoolRow=state.pdf.use?.school===false?'':`<div class="paper-aligned-row" style="text-align:${a.school}">${esc(state.school.name)} · ${esc(state.school.code)}</div>`;
-    const dateRow=state.pdf.use?.date===false?'':`<div class="paper-aligned-row" style="text-align:${a.date}">출력일 ${todayText()}</div>`;
-    const footerRow=state.pdf.use?.footer===false?'':`<div class="paper-aligned-row" style="text-align:${a.footer}">${esc(state.pdf.footerText||'')}</div>`;
+    const schoolRow=state.pdf.use?.school===false?'':`<div class="paper-aligned-row" data-preview-item="school" style="text-align:${a.school}">${esc(state.school.name)} · ${esc(state.school.code)}</div>`;
+    const dateRow=state.pdf.use?.date===false?'':`<div class="paper-aligned-row" data-preview-item="date" style="text-align:${a.date}">출력일 ${todayText()}</div>`;
+    const footerRow=state.pdf.use?.footer===false?'':`<div class="paper-aligned-row" data-preview-item="footer" style="text-align:${a.footer}">${esc(state.pdf.footerText||'')}</div>`;
     let signRow='<div style="text-align:center;color:#777">서명 미사용</div>';
     if(state.pdf.use?.sign===false) signRow='<div style="text-align:center;color:#777">서명 영역 미사용</div>';
-    else if(previewSigners.length) signRow=`<div class="paper-signatures" style="text-align:${a.sign}">${previewSigners.map(s=>`<div class="paper-sign-row"><span class="who">${state.pdf.signaturePolicy==='selected'?'감독관 ':state.pdf.showRoleLabel?roleNameKorean(s.role)+' ':''}${esc(s.name)}</span><span>${esc(s.room||'무배정')} · 서명 __________</span></div>`).join('')}</div>`;
+    else if(previewSigners.length) signRow=`<div class="paper-signatures" data-preview-item="sign" style="text-align:${a.sign}">${previewSigners.map(s=>`<div class="paper-sign-row"><span class="who">${state.pdf.signaturePolicy==='selected'?'감독관 ':state.pdf.showRoleLabel?roleNameKorean(s.role)+' ':''}${esc(s.name)}</span><span>${esc(s.room||'무배정')} · 서명 __________</span></div>`).join('')}</div>`;
     return `<div class="preview-sheet"><div class="paper"><div class="paper-meta-stack">${schoolRow}${dateRow}</div><div class="paper-title">${state.selection} 수험생 출결 명부</div><div class="preview-policy"><span class="preview-page-size">1페이지당 ${state.pdf.pageSize}명</span>서명정책: ${signaturePolicyLabel()} · 시험일 ${formatExamDateWithWeekday(state.basic.examDate)}</div><table class="paper-table preview-${state.pdf.pageSize}"><thead><tr><th>순번</th><th>수험번호</th><th>성명</th><th>${term('examRoom')}</th><th>상태</th><th>확인</th></tr></thead><tbody>${rows}${state.pdf.pageSize>visibleRows?`<tr class="preview-more"><td colspan="6">… 이 페이지에 총 ${state.pdf.pageSize}명까지 출력</td></tr>`:''}</tbody></table><div class="paper-footer">${footerRow}${signRow}<div class="text-center">1 / ${Math.ceil(state.data.total/state.pdf.pageSize)}</div></div></div></div>`;
   }
   function donutChart(rate,attended,absent,big=false){ return `<div class="donut-wrap"><div class="donut ${big?'donut-xl':''}" style="background:conic-gradient(var(--green) 0 ${rate}%,var(--red) ${rate}% 100%)"><div class="donut-label"><div><b>${rate.toFixed(1)}%</b>전체 응시율</div></div></div><div class="legend"><div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span><span>응시</span><b>${fmt(attended)}명</b></div><div class="legend-row"><span class="legend-dot" style="background:var(--red)"></span><span>결시</span><b>${fmt(absent)}명</b></div><div class="legend-row"><span class="legend-dot" style="background:var(--gray-300)"></span><span>배정</span><b>${fmt(attended+absent)}명</b></div></div></div>`; }
@@ -1592,11 +1690,15 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
       if(a==='download-selected-results') downloadResultFiles(false);
       if(a==='download-all-results') downloadResultFiles(true);
       if(a==='download-signature-file') downloadBlob(signatureCsvBlob(),'감독관_서명_확인_목록.csv');
+      if(a==='download-pdf') downloadPdfPreview();
+      if(a==='print-pdf') printPdfPreview();
+      if(a==='select-photo-candidate'){state.ui.photoCandidate=el.dataset.photoCandidate;save();render();}
+      if(a==='open-photo-candidate'){state.ui.photoCandidate=el.dataset.photoCandidate||state.ui.photoCandidate;save();navTo('photo-compare');}
     }));
     document.querySelectorAll('[data-error-index]').forEach(el=>el.addEventListener('click',()=>openErrorModal(Number(el.dataset.errorIndex))));
-    document.querySelectorAll('[data-pdf-page]').forEach(el=>el.addEventListener('click',()=>{state.pdf.pageSize=Number(el.dataset.pdfPage);save();render();}));
-    document.querySelectorAll('[data-align-key]').forEach(el=>el.addEventListener('click',()=>{state.pdf.align[el.dataset.alignKey]=el.dataset.alignValue;save();render();}));
-    document.querySelectorAll('[data-pdf-use]').forEach(el=>el.addEventListener('change',()=>{state.pdf.use=state.pdf.use||{school:true,date:true,footer:true,sign:true};state.pdf.use[el.dataset.pdfUse]=el.checked;save();render();}));
+    document.querySelectorAll('[data-pdf-page]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();state.pdf.pageSize=Number(el.dataset.pdfPage);document.querySelectorAll('[data-pdf-page]').forEach(b=>b.classList.toggle('btn-blue',b===el));save();updatePdfPreview();}));
+    document.querySelectorAll('[data-align-key]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();if(el.disabled)return;const key=el.dataset.alignKey;state.pdf.align[key]=el.dataset.alignValue;document.querySelectorAll(`[data-align-key="${key}"]`).forEach(b=>b.classList.toggle('active',b===el));save();updatePdfPreview();}));
+    document.querySelectorAll('[data-pdf-use]').forEach(el=>el.addEventListener('change',()=>{const key=el.dataset.pdfUse;state.pdf.use=state.pdf.use||{school:true,date:true,footer:true,sign:true};state.pdf.use[key]=el.checked;const row=document.querySelector(`[data-align-row="${key}"]`);if(row)row.classList.toggle('off',!el.checked);document.querySelectorAll(`[data-align-key="${key}"]`).forEach(b=>b.disabled=!el.checked);save();updatePdfPreview();}));
     document.querySelectorAll('[data-signature-policy]').forEach(el=>el.addEventListener('click',()=>{state.pdf.signaturePolicy=el.dataset.signaturePolicy;save();render();}));
   }
   function bindInputs(){
@@ -1606,12 +1708,13 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     document.querySelectorAll('[data-signer]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.signer; state.pdf.selectedSigners=el.checked?[...new Set([...state.pdf.selectedSigners,id])]:state.pdf.selectedSigners.filter(x=>x!==id); save();render();}));
     document.querySelectorAll('[data-exam-status]').forEach(el=>el.addEventListener('change',()=>{const ex=state.exams.find(x=>x.id===el.dataset.examStatus);if(ex){ex.status=el.value;save();toast(`${ex.name} 상태를 ${el.value}(으)로 변경했습니다.`,'success');render();}}));
     const all=document.getElementById('feature-all'); if(all) all.addEventListener('change',()=>{['closing','reserveRoom','splitInvigilator','answerSheet','allowUnassignedInvigilator','remainingSeat','photoCompare'].forEach(k=>state.features[k]=all.checked);save();render();});
-    const footer=document.getElementById('pdf-footer-text'); if(footer) footer.addEventListener('change',()=>{state.pdf.footerText=footer.value;save();render();});
+    const footer=document.getElementById('pdf-footer-text'); if(footer){footer.addEventListener('input',()=>{state.pdf.footerText=footer.value;updatePdfPreview();});footer.addEventListener('change',()=>save());}
     const roleLabel=document.getElementById('pdf-role-label'); if(roleLabel) roleLabel.addEventListener('change',()=>{state.pdf.showRoleLabel=roleLabel.checked;save();render();});
     const dashboardSite=document.getElementById('dashboard-site-filter'); if(dashboardSite) dashboardSite.addEventListener('change',()=>{state.ui.dashboardSite=dashboardSite.value;save();render();});
     const dashboardSession=document.getElementById('dashboard-session-filter'); if(dashboardSession) dashboardSession.addEventListener('change',()=>{state.ui.dashboardSession=dashboardSession.value;save();render();});
     const orgStatus=document.getElementById('developer-org-status'); if(orgStatus) orgStatus.addEventListener('change',()=>{state.ui.orgStatus=orgStatus.value;save();render();});
-    const examDate=document.getElementById('exam-date'); if(examDate) examDate.addEventListener('change',()=>{const chip=document.getElementById('exam-weekday');if(chip)chip.textContent=weekdayOnly(examDate.value);});
+    const examDate=document.getElementById('exam-date'); if(examDate) examDate.addEventListener('change',()=>{state.basic.examDate=examDate.value;const display=document.getElementById('exam-date-display');if(display)display.textContent=formatExamDateWithWeekday(examDate.value);save();});
+    const closeTimeUse=document.getElementById('close-time-use'); if(closeTimeUse) closeTimeUse.addEventListener('change',()=>{state.basic.closeTimeUse=closeTimeUse.value==='on';save();render();});
     document.querySelectorAll('[data-term-use]').forEach(el=>el.addEventListener('change',()=>{state.termUse=state.termUse||{};state.termUse[el.dataset.termUse]=el.checked;save();render();}));
     const auditSchool=document.getElementById('audit-school'); if(auditSchool) auditSchool.addEventListener('change',()=>{state.ui.auditSchool=auditSchool.value;state.ui.auditExam='all';save();render();});
     const auditExam=document.getElementById('audit-exam'); if(auditExam) auditExam.addEventListener('change',()=>{state.ui.auditExam=auditExam.value;save();render();});
@@ -1619,10 +1722,11 @@ body.dark .term-setting-row,body.dark .download-toolbar,body.dark .incident-mini
     const accountFile=document.getElementById('account-excel-file'); if(accountFile) accountFile.addEventListener('change',()=>{if(accountFile.files[0])processAccountExcel(accountFile.files[0]);});
   }
   function saveSettings(){
-    const date=document.getElementById('exam-date'); if(date) state.basic.examDate=date.value;
+    const date=document.getElementById('exam-date'); if(date){state.basic.examDate=date.value;const ex=currentExam();if(ex)ex.examDate=date.value;}
+    const closeTimeUse=document.getElementById('close-time-use'); if(closeTimeUse) state.basic.closeTimeUse=closeTimeUse.value==='on';
     const footer=document.getElementById('pdf-footer-text'); if(footer) state.pdf.footerText=footer.value;
     state.basic.sessions.forEach((s,i)=>{const use=document.querySelector(`[data-session-use="${i}"]`);const n=document.querySelector(`[data-session-name="${i}"]`);const st=document.querySelector(`[data-session-start="${i}"]`);const en=document.querySelector(`[data-session-end="${i}"]`);const cl=document.querySelector(`[data-session-close="${i}"]`);if(use)s.use=use.checked;if(n)s.name=n.value;if(st)s.start=st.value;if(en)s.end=en.value;if(cl)s.close=cl.value;});
-    save();toast('학교·전형별 세팅을 저장했습니다.','success');
+    save();toast('학교·전형별 세팅을 저장했습니다.','success');render();
   }
   function saveTerms(){
     document.querySelectorAll('[data-term]').forEach(el=>state.terms[el.dataset.term]=el.value.trim()||DEFAULT_TERMS[el.dataset.term]);
