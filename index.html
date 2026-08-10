@@ -886,10 +886,7 @@ body.dark .v207-unassigned-banner,body.dark .v207-feature-dependency{background:
 
 </style>
 
-<style>
-/* v2.0.8 — 학교별 명칭을 설정값 내부에서 편집 */
-.v208-terms-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;padding:14px;border:1px solid var(--gray-200);border-radius:14px;background:linear-gradient(135deg,var(--blue-2),var(--white))}.v208-terms-head h3{margin:0 0 5px}.v208-terms-head p{margin:0;color:var(--gray-600);font-size:12px;line-height:1.55}.v208-term-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.92fr);gap:14px;align-items:start}.v208-term-list{display:grid;gap:10px}.v208-term-row{display:grid;grid-template-columns:155px minmax(0,1fr);align-items:center;gap:12px;border:1px solid var(--gray-200);background:var(--white);border-radius:12px;padding:12px}.v208-term-row .base{font-weight:900}.v208-term-row .hint{font-size:11px;color:var(--gray-500);margin-top:3px}.v208-term-preview{border:1px solid var(--gray-200);border-radius:14px;background:linear-gradient(180deg,var(--blue-2),var(--white));padding:14px;position:sticky;top:74px}.v208-term-arrow-list{display:grid;gap:8px;margin-top:12px}.v208-term-arrow{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);align-items:center;gap:8px;background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:10px}.v208-term-arrow .from{color:var(--gray-500);text-decoration:line-through}.v208-term-arrow .arrow{text-align:center;color:var(--blue);font-weight:900}.v208-term-arrow .to{font-weight:900;color:var(--navy-2)}.v208-preview-frame{margin-top:12px;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;background:var(--white)}.v208-preview-frame .top{background:#0d2b58;color:#fff;padding:11px 12px;font-weight:900}.v208-preview-frame .body{padding:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.v208-preview-frame .cell{border:1px solid var(--gray-200);border-radius:9px;padding:9px;font-size:12px}.v208-preview-frame .cell b{display:block;margin-bottom:3px}.v208-save-row{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.dark .v208-term-row,.dark .v208-term-preview,.dark .v208-term-arrow,.dark .v208-preview-frame,.dark .v208-preview-frame .cell{background:#111d2c;border-color:#2b3950}.dark .v208-terms-head{background:#12243b;border-color:#2b3950}@media(max-width:1050px){.v208-term-layout{grid-template-columns:1fr}.v208-term-preview{position:static}}@media(max-width:650px){.v208-term-row{grid-template-columns:1fr}.v208-preview-frame .body{grid-template-columns:1fr}}
-</style></head>
+</head>
 <body>
   <noscript><div style="padding:24px;font-family:Arial,sans-serif">이 테스트 페이지는 JavaScript를 사용합니다. 브라우저에서 JavaScript를 허용해 주세요.</div></noscript>
   <div id="app" aria-live="polite"></div>
@@ -900,8 +897,8 @@ body.dark .v207-unassigned-banner,body.dark .v207-feature-dependency{background:
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.8';
-  const BUILD_ID = '20260810-208';
+  const APP_VERSION = '2.0.7';
+  const BUILD_ID = '20260810-207';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -2427,7 +2424,7 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
   bindInputs=function(){v201BaseBindInputs();document.querySelectorAll('[data-v201-term]').forEach(el=>el.addEventListener('input',()=>{document.querySelectorAll(`[data-v201-term-preview="${el.dataset.v201Term}"]`).forEach(x=>x.textContent=el.value||DEFAULT_TERMS[el.dataset.v201Term]);}));document.querySelectorAll('[data-v201-feature]').forEach(el=>el.addEventListener('change',()=>{state.features[el.dataset.v201Feature]=el.checked;save();render();}));document.querySelectorAll('[data-v201-incident-permission]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.v201IncidentPermission,role=el.dataset.role;state.incidentPermissions[id]=state.incidentPermissions[id]||{invigilator:false,middle:false};state.incidentPermissions[id][role]=el.checked;save();render();}));['v201-home-exam-select','v201-terms-exam-select','v201-settings-exam-select','v201-upload-exam-select','v201-result-exam-select','v201-output-exam-select'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>v201SetExam(el.value));});document.querySelectorAll('[data-v201-close-site]').forEach(el=>el.addEventListener('change',()=>{state.ui.closeSelectedSites=[...document.querySelectorAll('[data-v201-close-site]:checked')].map(x=>x.dataset.v201CloseSite);save();}));const us=document.getElementById('v201-upload-search');if(us)us.addEventListener('input',()=>{state.ui.uploadSearch=us.value;document.querySelectorAll('#v201-derived-table tbody tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(us.value.toLowerCase())?'':'none');});document.querySelectorAll('.v201-upload-type-search').forEach(inp=>inp.addEventListener('input',()=>{const type=inp.dataset.targetType;document.querySelectorAll(`[data-v201-upload-table="${type}"] tbody tr`).forEach(r=>r.style.display=r.textContent.toLowerCase().includes(inp.value.toLowerCase())?'':'none');}));const ps=document.getElementById('v201-photo-student-search');if(ps)ps.addEventListener('input',()=>{document.querySelectorAll('.photo-candidate-button').forEach(b=>b.style.display=b.textContent.toLowerCase().includes(ps.value.toLowerCase())?'':'none');});};
   bindPageEvents=function(){v201OriginalBindPageEvents();};
 
-  render=function(){const app=document.getElementById('app');document.body.classList.toggle('dark',!!state.ui.darkMode);document.documentElement.style.colorScheme=state.ui.darkMode?'dark':'light';if(!state.session&&route!=='login')route='login';if(state.session&&route!=='login'&&!routeAllowed(route)){app.innerHTML=shell(`<div class="notice notice-danger"><span>!</span><div><b>접근 권한이 없습니다.</b></div></div>`,'접근 제한','','');bindPageEvents();return;}let out='';switch(route){case'login':out=loginPage();break;case'developer-home':out=developerHome();break;case'developer-org':out=developerOrg();break;case'developer-accounts':out=accountPage(true);break;case'pm-home':out=pmHome();break;case'accounts':out=accountPage(false);break;case'settings-basic':case'settings-locations':case'settings-features':out=settingsPage('features');break;case'settings-pdf':out=settingsPage('pdf');break;case'settings-pledge':out=settingsPage('pledge');break;case'terminology':case'settings-terms':out=settingsPage('terms');break;case'upload':out=uploadPage();break;case'dashboard':out=dashboardPage();break;case'mobile-operations':out=mobileOperationsPage();break;case'room-list':out=roomListPage();break;case'answer-sheet-history':out=answerSheetHistoryPage();break;case'incidents':out=incidentsPage();break;case'photo-compare':out=photoComparePage();break;case'field-attendance':out=fieldAttendancePage();break;case'field-sign':out=fieldSignPage();break;case'close':out=closePage();break;case'pdf-output':out=pdfOutputPage();break;case'pledge-output':out=v201PledgeOutputPage();break;case'downloads':out=downloadsPage();break;case'audit':out=auditPage();break;case'other-site-candidates':out=v201OtherSitePage();break;default:out=shell('<div class="notice notice-warning">접근할 수 없는 화면입니다.</div>','접근 제한','','');}app.innerHTML=out;bindPageEvents();enhanceTables(app);};
+  render=function(){const app=document.getElementById('app');document.body.classList.toggle('dark',!!state.ui.darkMode);document.documentElement.style.colorScheme=state.ui.darkMode?'dark':'light';if(!state.session&&route!=='login')route='login';if(state.session&&route!=='login'&&!routeAllowed(route)){app.innerHTML=shell(`<div class="notice notice-danger"><span>!</span><div><b>접근 권한이 없습니다.</b></div></div>`,'접근 제한','','');bindPageEvents();return;}let out='';switch(route){case'login':out=loginPage();break;case'developer-home':out=developerHome();break;case'developer-org':out=developerOrg();break;case'developer-accounts':out=accountPage(true);break;case'pm-home':out=pmHome();break;case'accounts':out=accountPage(false);break;case'settings-basic':case'settings-locations':case'settings-features':out=settingsPage('features');break;case'settings-pdf':out=settingsPage('pdf');break;case'settings-pledge':out=settingsPage('pledge');break;case'terminology':out=terminologyPage();break;case'upload':out=uploadPage();break;case'dashboard':out=dashboardPage();break;case'mobile-operations':out=mobileOperationsPage();break;case'room-list':out=roomListPage();break;case'answer-sheet-history':out=answerSheetHistoryPage();break;case'incidents':out=incidentsPage();break;case'photo-compare':out=photoComparePage();break;case'field-attendance':out=fieldAttendancePage();break;case'field-sign':out=fieldSignPage();break;case'close':out=closePage();break;case'pdf-output':out=pdfOutputPage();break;case'pledge-output':out=v201PledgeOutputPage();break;case'downloads':out=downloadsPage();break;case'audit':out=auditPage();break;case'other-site-candidates':out=v201OtherSitePage();break;default:out=shell('<div class="notice notice-warning">접근할 수 없는 화면입니다.</div>','접근 제한','','');}app.innerHTML=out;bindPageEvents();enhanceTables(app);};
 
   v201Normalize();
 
@@ -3066,7 +3063,7 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
 
   const v207MenusBase=menus;
   menus=function(){
-    if(isRole('pm')){const items=[['pm-home','운영현황','home'],['accounts','계정관리','account'],['settings-features','설정값','settings'],['upload','업로드·자동검증','upload'],['dashboard','운영 대시보드','dashboard'],['incidents','특이사항','incident'],['close','마감 관리','close']];if(state.features.pdfUse)items.push(['pdf-output','PDF·서명 출력','pdf']);if(state.features.pledge)items.push(['pledge-output','각서 출력','pdf']);items.push(['downloads','결과파일·통계','download']);return [['담당 PM 업무',items]];}
+    if(isRole('pm')){const items=[['pm-home','운영현황','home'],['accounts','계정관리','account'],['settings-features','설정값','settings'],['terminology','학교별 명칭','term'],['upload','업로드·자동검증','upload'],['dashboard','운영 대시보드','dashboard'],['incidents','특이사항','incident'],['close','마감 관리','close']];if(state.features.pdfUse)items.push(['pdf-output','PDF·서명 출력','pdf']);if(state.features.pledge)items.push(['pledge-output','각서 출력','pdf']);items.push(['downloads','결과파일·통계','download']);return [['담당 PM 업무',items]];}
     if(isRole('exam')){const items=[['dashboard','운영 대시보드','dashboard'],['accounts',`${term('middleManager')} 계정`,'account'],['incidents','특이사항 학생','incident'],['photo-compare','사진 비교','photo'],['close','마감 관리','close']];if(state.features.pdfUse)items.push(['pdf-output','PDF·서명 출력','pdf']);if(state.features.pledge)items.push(['pledge-output','각서 출력','pdf']);items.push(['downloads','결과파일·통계','download']);return [['전형 운영',items]];}
     return v207MenusBase();
   };
@@ -3150,61 +3147,6 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
   };
   const v207BindInputsBase=bindInputs;
   bindInputs=function(){v207BindInputsBase();document.querySelectorAll('[data-v201-feature="allowUnassignedInvigilator"],[data-feature="allowUnassignedInvigilator"]').forEach(el=>el.addEventListener('change',()=>{state.features.allowUnassignedInvigilator=el.checked;if(el.checked){state.features.reserveRoom=false;state.features.otherSiteCandidates=false;toast('예비고사실과 타고사장 수험생 보기를 자동으로 껐습니다.','warning');}save();render();}));};
-
-
-
-  /* v2.0.8 — 학교별 명칭을 담당 PM 설정값 탭으로 통합 */
-  function v208SettingsTermsBody(){
-    const terms=[
-      ['examSite','고사장','고사장'],
-      ['examRoom','고사실','고사실'],
-      ['middleManager','중간관리자','복도관리자'],
-      ['examManager','전형관리자','입학처 관리자'],
-      ['incident','사고자','특이사항 학생']
-    ];
-    const rows=terms.map(([k,base,ph])=>`<div class="v208-term-row"><div><div class="base">${esc(base)}</div><div class="hint">기본 시스템 명칭</div></div><div class="field"><label>변경 명칭</label><input class="input" data-v201-term="${k}" value="${esc(state.terms[k]||base)}" placeholder="${esc(ph)}"></div></div>`).join('');
-    const arrows=terms.map(([k,base])=>`<div class="v208-term-arrow"><span class="from">${esc(base)}</span><span class="arrow">→</span><span class="to" data-v201-term-preview="${k}">${esc(term(k))}</span></div>`).join('');
-    return `<div class="v208-terms-head"><div><h3>학교별 명칭</h3><p>선택한 전형에서 사용하는 고사장·고사실·관리자·사고자 명칭을 수정합니다. 저장하면 계정 역할, 왼쪽 메뉴, 표 컬럼, 검색 필터, PDF·각서 문구에 동일하게 반영됩니다.</p></div><span class="badge badge-blue">전형별 저장</span></div><div class="v208-term-layout"><section class="card"><div class="card-header"><div><div class="card-title">명칭 편집</div><div class="card-sub">온·오프 없이 필요한 명칭을 직접 수정합니다.</div></div></div><div class="card-body"><div class="v208-term-list">${rows}</div><div class="v208-save-row"><button class="btn btn-primary" data-action="save-terms">선택 전형 명칭 저장</button></div></div></section><section class="v208-term-preview"><div class="flex justify-between"><div><h3 class="section-title">변경 미리보기</h3><div class="small muted">입력 즉시 “기존 명칭 → 변경 명칭”으로 표시됩니다.</div></div><span class="badge badge-green">실시간</span></div><div class="v208-term-arrow-list">${arrows}</div><div class="v208-preview-frame"><div class="top">예상 화면</div><div class="body"><div class="cell"><b>계정 역할</b><span data-v201-term-preview="examManager">${esc(term('examManager'))}</span> · <span data-v201-term-preview="middleManager">${esc(term('middleManager'))}</span></div><div class="cell"><b>운영 필터</b><span data-v201-term-preview="examSite">${esc(term('examSite'))}</span> / <span data-v201-term-preview="examRoom">${esc(term('examRoom'))}</span></div><div class="cell"><b>메뉴 문구</b><span data-v201-term-preview="incident">${esc(term('incident'))}</span> 관리</div><div class="cell"><b>표 컬럼</b><span data-v201-term-preview="examRoom">${esc(term('examRoom'))}</span> · 응시율</div></div></div></section></div>`;
-  }
-
-  const v208SettingsNavOriginal=settingsNav;
-  settingsNav=function(active){
-    const tabs=[['features','기능','settings-features'],['terms','학교별 명칭','settings-terms']];
-    if(state.features.pdfUse)tabs.push(['pdf','PDF 편집','settings-pdf']);
-    if(state.features.pledge)tabs.push(['pledge','각서 편집','settings-pledge']);
-    return `<div class="tabs">${tabs.map(([k,l,r])=>`<button class="tab ${active===k?'active':''}" data-route="${r}">${l}</button>`).join('')}</div>`;
-  };
-
-  const v208SettingsPageOriginal=settingsPage;
-  settingsPage=function(tab){
-    if(tab==='terms'){
-      return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-settings-exam-select')}</div><span class="badge badge-blue">전형별 설정값</span></div><section class="card">${settingsNav('terms')}<div class="card-body">${v208SettingsTermsBody()}</div></section>`,'설정값 관리',`${state.school.name} · ${state.selection} 기능/학교별 명칭/PDF/각서 설정을 관리합니다.`,`<button class="btn btn-primary" data-action="save-terms">선택 전형 명칭 저장</button>`);
-    }
-    let html=v208SettingsPageOriginal(tab);
-    html=html.replace('<button class="btn" data-route="terminology">학교별 명칭</button>','');
-    html=html.replace('기능/PDF/각서 설정을 관리합니다.','기능/학교별 명칭/PDF/각서 설정을 관리합니다.');
-    return html;
-  };
-
-  const v208MenuOriginal=menus;
-  menus=function(){
-    const groups=v208MenuOriginal();
-    if(isRole('pm'))return groups.map(([group,items])=>[group,items.filter(([r])=>r!=='terminology')]);
-    return groups;
-  };
-
-  const v208AllowedOriginal=allowedRoutesFor;
-  allowedRoutesFor=function(role){
-    let list=v208AllowedOriginal(role);
-    if(role==='pm'&&!list.includes('settings-terms'))list=[...list,'settings-terms'];
-    return list;
-  };
-
-  const v208NavActiveOriginal=navItemActive;
-  navItemActive=function(r){
-    if(r==='settings-features')return ['settings-features','settings-terms','settings-pdf','settings-pledge','terminology'].includes(route);
-    return v208NavActiveOriginal(r);
-  };
 
   v207Normalize();
 
