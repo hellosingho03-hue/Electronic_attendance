@@ -841,9 +841,55 @@ body.dark .v205-sample-btn,body.dark .term-preview .term-token,body.dark .v205-i
 body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v206-stat{background:#17233a;border-color:#30405d}body.dark .v206-summary-note{background:#14253e;border-color:#2c5283;color:#a8c7ff}
 @media(max-width:1100px){.v206-summary-grid{grid-template-columns:1fr}.v206-data-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+
+
+/* v2.0.7 — 전형관리·출력기능·메모·부분초기화·무배정운영 */
+.v207-exam-management{margin-top:14px}
+.v207-exam-management .manage-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.v207-exam-management table{min-width:980px}
+.v207-exam-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.v207-disabled-row{background:var(--gray-100);color:var(--gray-500);opacity:.72}
+.v207-disabled-row td{background:transparent!important}
+.v207-current-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:var(--blue-2);color:var(--blue);font-size:11px;font-weight:900}
+.v207-output-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.v207-output-feature{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--gray-200);border-radius:13px;padding:14px;background:var(--gray-100)}
+.v207-output-feature.on{background:#eef6ff;border-color:#9ec5f5;box-shadow:inset 4px 0 0 var(--blue)}
+.v207-output-feature .desc{font-size:11px;color:var(--gray-600);margin-top:4px;line-height:1.45}
+.v207-photo-memo{margin-top:14px;border:1px solid var(--gray-200);border-radius:14px;background:var(--white)}
+.v207-photo-memo .head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--gray-200)}
+.v207-memo-list{display:grid;gap:8px;margin-bottom:12px}
+.v207-memo-item{display:grid;grid-template-columns:150px minmax(0,1fr) 120px;gap:10px;align-items:start;padding:10px 12px;border-radius:10px;background:var(--gray-100);font-size:12px}
+.v207-memo-item .author{font-weight:900;color:var(--navy-2)}
+.v207-memo-item .date{text-align:right;color:var(--gray-500);font-size:10px}
+.v207-partial-reset{display:grid;gap:8px;margin-top:12px}
+.v207-reset-option{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white)}
+.v207-reset-option input{margin-top:3px}
+.v207-reset-option b{display:block;font-size:12px}
+.v207-reset-option span{font-size:10px;color:var(--gray-600)}
+.v207-unassigned-banner{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:14px 16px;margin-bottom:14px;border:1px solid #f5b86b;border-radius:14px;background:#fff7e9}
+.v207-unassigned-banner .facts{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.v207-unassigned-banner .facts span{padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #f4d5a4;font-size:10px;font-weight:850;color:#8a4c00}
+.v207-cross-errors{border:2px solid #ef9a9a;border-radius:14px;background:#fff5f5;padding:14px;margin-top:14px}
+.v207-cross-errors .title{font-weight:950;color:var(--red);margin-bottom:8px}
+.v207-metric-button{border:0;background:transparent;padding:0;margin:0;width:100%;text-align:inherit;color:inherit;cursor:pointer}
+.v207-metric-button:hover .v206-metric{box-shadow:0 0 0 2px rgba(37,99,235,.22);transform:translateY(-1px)}
+.v207-data-detail{margin-top:14px;border:1px solid var(--gray-200);border-radius:13px;background:var(--white)}
+.v207-data-detail .head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--gray-200)}
+.v207-data-detail .body{padding:12px 14px}
+.v207-shared-login-card{margin-top:12px;padding:12px 14px;border-radius:12px;border:1px solid #b8d4f5;background:#eff7ff}
+.v207-feature-lock{opacity:.55;pointer-events:none}
+.v207-feature-dependency{margin-top:10px;padding:10px 12px;border-radius:10px;background:#fff7e9;border:1px solid #f2c78d;font-size:11px;color:#7d4a08}
+.v207-settings-tab-disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:900px){.v207-memo-item{grid-template-columns:1fr}.v207-memo-item .date{text-align:left}.v207-output-feature-grid{grid-template-columns:1fr}}
+body.dark .v207-output-feature,body.dark .v207-photo-memo,body.dark .v207-memo-item,body.dark .v207-reset-option,body.dark .v207-data-detail{background:var(--gray-100);border-color:var(--gray-200)}
+body.dark .v207-unassigned-banner,body.dark .v207-feature-dependency{background:#3a2b12;border-color:#70511e;color:#f1c477}
+
 </style>
 
-</head>
+<style>
+/* v2.0.8 — 학교별 명칭을 설정값 내부에서 편집 */
+.v208-terms-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;padding:14px;border:1px solid var(--gray-200);border-radius:14px;background:linear-gradient(135deg,var(--blue-2),var(--white))}.v208-terms-head h3{margin:0 0 5px}.v208-terms-head p{margin:0;color:var(--gray-600);font-size:12px;line-height:1.55}.v208-term-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.92fr);gap:14px;align-items:start}.v208-term-list{display:grid;gap:10px}.v208-term-row{display:grid;grid-template-columns:155px minmax(0,1fr);align-items:center;gap:12px;border:1px solid var(--gray-200);background:var(--white);border-radius:12px;padding:12px}.v208-term-row .base{font-weight:900}.v208-term-row .hint{font-size:11px;color:var(--gray-500);margin-top:3px}.v208-term-preview{border:1px solid var(--gray-200);border-radius:14px;background:linear-gradient(180deg,var(--blue-2),var(--white));padding:14px;position:sticky;top:74px}.v208-term-arrow-list{display:grid;gap:8px;margin-top:12px}.v208-term-arrow{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);align-items:center;gap:8px;background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:10px}.v208-term-arrow .from{color:var(--gray-500);text-decoration:line-through}.v208-term-arrow .arrow{text-align:center;color:var(--blue);font-weight:900}.v208-term-arrow .to{font-weight:900;color:var(--navy-2)}.v208-preview-frame{margin-top:12px;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;background:var(--white)}.v208-preview-frame .top{background:#0d2b58;color:#fff;padding:11px 12px;font-weight:900}.v208-preview-frame .body{padding:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.v208-preview-frame .cell{border:1px solid var(--gray-200);border-radius:9px;padding:9px;font-size:12px}.v208-preview-frame .cell b{display:block;margin-bottom:3px}.v208-save-row{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.dark .v208-term-row,.dark .v208-term-preview,.dark .v208-term-arrow,.dark .v208-preview-frame,.dark .v208-preview-frame .cell{background:#111d2c;border-color:#2b3950}.dark .v208-terms-head{background:#12243b;border-color:#2b3950}@media(max-width:1050px){.v208-term-layout{grid-template-columns:1fr}.v208-term-preview{position:static}}@media(max-width:650px){.v208-term-row{grid-template-columns:1fr}.v208-preview-frame .body{grid-template-columns:1fr}}
+</style></head>
 <body>
   <noscript><div style="padding:24px;font-family:Arial,sans-serif">이 테스트 페이지는 JavaScript를 사용합니다. 브라우저에서 JavaScript를 허용해 주세요.</div></noscript>
   <div id="app" aria-live="polite"></div>
@@ -854,8 +900,8 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.6';
-  const BUILD_ID = '20260810-206';
+  const APP_VERSION = '2.0.8';
+  const BUILD_ID = '20260810-208';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -2381,7 +2427,7 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
   bindInputs=function(){v201BaseBindInputs();document.querySelectorAll('[data-v201-term]').forEach(el=>el.addEventListener('input',()=>{document.querySelectorAll(`[data-v201-term-preview="${el.dataset.v201Term}"]`).forEach(x=>x.textContent=el.value||DEFAULT_TERMS[el.dataset.v201Term]);}));document.querySelectorAll('[data-v201-feature]').forEach(el=>el.addEventListener('change',()=>{state.features[el.dataset.v201Feature]=el.checked;save();render();}));document.querySelectorAll('[data-v201-incident-permission]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.v201IncidentPermission,role=el.dataset.role;state.incidentPermissions[id]=state.incidentPermissions[id]||{invigilator:false,middle:false};state.incidentPermissions[id][role]=el.checked;save();render();}));['v201-home-exam-select','v201-terms-exam-select','v201-settings-exam-select','v201-upload-exam-select','v201-result-exam-select','v201-output-exam-select'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>v201SetExam(el.value));});document.querySelectorAll('[data-v201-close-site]').forEach(el=>el.addEventListener('change',()=>{state.ui.closeSelectedSites=[...document.querySelectorAll('[data-v201-close-site]:checked')].map(x=>x.dataset.v201CloseSite);save();}));const us=document.getElementById('v201-upload-search');if(us)us.addEventListener('input',()=>{state.ui.uploadSearch=us.value;document.querySelectorAll('#v201-derived-table tbody tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(us.value.toLowerCase())?'':'none');});document.querySelectorAll('.v201-upload-type-search').forEach(inp=>inp.addEventListener('input',()=>{const type=inp.dataset.targetType;document.querySelectorAll(`[data-v201-upload-table="${type}"] tbody tr`).forEach(r=>r.style.display=r.textContent.toLowerCase().includes(inp.value.toLowerCase())?'':'none');}));const ps=document.getElementById('v201-photo-student-search');if(ps)ps.addEventListener('input',()=>{document.querySelectorAll('.photo-candidate-button').forEach(b=>b.style.display=b.textContent.toLowerCase().includes(ps.value.toLowerCase())?'':'none');});};
   bindPageEvents=function(){v201OriginalBindPageEvents();};
 
-  render=function(){const app=document.getElementById('app');document.body.classList.toggle('dark',!!state.ui.darkMode);document.documentElement.style.colorScheme=state.ui.darkMode?'dark':'light';if(!state.session&&route!=='login')route='login';if(state.session&&route!=='login'&&!routeAllowed(route)){app.innerHTML=shell(`<div class="notice notice-danger"><span>!</span><div><b>접근 권한이 없습니다.</b></div></div>`,'접근 제한','','');bindPageEvents();return;}let out='';switch(route){case'login':out=loginPage();break;case'developer-home':out=developerHome();break;case'developer-org':out=developerOrg();break;case'developer-accounts':out=accountPage(true);break;case'pm-home':out=pmHome();break;case'accounts':out=accountPage(false);break;case'settings-basic':case'settings-locations':case'settings-features':out=settingsPage('features');break;case'settings-pdf':out=settingsPage('pdf');break;case'settings-pledge':out=settingsPage('pledge');break;case'terminology':out=terminologyPage();break;case'upload':out=uploadPage();break;case'dashboard':out=dashboardPage();break;case'mobile-operations':out=mobileOperationsPage();break;case'room-list':out=roomListPage();break;case'answer-sheet-history':out=answerSheetHistoryPage();break;case'incidents':out=incidentsPage();break;case'photo-compare':out=photoComparePage();break;case'field-attendance':out=fieldAttendancePage();break;case'field-sign':out=fieldSignPage();break;case'close':out=closePage();break;case'pdf-output':out=pdfOutputPage();break;case'pledge-output':out=v201PledgeOutputPage();break;case'downloads':out=downloadsPage();break;case'audit':out=auditPage();break;case'other-site-candidates':out=v201OtherSitePage();break;default:out=shell('<div class="notice notice-warning">접근할 수 없는 화면입니다.</div>','접근 제한','','');}app.innerHTML=out;bindPageEvents();enhanceTables(app);};
+  render=function(){const app=document.getElementById('app');document.body.classList.toggle('dark',!!state.ui.darkMode);document.documentElement.style.colorScheme=state.ui.darkMode?'dark':'light';if(!state.session&&route!=='login')route='login';if(state.session&&route!=='login'&&!routeAllowed(route)){app.innerHTML=shell(`<div class="notice notice-danger"><span>!</span><div><b>접근 권한이 없습니다.</b></div></div>`,'접근 제한','','');bindPageEvents();return;}let out='';switch(route){case'login':out=loginPage();break;case'developer-home':out=developerHome();break;case'developer-org':out=developerOrg();break;case'developer-accounts':out=accountPage(true);break;case'pm-home':out=pmHome();break;case'accounts':out=accountPage(false);break;case'settings-basic':case'settings-locations':case'settings-features':out=settingsPage('features');break;case'settings-pdf':out=settingsPage('pdf');break;case'settings-pledge':out=settingsPage('pledge');break;case'terminology':case'settings-terms':out=settingsPage('terms');break;case'upload':out=uploadPage();break;case'dashboard':out=dashboardPage();break;case'mobile-operations':out=mobileOperationsPage();break;case'room-list':out=roomListPage();break;case'answer-sheet-history':out=answerSheetHistoryPage();break;case'incidents':out=incidentsPage();break;case'photo-compare':out=photoComparePage();break;case'field-attendance':out=fieldAttendancePage();break;case'field-sign':out=fieldSignPage();break;case'close':out=closePage();break;case'pdf-output':out=pdfOutputPage();break;case'pledge-output':out=v201PledgeOutputPage();break;case'downloads':out=downloadsPage();break;case'audit':out=auditPage();break;case'other-site-candidates':out=v201OtherSitePage();break;default:out=shell('<div class="notice notice-warning">접근할 수 없는 화면입니다.</div>','접근 제한','','');}app.innerHTML=out;bindPageEvents();enhanceTables(app);};
 
   v201Normalize();
 
@@ -2979,6 +3025,188 @@ body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v20
     html=html.replaceAll('조회정보','정리정보');
     return html;
   };
+
+
+
+  /* v2.0.7 — targeted feedback while preserving v1.9.1/v2.0.x style */
+  function v207Normalize(){
+    state.schemaVersion=12;state.ui=state.ui||{};state.features=state.features||{};
+    if(state.features.pdfUse===undefined)state.features.pdfUse=true;
+    if(state.ui.dataDetail===undefined)state.ui.dataDetail='';
+    if(!state.photoMemos)state.photoMemos={
+      '21330061':[
+        {author:'감독관 김민수',role:'감독관',text:'신분증 미지참 확인 후 현장사진을 촬영했습니다.',at:'2025.11.16 10:04'},
+        {author:`${term('middleManager')} 이서준`,role:term('middleManager'),text:'사전사진과 얼굴 특징이 유사하며 입학처 최종 확인을 요청합니다.',at:'2025.11.16 10:12'}
+      ]
+    };
+    if(!state.ui.photoMemoDraft)state.ui.photoMemoDraft='';
+    if(state.schemaVersion<12 || state.features.unassignedPolicyInitialized!==true){
+      state.features.allowUnassignedInvigilator=false;
+      state.features.unassignedPolicyInitialized=true;
+    }
+    if(state.features.allowUnassignedInvigilator){state.features.reserveRoom=false;state.features.otherSiteCandidates=false;}
+    const active=v207ActiveExams();const selected=state.exams.find(e=>e.name===state.selection);
+    if((!selected||selected.useStatus==='사용중지')&&active[0]){state.selection=active[0].name;state.ui.pmExamId=active[0].id;}
+  }
+  function v207ActiveExams(){return state.exams.filter(e=>e.schoolId===state.school.id&&e.useStatus!=='사용중지');}
+  v201ExamSelect=function(id='v201-exam-select'){
+    const list=v207ActiveExams();const current=v201CurrentExamId();
+    return `<select class="select v205-exam-select" id="${id}">${list.map(e=>`<option value="${esc(e.id)}" ${e.id===current?'selected':''}>${esc(e.name)} · ${esc(e.status)}</option>`).join('')||'<option value="">사용 가능한 전형 없음</option>'}</select>`;
+  };
+  const v207SetExamBase=v201SetExam;
+  v201SetExam=function(id,rerender=true){const e=state.exams.find(x=>x.id===id);if(!e||e.useStatus==='사용중지'){toast('사용중지 전형은 선택할 수 없습니다.','warning');return;}v207SetExamBase(id,rerender);};
+
+  pmHome=function(){
+    v207Normalize();const all=v201ExamList(),active=v207ActiveExams(),current=active.find(e=>e.id===v201CurrentExamId())||active[0],stages=['테스트','운영','종료'];
+    const statusButtons=stages.map(s=>`<button class="v202-stage-btn ${current?.status===s?'active '+s:''}" data-action="v202-set-exam-status" data-status="${s}">${s}<small>${s==='테스트'?'내부검수':s==='운영'?'운영공개':'조회전용'}</small></button>`).join('');
+    const rows=all.map(e=>{const disabled=e.useStatus==='사용중지';return `<tr class="${disabled?'v207-disabled-row':''}"><td><b>${esc(e.name)}</b><div class="tiny muted">${esc(e.code)}</div></td><td>${formatExamDateWithWeekday(e.examDate)}</td><td>${examStatusBadge(e.status)}</td><td><span class="badge ${disabled?'badge-gray':'badge-green'}">${disabled?'사용중지':'사용'}</span></td><td>${e.id===current?.id?'<span class="v207-current-pill">현재 전형</span>':disabled?'<span class="tiny muted">선택 불가</span>':`<button class="btn btn-sm" data-action="v201-select-exam" data-exam-id="${esc(e.id)}">선택</button>`}</td><td><div class="v207-exam-actions"><button class="btn btn-sm" data-action="v207-edit-exam" data-exam-id="${esc(e.id)}">수정</button><button class="btn btn-sm" data-action="v207-toggle-exam" data-exam-id="${esc(e.id)}">${disabled?'사용재개':'사용중지'}</button><button class="btn btn-sm btn-red" data-action="v207-delete-exam" data-exam-id="${esc(e.id)}">삭제</button></div></td></tr>`}).join('');
+    const currentBox=current?`<div class="v202-current-exam"><div><span class="tiny muted">현재 전형</span><h3>${esc(current.name)}</h3><div class="small muted">${esc(current.code)} · ${formatExamDateWithWeekday(current.examDate)}</div></div><div class="v202-stage-wrap"><span class="tiny muted">현재 단계</span><div class="v202-stage-buttons">${statusButtons}</div></div></div>`:`<div class="notice notice-warning">사용 가능한 전형이 없습니다. 전형관리에서 전형을 생성하거나 사용재개하세요.</div>`;
+    return shell(`${currentBox}<section class="card v207-exam-management"><div class="card-header"><div><div class="card-title">전형관리</div><div class="card-sub">전형 생성·선택·수정·사용중지·삭제를 이 영역에서 관리합니다. 사용중지 전형은 다른 화면의 선택 목록에서 완전히 제외됩니다.</div></div><button class="btn btn-primary" data-action="v201-open-exam-create">+ 전형 생성</button></div><div class="card-body"><div class="table-wrap"><table><thead><tr><th>전형</th><th>시험일</th><th>단계</th><th>사용상태</th><th>선택</th><th>관리</th></tr></thead><tbody>${rows}</tbody></table></div><div class="inline-meta" style="margin-top:10px"><span class="badge badge-blue">전체 ${all.length}개</span><span class="badge badge-green">사용 ${active.length}개</span><span class="small muted">사용중지 전형은 설정값·명칭·업로드·대시보드·마감·결과파일의 전형 선택 목록에 나타나지 않습니다.</span></div></div></section>${v201DerivedPanel()}`,'담당 PM 운영현황','현재 전형 요약과 전형관리를 분리하여 운영합니다.',`<button class="btn" data-route="accounts">계정관리</button><button class="btn btn-primary" data-route="settings-features">설정값</button>`);
+  };
+
+  const v207MenusBase=menus;
+  menus=function(){
+    if(isRole('pm')){const items=[['pm-home','운영현황','home'],['accounts','계정관리','account'],['settings-features','설정값','settings'],['upload','업로드·자동검증','upload'],['dashboard','운영 대시보드','dashboard'],['incidents','특이사항','incident'],['close','마감 관리','close']];if(state.features.pdfUse)items.push(['pdf-output','PDF·서명 출력','pdf']);if(state.features.pledge)items.push(['pledge-output','각서 출력','pdf']);items.push(['downloads','결과파일·통계','download']);return [['담당 PM 업무',items]];}
+    if(isRole('exam')){const items=[['dashboard','운영 대시보드','dashboard'],['accounts',`${term('middleManager')} 계정`,'account'],['incidents','특이사항 학생','incident'],['photo-compare','사진 비교','photo'],['close','마감 관리','close']];if(state.features.pdfUse)items.push(['pdf-output','PDF·서명 출력','pdf']);if(state.features.pledge)items.push(['pledge-output','각서 출력','pdf']);items.push(['downloads','결과파일·통계','download']);return [['전형 운영',items]];}
+    return v207MenusBase();
+  };
+  const v207AllowedBase=allowedRoutesFor;
+  allowedRoutesFor=function(role){let list=v207AllowedBase(role);if(!state.features.pdfUse)list=list.filter(r=>!['settings-pdf','pdf-output'].includes(r));if(!state.features.pledge)list=list.filter(r=>!['settings-pledge','pledge-output'].includes(r));return list;};
+  settingsNav=function(active){const tabs=[['features','기능','settings-features']];if(state.features.pdfUse)tabs.push(['pdf','PDF 편집','settings-pdf']);if(state.features.pledge)tabs.push(['pledge','각서 편집','settings-pledge']);return `<div class="tabs">${tabs.map(([k,l,r])=>`<button class="tab ${active===k?'active':''}" data-route="${r}">${l}</button>`).join('')}</div>`;};
+  const v207SettingsPageBase=settingsPage;
+  settingsPage=function(tab){if(tab==='pdf'&&!state.features.pdfUse)tab='features';if(tab==='pledge'&&!state.features.pledge)tab='features';return v207SettingsPageBase(tab);};
+  const v207SettingsFeaturesBase=settingsFeatures;
+  settingsFeatures=function(){
+    let html=v207SettingsFeaturesBase();
+    const output=`<section class="setting-section v201-settings-extra"><div class="setting-section-head"><div><h3 class="setting-section-title">출력 기능 사용</h3><div class="setting-section-desc">사용을 켠 경우에만 편집 탭과 왼쪽 출력 메뉴가 활성화됩니다.</div></div></div><div class="v207-output-feature-grid"><label class="v207-output-feature ${state.features.pdfUse?'on':''}"><div><b>PDF 사용</b><div class="desc">감독관 명부 PDF 편집과 PDF·서명 출력 메뉴를 사용합니다.</div></div><span class="switch"><input type="checkbox" data-v201-feature="pdfUse" ${state.features.pdfUse?'checked':''}><span></span></span></label><label class="v207-output-feature ${state.features.pledge?'on':''}"><div><b>각서 사용</b><div class="desc">사고유형별 각서 편집과 각서 출력 메뉴를 사용합니다.</div></div><span class="switch"><input type="checkbox" data-v201-feature="pledge" ${state.features.pledge?'checked':''}><span></span></span></label></div></section>`;
+    html=output+html;
+    html=html.replace(/<label class="feature-compact-row"><span class="switch"><input type="checkbox" data-feature="pledge"[\s\S]*?<\/label>/,'');
+    html=html.replaceAll('고사실 무배정 허용','고사실 무배정 운영');
+    html=html.replaceAll('감독관을 특정 고사실에 배정하지 않고 등록','수험생·감독관을 고사실에 사전 배정하지 않고 건물별 수험번호 범위로 현장 입장');
+    if(state.features.allowUnassignedInvigilator){html=html.replace(/(<input[^>]+data-feature="reserveRoom"[^>]*)(>)/,'$1 disabled$2').replace(/(<input[^>]+data-v201-feature="otherSiteCandidates"[^>]*)(>)/,'$1 disabled$2').replace(/(<input[^>]+data-feature="otherSiteCandidates"[^>]*)(>)/,'$1 disabled$2');html+=`<div class="v207-feature-dependency"><b>고사실 무배정 운영 적용 중</b> · 전체 고사장은 예비 운영 개념으로 처리하며, 예비고사실 사용과 타고사장 수험생 보기는 자동으로 OFF 됩니다. 감독관은 고사실별 공용 ID 1개를 중복 로그인하여 사용하므로 감독관 수는 고사실 수와 같아야 합니다.</div>`;}
+    return html;
+  };
+
+  const v207PhotoBase=photoComparePage;
+  photoComparePage=function(){
+    let html=v207PhotoBase();const id=state.ui.photoCandidate||'21330061',memos=state.photoMemos[id]||[];
+    const list=memos.map(m=>`<div class="v207-memo-item"><div class="author">${esc(m.author)}<div class="tiny muted">${esc(m.role||'')}</div></div><div>${esc(m.text)}</div><div class="date">${esc(m.at)}</div></div>`).join('')||'<div class="notice notice-info">등록된 현장 메모가 없습니다.</div>';
+    const card=`<section class="v207-photo-memo"><div class="head"><div><b>현장 확인 메모</b><div class="small muted">감독관 또는 ${esc(term('middleManager'))}가 남긴 메모를 담당 PM·전형관리자가 함께 확인합니다.</div></div><span class="badge badge-blue">${memos.length}건</span></div><div class="card-body"><div class="v207-memo-list">${list}</div><div class="field"><label>메모 추가</label><textarea class="textarea" id="v207-photo-memo-input" placeholder="현장 확인 내용, 촬영 사유, 입학처 전달사항을 입력하세요."></textarea></div><div class="flex justify-end" style="margin-top:8px"><button class="btn btn-primary" data-action="v207-save-photo-memo">메모 저장</button></div></div></section>`;
+    return html.replace('</main>',card+'</main>');
+  };
+
+  const v207ResetBase=openResetConfirm;
+  openResetConfirm=function(){
+    if(!isRole('pm'))return v207ResetBase();const code=state.school.code;
+    modal('담당 PM 데이터 선택 초기화',`<div class="notice notice-warning"><span>!</span><div><b>전체 초기화가 아니라 필요한 메뉴 데이터만 선택하여 초기화합니다.</b><br>선택하지 않은 데이터와 다른 전형의 데이터는 유지됩니다.</div></div><div class="v207-partial-reset"><label class="v207-reset-option"><input type="checkbox" data-v207-reset="settings"><div><b>설정값</b><span>기능, PDF, 각서, 사고유형 권한을 기본값으로 초기화</span></div></label><label class="v207-reset-option"><input type="checkbox" data-v207-reset="terms"><div><b>학교별 명칭</b><span>선택 전형의 명칭 변경값 초기화</span></div></label><label class="v207-reset-option"><input type="checkbox" data-v207-reset="uploads"><div><b>업로드 데이터</b><span>수험생, 감독관, 사진 ZIP, 오류내용, 자동배정 데이터 삭제</span></div></label><label class="v207-reset-option"><input type="checkbox" data-v207-reset="operations"><div><b>운영·마감 데이터</b><span>사진 확인상태, 현장 메모, 마감상태 초기화</span></div></label><label class="v207-reset-option"><input type="checkbox" data-v207-reset="accounts"><div><b>대학관리자 계정 편집값</b><span>PM가 생성한 전형관리자·중간관리자 예시 계정 초기화</span></div></label></div><div class="field" style="margin-top:12px"><label>학교코드 확인</label><input class="input" id="v207-reset-code" placeholder="${esc(code)}"></div>`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-red" id="v207-reset-submit">선택 데이터 초기화</button>`);
+    setTimeout(()=>document.getElementById('v207-reset-submit')?.addEventListener('click',()=>{const selected=[...document.querySelectorAll('[data-v207-reset]:checked')].map(x=>x.dataset.v207Reset);if(!selected.length){toast('초기화할 메뉴를 선택해주세요.','warning');return;}if(document.getElementById('v207-reset-code').value.trim().toUpperCase()!==code.toUpperCase()){toast('학교코드가 일치하지 않습니다.','error');return;}if(selected.includes('settings')){delete state.examConfigs[v201CurrentExamId()];state.features=Object.assign({},defaultState.features,{pdfUse:true,allowUnassignedInvigilator:false});state.pdf=v201Deep(defaultState.pdf);state.pledgeTemplates=v201Deep(defaultState.pledgeTemplates||state.pledgeTemplates);}if(selected.includes('terms')){delete state.examTerms[v201CurrentExamId()];state.terms=v201Deep(DEFAULT_TERMS);}if(selected.includes('uploads')){state.uploadRows={candidate:[],invigilator:[],photos:[]};state.uploadErrors={candidate:[],invigilator:[],photos:[]};state.uploadFileNames={};state.invigilatorAssignments=[];}if(selected.includes('operations')){state.photoAdmissionStatus={};state.photoMemos={};['s1','s2','s3','s4'].forEach(s=>state.closeBySite[s]={'본교 제1고사장':'마감 전','본교 제2고사장':'마감 전','예비고사장':'마감 전'});}if(selected.includes('accounts'))state.accounts=clone(defaultState.accounts);save();closeModal();render();toast('선택한 메뉴 데이터를 초기화했습니다.','success');}),0);
+  };
+
+  function v207CrossErrors(){
+    const c=state.uploadRows.candidate||[],i=state.uploadRows.invigilator||[],p=state.uploadRows.photos||[],errors=[];
+    if(c.length&&p.length&&c.length!==p.length)errors.push({row:'교차검증',column:'수험생/사진',value:`수험생 ${c.length}명 · 사진 ${p.length}개`,message:'수험생 수와 사진 파일 수가 일치하지 않습니다.',solution:'누락 또는 중복 사진을 확인하세요.',source:'v207'});
+    if(c.length>=10){const map={};c.forEach(r=>{const room=v206Get(r,['고사실코드','고사실']);if(!room)return;map[room]=map[room]||{count:0,assigned:Number(v206Get(r,['배정인원']))||0};map[room].count++;});Object.entries(map).filter(([,v])=>v.assigned&&v.assigned!==v.count).slice(0,5).forEach(([room,v])=>errors.push({row:'교차검증',column:'고사실별 인원',value:`${room} · 배정 ${v.assigned} / 데이터 ${v.count}`,message:'고사실별 배정인원과 수험생 데이터 수가 일치하지 않습니다.',solution:'배정인원 또는 수험생 행을 확인하세요.',source:'v207'}));}
+    if(state.features.allowUnassignedInvigilator&&c.length&&i.length){const rooms=new Set(c.map(r=>v206Get(r,['고사실코드','고사실'])).filter(Boolean)).size;const ids=new Set(i.map(r=>v206Get(r,['감독관ID'])).filter(Boolean)).size;if(rooms!==ids)errors.push({row:'운영정책',column:'감독관 수',value:`고사실 ${rooms}실 · 감독관ID ${ids}개`,message:'고사실 무배정 운영에서는 고사실 수와 공용 감독관 ID 수가 같아야 합니다.',solution:'고사실별 공용 ID를 1개씩 생성하세요.',source:'v207'});}
+    return errors;
+  }
+  function v207ApplyCrossErrors(){['candidate','invigilator','photos'].forEach(t=>state.uploadErrors[t]=(state.uploadErrors[t]||[]).filter(e=>e.source!=='v207'));const cross=v207CrossErrors();if(cross.length){const target=state.uploadRows.candidate?.length?'candidate':state.uploadRows.invigilator?.length?'invigilator':'photos';state.uploadErrors[target]=[...(state.uploadErrors[target]||[]),...cross];}}
+  const v207UploadBase=uploadPage;
+  uploadPage=function(){
+    v207ApplyCrossErrors();let html=v207UploadBase();
+    if(state.features.allowUnassignedInvigilator&&(state.ui.uploadType||'candidate')==='invigilator'){
+      const shared=`<section class="v201-auto-assign v207-shared-login-card"><div class="head"><div><b>고사실별 공용 감독관 ID</b><div class="small muted">고사실마다 공용 ID 1개를 생성하고, 해당 고사실 감독관들이 같은 ID로 중복 로그인합니다.</div></div><div class="actions"><button class="btn btn-primary" data-action="v207-generate-shared-ids">고사실별 공용ID 생성</button><button class="btn" data-action="v201-download-assignment">공용ID 목록 다운로드</button></div></div><div class="v207-feature-dependency">감독관 수(공용 ID 수)는 고사실 수와 같아야 하며, 개인 감독관 자동배정은 사용하지 않습니다.</div></section>`;
+      html=html.replace(/<section class="v201-auto-assign">[\s\S]*?<\/section>/,shared);
+    }
+    return html;
+  };
+
+  const v207MetricBase=v206Metric;
+  v206Metric=function(label,value,suffix=''){return `<button type="button" class="v207-metric-button" data-action="v207-show-data-detail" data-detail="${esc(label)}">${v207MetricBase(label,value,suffix)}</button>`;};
+  function v207DataDetailRows(label){
+    const c=state.uploadRows.candidate||[],i=state.uploadRows.invigilator||[],p=state.uploadRows.photos||[];
+    if(label.includes('감독관')||['정감독관','부감독관','예비감독관','무배정'].includes(label))return i.map(r=>[v206Get(r,['감독관ID']),v206Get(r,['감독관명']),v206Get(r,['감독관구분']),v206Get(r,['교시']),v206Get(r,['고사장']),v206Get(r,['고사실'])]);
+    if(label.includes('사진'))return p.map(r=>[v206Get(r,['파일명','사진파일명']),v206Get(r,['수험번호']),v206Get(r,['매칭','상태']),v206Get(r,['오류내용'])]);
+    return c.map(r=>[v206Get(r,['수험번호']),v206Get(r,['수험생명','성명']),v206Get(r,['교시']),v206Get(r,['고사장']),v206Get(r,['고사실']),v206Get(r,['사진파일명'])]);
+  }
+  function v207DataDetailPanel(){const label=state.ui.dataDetail;if(!label)return '';const rows=v207DataDetailRows(label);const isInv=label.includes('감독관')||['정감독관','부감독관','예비감독관','무배정'].includes(label),isPhoto=label.includes('사진');const heads=isInv?['감독관ID','감독관명','구분','교시','고사장','고사실']:isPhoto?['파일명','수험번호','매칭','오류내용']:['수험번호','수험생명','교시','고사장','고사실','사진파일명'];return `<section class="v207-data-detail"><div class="head"><div><b>${esc(label)} 상세 목록</b><div class="small muted">상단 숫자를 선택해 펼친 읽기 전용 목록입니다.</div></div><button class="btn btn-sm" data-action="v207-close-data-detail">닫기</button></div><div class="body"><div class="table-wrap"><table><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v||'-')}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${heads.length}" class="text-center muted">데이터가 없습니다.</td></tr>`}</tbody></table></div></div></section>`;}
+  const v207DerivedBase=v201DerivedPanel;
+  v201DerivedPanel=function(){let html=v207DerivedBase();if(!html)return html;const panel=v207DataDetailPanel();if(panel){const pos=html.lastIndexOf('</div></section>');if(pos>=0)html=html.slice(0,pos)+panel+html.slice(pos);}return html;};
+
+  const v207DashboardBase=dashboardPage;
+  dashboardPage=function(){let html=v207DashboardBase();if(state.features.allowUnassignedInvigilator){const notice=`<div class="v207-unassigned-banner"><div><b>고사실 무배정 운영</b><div class="small">수험생·감독관을 고사실에 사전 배정하지 않고 건물별 수험번호 범위와 현장 수용인원으로 입장 처리합니다.</div><div class="facts"><span>전체 고사장 예비 운영</span><span>전체 수험생 타고사장 처리</span><span>고사실별 공용 감독관ID 1개</span><span>감독관수 = 고사실수</span></div></div><span class="badge badge-orange">특수 운영</span></div>`;html=html.replace('<div class="toolbar v202-dashboard-toolbar">',notice+'<div class="toolbar v202-dashboard-toolbar">').replace('<div class="toolbar">',notice+'<div class="toolbar">').replaceAll('타고사장 수험생','전체 수험생(타고사장 처리)');}return html;};
+  const v207RoomBase=roomListPage;
+  roomListPage=function(){let html=v207RoomBase();if(state.features.allowUnassignedInvigilator){const notice=`<div class="v207-unassigned-banner"><div><b>고사실 무배정 운영현황</b><div class="small">고사실은 현장 수용인원 단위로 운영하며 감독관은 고사실별 공용 ID로 로그인합니다.</div><div class="facts"><span>수험번호 범위 기반 입장</span><span>사전 고사실 배정 없음</span><span>공용ID 중복 로그인 허용</span></div></div></div>`;html=html.replace('<div class="toolbar">',notice+'<div class="toolbar">');}return html;};
+
+  const v207BindActionsBase=bindActions;
+  bindActions=function(){
+    v207BindActionsBase();
+    document.querySelectorAll('[data-action="v207-edit-exam"]').forEach(el=>el.addEventListener('click',()=>{const ex=state.exams.find(x=>x.id===el.dataset.examId);if(!ex)return;modal('전형 수정',`<div class="grid grid-2"><div class="field"><label>전형명</label><input class="input" id="v207-exam-name" value="${esc(ex.name)}"></div><div class="field"><label>전형코드</label><input class="input" id="v207-exam-code" value="${esc(ex.code)}"></div><div class="field"><label>시험일</label><input class="input" type="date" id="v207-exam-date" value="${esc(ex.examDate)}"></div><div class="field"><label>단계</label><select class="select" id="v207-exam-status">${['테스트','운영','종료'].map(s=>`<option ${ex.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div>`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-primary" id="v207-exam-save">저장</button>`);setTimeout(()=>document.getElementById('v207-exam-save')?.addEventListener('click',()=>{const old=ex.name;ex.name=document.getElementById('v207-exam-name').value.trim()||ex.name;ex.code=document.getElementById('v207-exam-code').value.trim()||ex.code;ex.examDate=document.getElementById('v207-exam-date').value;ex.status=document.getElementById('v207-exam-status').value;if(state.selection===old)state.selection=ex.name;save();closeModal();render();toast('전형 정보를 수정했습니다.','success');}),0);}));
+    document.querySelectorAll('[data-action="v207-toggle-exam"]').forEach(el=>el.addEventListener('click',()=>{const ex=state.exams.find(x=>x.id===el.dataset.examId);if(!ex)return;ex.useStatus=ex.useStatus==='사용중지'?'사용':'사용중지';if(ex.useStatus==='사용중지'&&state.selection===ex.name){const next=v207ActiveExams().find(x=>x.id!==ex.id);if(next){state.selection=next.name;state.ui.pmExamId=next.id;}}save();render();toast(`전형을 ${ex.useStatus} 상태로 변경했습니다.`,'success');}));
+    document.querySelectorAll('[data-action="v207-delete-exam"]').forEach(el=>el.addEventListener('click',()=>{const ex=state.exams.find(x=>x.id===el.dataset.examId);if(!ex||!confirm(`${ex.name} 전형을 삭제할까요?`))return;state.exams=state.exams.filter(x=>x.id!==ex.id);const next=v207ActiveExams()[0]||v201ExamList()[0];if(next){state.selection=next.name;state.ui.pmExamId=next.id;}save();render();toast('전형을 삭제했습니다.','success');}));
+    document.querySelectorAll('[data-action="v207-save-photo-memo"]').forEach(el=>el.addEventListener('click',()=>{const input=document.getElementById('v207-photo-memo-input'),text=input?.value.trim();if(!text){toast('메모 내용을 입력해주세요.','warning');return;}const id=state.ui.photoCandidate||'21330061';state.photoMemos[id]=state.photoMemos[id]||[];state.photoMemos[id].push({author:`${roleDisplayName(state.session.role)} ${state.session.name}`,role:roleDisplayName(state.session.role),text,at:new Date().toLocaleString('ko-KR')});save();render();toast('현장 메모를 저장했습니다.','success');}));
+    document.querySelectorAll('[data-action="v207-show-data-detail"]').forEach(el=>el.addEventListener('click',()=>{state.ui.dataDetail=el.dataset.detail;save();render();setTimeout(()=>document.querySelector('.v207-data-detail')?.scrollIntoView({behavior:'smooth',block:'start'}),0);}));
+    document.querySelectorAll('[data-action="v207-close-data-detail"]').forEach(el=>el.addEventListener('click',()=>{state.ui.dataDetail='';save();render();}));
+    document.querySelectorAll('[data-action="v207-generate-shared-ids"]').forEach(el=>el.addEventListener('click',()=>{const rooms=[];const seen=new Set();(state.uploadRows.candidate||[]).forEach(r=>{const code=v206Get(r,['고사실코드','고사실 코드','고사실']);const session=v206Get(r,['교시']);if(!code)return;const key=code+'|'+session;if(seen.has(key))return;seen.add(key);rooms.push({code,session,site:v206Get(r,['고사장','시험장']),building:v206Get(r,['건물','건물명']),room:v206Get(r,['고사실'])});});if(!rooms.length){toast('수험생 기초데이터를 먼저 업로드해주세요.','warning');return;}state.uploadRows.invigilator=rooms.map((r,i)=>({'전형명':state.selection,'시험일':state.basic.examDate,'교시':r.session,'시작시간':'','종료시간':'','고사장':r.site,'건물':r.building,'고사실코드':r.code,'고사실':r.room,'감독관ID':`ROOM-${r.code}`,'감독관명':`${r.room||r.code} 공용ID`,'감독관구분':'정감독관','서명사용여부':'Y','로그인방식':'고사실당 1개 ID · 중복로그인 허용','오류내용':'정상'}));state.invigilatorAssignments=v201Deep(state.uploadRows.invigilator);state.uploadFileNames.invigilator='고사실별_공용감독관ID.xlsx';state.uploadErrors.invigilator=[];v207ApplyCrossErrors();save();render();toast(`${rooms.length}개 고사실 공용 ID를 생성했습니다.`,'success');}));
+  };
+  const v207BindInputsBase=bindInputs;
+  bindInputs=function(){v207BindInputsBase();document.querySelectorAll('[data-v201-feature="allowUnassignedInvigilator"],[data-feature="allowUnassignedInvigilator"]').forEach(el=>el.addEventListener('change',()=>{state.features.allowUnassignedInvigilator=el.checked;if(el.checked){state.features.reserveRoom=false;state.features.otherSiteCandidates=false;toast('예비고사실과 타고사장 수험생 보기를 자동으로 껐습니다.','warning');}save();render();}));};
+
+
+
+  /* v2.0.8 — 학교별 명칭을 담당 PM 설정값 탭으로 통합 */
+  function v208SettingsTermsBody(){
+    const terms=[
+      ['examSite','고사장','고사장'],
+      ['examRoom','고사실','고사실'],
+      ['middleManager','중간관리자','복도관리자'],
+      ['examManager','전형관리자','입학처 관리자'],
+      ['incident','사고자','특이사항 학생']
+    ];
+    const rows=terms.map(([k,base,ph])=>`<div class="v208-term-row"><div><div class="base">${esc(base)}</div><div class="hint">기본 시스템 명칭</div></div><div class="field"><label>변경 명칭</label><input class="input" data-v201-term="${k}" value="${esc(state.terms[k]||base)}" placeholder="${esc(ph)}"></div></div>`).join('');
+    const arrows=terms.map(([k,base])=>`<div class="v208-term-arrow"><span class="from">${esc(base)}</span><span class="arrow">→</span><span class="to" data-v201-term-preview="${k}">${esc(term(k))}</span></div>`).join('');
+    return `<div class="v208-terms-head"><div><h3>학교별 명칭</h3><p>선택한 전형에서 사용하는 고사장·고사실·관리자·사고자 명칭을 수정합니다. 저장하면 계정 역할, 왼쪽 메뉴, 표 컬럼, 검색 필터, PDF·각서 문구에 동일하게 반영됩니다.</p></div><span class="badge badge-blue">전형별 저장</span></div><div class="v208-term-layout"><section class="card"><div class="card-header"><div><div class="card-title">명칭 편집</div><div class="card-sub">온·오프 없이 필요한 명칭을 직접 수정합니다.</div></div></div><div class="card-body"><div class="v208-term-list">${rows}</div><div class="v208-save-row"><button class="btn btn-primary" data-action="save-terms">선택 전형 명칭 저장</button></div></div></section><section class="v208-term-preview"><div class="flex justify-between"><div><h3 class="section-title">변경 미리보기</h3><div class="small muted">입력 즉시 “기존 명칭 → 변경 명칭”으로 표시됩니다.</div></div><span class="badge badge-green">실시간</span></div><div class="v208-term-arrow-list">${arrows}</div><div class="v208-preview-frame"><div class="top">예상 화면</div><div class="body"><div class="cell"><b>계정 역할</b><span data-v201-term-preview="examManager">${esc(term('examManager'))}</span> · <span data-v201-term-preview="middleManager">${esc(term('middleManager'))}</span></div><div class="cell"><b>운영 필터</b><span data-v201-term-preview="examSite">${esc(term('examSite'))}</span> / <span data-v201-term-preview="examRoom">${esc(term('examRoom'))}</span></div><div class="cell"><b>메뉴 문구</b><span data-v201-term-preview="incident">${esc(term('incident'))}</span> 관리</div><div class="cell"><b>표 컬럼</b><span data-v201-term-preview="examRoom">${esc(term('examRoom'))}</span> · 응시율</div></div></div></section></div>`;
+  }
+
+  const v208SettingsNavOriginal=settingsNav;
+  settingsNav=function(active){
+    const tabs=[['features','기능','settings-features'],['terms','학교별 명칭','settings-terms']];
+    if(state.features.pdfUse)tabs.push(['pdf','PDF 편집','settings-pdf']);
+    if(state.features.pledge)tabs.push(['pledge','각서 편집','settings-pledge']);
+    return `<div class="tabs">${tabs.map(([k,l,r])=>`<button class="tab ${active===k?'active':''}" data-route="${r}">${l}</button>`).join('')}</div>`;
+  };
+
+  const v208SettingsPageOriginal=settingsPage;
+  settingsPage=function(tab){
+    if(tab==='terms'){
+      return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-settings-exam-select')}</div><span class="badge badge-blue">전형별 설정값</span></div><section class="card">${settingsNav('terms')}<div class="card-body">${v208SettingsTermsBody()}</div></section>`,'설정값 관리',`${state.school.name} · ${state.selection} 기능/학교별 명칭/PDF/각서 설정을 관리합니다.`,`<button class="btn btn-primary" data-action="save-terms">선택 전형 명칭 저장</button>`);
+    }
+    let html=v208SettingsPageOriginal(tab);
+    html=html.replace('<button class="btn" data-route="terminology">학교별 명칭</button>','');
+    html=html.replace('기능/PDF/각서 설정을 관리합니다.','기능/학교별 명칭/PDF/각서 설정을 관리합니다.');
+    return html;
+  };
+
+  const v208MenuOriginal=menus;
+  menus=function(){
+    const groups=v208MenuOriginal();
+    if(isRole('pm'))return groups.map(([group,items])=>[group,items.filter(([r])=>r!=='terminology')]);
+    return groups;
+  };
+
+  const v208AllowedOriginal=allowedRoutesFor;
+  allowedRoutesFor=function(role){
+    let list=v208AllowedOriginal(role);
+    if(role==='pm'&&!list.includes('settings-terms'))list=[...list,'settings-terms'];
+    return list;
+  };
+
+  const v208NavActiveOriginal=navItemActive;
+  navItemActive=function(r){
+    if(r==='settings-features')return ['settings-features','settings-terms','settings-pdf','settings-pledge','terminology'].includes(route);
+    return v208NavActiveOriginal(r);
+  };
+
+  v207Normalize();
 
   v205Normalize();
 
