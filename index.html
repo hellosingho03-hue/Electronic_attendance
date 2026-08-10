@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.4</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.5</title>
   <style>
 :root {
   --navy:#071d42;
@@ -788,6 +788,59 @@ body.dark .v204-pledge-summary>div{background:#142235;border-color:#30445f}
   .v204-target-status{grid-column:2;justify-self:start}
 }
 
+
+/* v2.0.5 — targeted layout fixes */
+.v205-exam-select option:disabled{color:#9ca3af;background:#f1f3f6}
+.v205-fixed-output{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--gray-300);background:var(--gray-100);border-radius:10px;padding:10px 12px;font-weight:900;color:var(--navy)}
+.v205-fixed-output .badge{margin-left:auto}.v205-pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.v205-pdf-exam-line{border:1px solid #bdd6f6;background:#eff6ff;border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:var(--navy)}
+.v205-upload-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.v205-sample-btn{border:1px solid var(--gray-300);border-radius:12px;background:#fff;padding:12px 10px;font-weight:900;cursor:pointer;text-align:center}.v205-sample-btn.ok{border-color:#9ed7ba;background:#f3fff8;color:var(--green)}.v205-sample-btn.err{border-color:#eeadad;background:#fff6f6;color:var(--red)}.v205-sample-btn small{display:block;margin-top:4px;color:var(--gray-600);font-weight:700}
+.v205-feature-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.settings-feature-validation-grid .feature-all-control{margin-left:8px;min-width:148px;justify-content:center;padding:8px 10px}.incident-box .setting-section-title{font-size:16px}.incident-box .setting-section-head{align-items:center}.incident-edit-grid,.v202-incident-grid{grid-template-columns:repeat(5,minmax(140px,1fr))!important;gap:8px!important}.v202-incident-card,.incident-edit-card{padding:9px!important;gap:7px!important}.v202-incident-card .icon,.incident-edit-card .icon{font-size:16px}.v202-permission-buttons{gap:4px}.v202-permission{min-width:64px;padding:6px 7px;font-size:10.5px}.v202-permission-block{padding-top:6px}.v202-incident-card .field label{font-size:10.5px}.v202-incident-card .input{height:32px;font-size:12px}
+.term-preview .term-token{border:1px solid #d8e4f5;border-radius:12px;background:#fff;padding:10px 12px;margin:8px 0;gap:10px}.term-preview .term-token span:nth-child(2){font-size:18px;color:var(--blue);font-weight:950}.term-preview .term-token .from{min-width:130px;text-decoration:line-through;color:var(--gray-500)}.term-preview .term-token .to{font-size:15px;font-weight:950;color:var(--navy)}
+.v205-incident-count-card{border:1px solid var(--gray-200);background:#fff;border-radius:16px;padding:15px;cursor:pointer;transition:.15s;min-height:104px}.v205-incident-count-card:hover{border-color:var(--blue);box-shadow:0 8px 22px rgba(18,103,214,.12);transform:translateY(-1px)}.v205-incident-count-card.active{background:#eef6ff;border-color:var(--blue)}.v205-incident-count-card .top{display:flex;justify-content:space-between;gap:10px;align-items:center}.v205-incident-count-card .count{font-size:28px;font-weight:950;margin-top:10px;color:var(--navy)}.v205-incident-count-card .hint{font-size:11px;color:var(--gray-600);margin-top:2px}
+.v202-stats-first{margin:10px 0!important}.v202-stats-first .card-body{padding:12px!important}.v202-stats-first .stats-toolbar{margin-bottom:8px!important}.v202-stats-first .table-wrap{max-height:330px!important}.v202-stats-first table th,.v202-stats-first table td{padding:6px 7px!important;font-size:11px!important;line-height:1.25!important;white-space:nowrap}.v202-stats-first table{min-width:900px!important}.download-card .card-body{padding:13px!important}.download-card .card-title{font-size:14px!important}.download-card .kpi-icon{width:32px!important;height:32px!important;font-size:16px!important}
+.v205-close-confirm-title b{font-size:17px;color:var(--navy)}.v205-close-confirm-title .badge{margin-left:8px}.v203-close-filter-actions{display:flex;gap:8px;align-items:end}.v203-close-now{background:#fff7ed;border-color:#fed7aa;color:#9a3412;font-weight:900}
+body.dark .v205-sample-btn,body.dark .term-preview .term-token,body.dark .v205-incident-count-card{background:#111d2c;border-color:#2b3950;color:#dfe8f5}body.dark .v205-fixed-output,body.dark .v205-pdf-exam-line{background:#132a48;border-color:#2b5f9c;color:#e6f0ff}
+@media(max-width:1300px){.incident-edit-grid,.v202-incident-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.v205-pdf-grid{grid-template-columns:1fr}}
+
+
+/* v2.0.6 업로드 기초데이터 정리 */
+.v206-data-summary{margin-top:14px}
+.v206-data-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;box-shadow:0 8px 22px rgba(15,35,75,.05)}
+.v206-data-card.candidate{border-left:5px solid var(--blue)}
+.v206-data-card.invigilator{border-left:5px solid var(--green)}
+.v206-data-card .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.v206-data-card .head b{font-size:15px;color:var(--navy)}
+.v206-data-card .head span{font-size:11px;color:var(--gray-600)}
+.v206-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.v206-metric{border:1px solid var(--gray-200);border-radius:11px;background:var(--gray-100);padding:9px 10px;min-height:58px}
+.v206-metric span{display:block;font-size:11px;color:var(--gray-600);font-weight:800;letter-spacing:-.2px}
+.v206-metric b{display:block;margin-top:4px;font-size:18px;color:var(--navy);line-height:1.1}
+.v206-room-summary{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;margin-top:12px}
+.v206-room-summary .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.v206-room-summary .head b{font-size:15px;color:var(--navy)}
+.v206-room-summary table{min-width:1320px}
+.v206-room-summary th,.v206-room-summary td{padding:8px 9px!important;font-size:11.5px!important;white-space:nowrap}
+.v206-summary-note{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--blue-2);color:var(--blue);font-size:12px;font-weight:800}
+@media(max-width:900px){.v206-data-summary-grid{grid-template-columns:1fr}.v206-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* v2.0.6 — 업로드 기초데이터 요약 개선 */
+.v206-basic-data{margin-top:16px}
+.v206-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:14px;background:var(--white);padding:14px;min-height:150px}
+.v206-data-card h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.v206-data-card .sub{font-size:11px;color:var(--gray-600);margin-bottom:10px}
+.v206-data-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.v206-stat{border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-100);padding:8px 9px;min-height:48px}
+.v206-stat span{display:block;font-size:10.5px;color:var(--gray-600);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v206-stat b{display:block;margin-top:3px;font-size:18px;color:var(--navy)}
+.v206-stat.green b{color:var(--green)}.v206-stat.blue b{color:var(--blue)}.v206-stat.orange b{color:var(--orange)}.v206-stat.red b{color:var(--red)}
+.v206-summary-note{margin-top:12px;border:1px solid #c7d9f4;background:#f2f7ff;border-radius:12px;padding:11px 13px;font-size:12px;color:var(--blue);font-weight:800}
+.v206-room-table table{min-width:1300px}.v206-room-table th,.v206-room-table td{padding:7px 8px!important;font-size:11.5px;white-space:nowrap}.v206-room-table td:last-child{max-width:280px;white-space:normal}
+body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v206-stat{background:#17233a;border-color:#30405d}body.dark .v206-summary-note{background:#14253e;border-color:#2c5283;color:#a8c7ff}
+@media(max-width:1100px){.v206-summary-grid{grid-template-columns:1fr}.v206-data-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 
 </head>
@@ -801,8 +854,8 @@ body.dark .v204-pledge-summary>div{background:#142235;border-color:#30445f}
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.4';
-  const BUILD_ID = '20260810-204';
+  const APP_VERSION = '2.0.6';
+  const BUILD_ID = '20260810-206';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -1743,6 +1796,45 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
 @media(max-width:1100px){.v201-exam-grid,.v201-school-grid,.v201-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v201-term-layout,.v201-upload-grid{grid-template-columns:1fr}.v201-term-preview{position:static}}
 @media(max-width:700px){.v201-exam-grid,.v201-school-grid,.v201-feature-grid,.v201-pivot-grid,.v201-close-confirm .summary-grid{grid-template-columns:1fr}.v201-term-row{grid-template-columns:1fr}}
 
+
+/* v2.0.6 업로드 기초데이터 정리 */
+.v206-data-summary{margin-top:14px}
+.v206-data-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;box-shadow:0 8px 22px rgba(15,35,75,.05)}
+.v206-data-card.candidate{border-left:5px solid var(--blue)}
+.v206-data-card.invigilator{border-left:5px solid var(--green)}
+.v206-data-card .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.v206-data-card .head b{font-size:15px;color:var(--navy)}
+.v206-data-card .head span{font-size:11px;color:var(--gray-600)}
+.v206-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.v206-metric{border:1px solid var(--gray-200);border-radius:11px;background:var(--gray-100);padding:9px 10px;min-height:58px}
+.v206-metric span{display:block;font-size:11px;color:var(--gray-600);font-weight:800;letter-spacing:-.2px}
+.v206-metric b{display:block;margin-top:4px;font-size:18px;color:var(--navy);line-height:1.1}
+.v206-room-summary{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;margin-top:12px}
+.v206-room-summary .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.v206-room-summary .head b{font-size:15px;color:var(--navy)}
+.v206-room-summary table{min-width:1320px}
+.v206-room-summary th,.v206-room-summary td{padding:8px 9px!important;font-size:11.5px!important;white-space:nowrap}
+.v206-summary-note{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--blue-2);color:var(--blue);font-size:12px;font-weight:800}
+@media(max-width:900px){.v206-data-summary-grid{grid-template-columns:1fr}.v206-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* v2.0.6 — 업로드 기초데이터 요약 개선 */
+.v206-basic-data{margin-top:16px}
+.v206-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:14px;background:var(--white);padding:14px;min-height:150px}
+.v206-data-card h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.v206-data-card .sub{font-size:11px;color:var(--gray-600);margin-bottom:10px}
+.v206-data-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.v206-stat{border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-100);padding:8px 9px;min-height:48px}
+.v206-stat span{display:block;font-size:10.5px;color:var(--gray-600);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v206-stat b{display:block;margin-top:3px;font-size:18px;color:var(--navy)}
+.v206-stat.green b{color:var(--green)}.v206-stat.blue b{color:var(--blue)}.v206-stat.orange b{color:var(--orange)}.v206-stat.red b{color:var(--red)}
+.v206-summary-note{margin-top:12px;border:1px solid #c7d9f4;background:#f2f7ff;border-radius:12px;padding:11px 13px;font-size:12px;color:var(--blue);font-weight:800}
+.v206-room-table table{min-width:1300px}.v206-room-table th,.v206-room-table td{padding:7px 8px!important;font-size:11.5px;white-space:nowrap}.v206-room-table td:last-child{max-width:280px;white-space:normal}
+body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v206-stat{background:#17233a;border-color:#30405d}body.dark .v206-summary-note{background:#14253e;border-color:#2c5283;color:#a8c7ff}
+@media(max-width:1100px){.v206-summary-grid{grid-template-columns:1fr}.v206-data-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style></head><body><div class="preview-sheet">${paper.outerHTML}</div></body></html>`);
     popup.document.close();
     setTimeout(()=>{popup.focus();popup.print();},350);
@@ -2179,7 +2271,34 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
   function v201DerivedRows(){const c=state.uploadRows.candidate||[];const i=state.uploadRows.invigilator||[];const map={};c.forEach(r=>{const key=[r['전형명'],r['시험일'],r['교시'],r['고사실코드']].join('|');if(!map[key])map[key]={exam:r['전형명']||'',date:r['시험일']||'',session:r['교시']||'',start:r['시작시간']||'',end:r['종료시간']||'',site:r['고사장']||'',building:r['건물']||'',roomCode:r['고사실코드']||'',room:r['고사실']||'',assigned:Number(r['배정인원']||0),candidateCount:0,invigilators:[]};map[key].candidateCount++;map[key].assigned=Math.max(map[key].assigned,Number(r['배정인원']||0));});i.forEach(r=>{const key=[r['전형명'],r['시험일'],r['교시'],r['고사실코드']].join('|');if(!map[key])map[key]={exam:r['전형명']||'',date:r['시험일']||'',session:r['교시']||'',start:r['시작시간']||'',end:r['종료시간']||'',site:r['고사장']||'',building:r['건물']||'',roomCode:r['고사실코드']||'',room:r['고사실']||'',assigned:0,candidateCount:0,invigilators:[]};map[key].invigilators.push(`${r['감독관명']||''}(${r['감독관구분']||''})`);});return Object.values(map);}
   function v201RowsTable(type,rows){if(!rows.length)return `<div class="stats-empty">업로드한 데이터가 없습니다.</div>`;const headers=Object.keys(rows[0]);return `<div class="table-wrap"><table data-v201-upload-table="${type}"><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${headers.map(h=>`<td>${esc(r[h])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
   function v201ErrorPanel(type){const errors=state.uploadErrors[type]||[];if(!state.uploadFileNames[type])return `<div class="notice notice-info"><span>ⓘ</span><div>예시 양식을 다운로드한 뒤 파일을 선택하면 이 영역에 검증 결과가 표시됩니다.</div></div>`;if(!errors.length)return `<div class="v201-ok-panel"><b>✓ 오류 없이 검증되었습니다.</b><div class="small muted">${esc(state.uploadFileNames[type])} · ${state.uploadRows[type].length}행 · 다음 단계로 이동할 수 있습니다.</div></div>`;return `<div class="v201-error-panel"><div class="flex justify-between"><div><b>! 오류 ${errors.length}건으로 다음 단계가 차단되었습니다.</b><div class="small muted">팝업 없이 현재 화면에서 행·컬럼·조치방법을 확인합니다.</div></div><span class="badge badge-red">수정 필요</span></div><div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>행</th><th>컬럼</th><th>입력값</th><th>오류 내용</th><th>권장 조치</th></tr></thead><tbody>${errors.map(e=>`<tr><td>${e.row}</td><td><b>${esc(e.column)}</b></td><td>${esc(e.value)}</td><td>${esc(e.message)}</td><td>${esc(e.solution)}</td></tr>`).join('')}</tbody></table></div></div>`;}
-  function v201DerivedPanel(){const rows=v201DerivedRows();if(!rows.length)return '';const totalCandidates=(state.uploadRows.candidate||[]).length,totalSup=(state.uploadRows.invigilator||[]).length,rooms=new Set(rows.map(r=>r.roomCode).filter(Boolean)).size,exams=new Set(rows.map(r=>r.exam).filter(Boolean)).size;return `<section class="card v201-upload-query"><div class="card-header"><div><div class="card-title">업로드 기초데이터 조회 · 자동 피벗</div><div class="card-sub">업로드 원본은 수정할 수 없으며 변경이 필요하면 파일을 다시 업로드합니다.</div></div><span class="v201-readonly-badge">🔒 조회 전용</span></div><div class="card-body"><div class="v201-pivot-grid"><div class="v201-pivot-item"><span class="small muted">전형</span><b>${exams}</b></div><div class="v201-pivot-item"><span class="small muted">고사실</span><b>${rooms}</b></div><div class="v201-pivot-item"><span class="small muted">수험생 행</span><b>${totalCandidates}</b></div><div class="v201-pivot-item"><span class="small muted">감독관 행</span><b>${totalSup}</b></div></div><div class="v201-query-toolbar"><div class="field"><label>전체 검색</label><input class="input" id="v201-upload-search" value="${esc(state.ui.uploadSearch||'')}" placeholder="전형명, 교시, 날짜, 고사실, 감독관 검색"></div><span class="badge badge-green">컬럼별 필터·정렬 가능</span></div><div class="table-wrap"><table id="v201-derived-table"><thead><tr><th>전형명</th><th>시험일</th><th>교시</th><th>시간</th><th>고사장</th><th>건물</th><th>고사실코드</th><th>고사실</th><th>배정인원</th><th>업로드 수험생</th><th>감독관정보</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.exam)}</td><td>${esc(r.date)}</td><td>${esc(r.session)}</td><td>${esc(r.start)}~${esc(r.end)}</td><td>${esc(r.site)}</td><td>${esc(r.building)}</td><td>${esc(r.roomCode)}</td><td>${esc(r.room)}</td><td>${r.assigned}</td><td>${r.candidateCount}</td><td>${esc(r.invigilators.join(', ')||'미배정')}</td></tr>`).join('')}</tbody></table></div></div></section>`;}
+  function v201DerivedPanel(){
+    const candidate=state.uploadRows.candidate||[],inv=state.uploadRows.invigilator||[],photos=state.uploadRows.photos||[];
+    if(!candidate.length&&!inv.length&&!photos.length)return '';
+    const rows=v201DerivedRows();
+    const all=[...candidate,...inv];
+    const set=(arr,key)=>new Set(arr.map(r=>String(r[key]??'').trim()).filter(Boolean));
+    const roomAssigned={};
+    candidate.forEach(r=>{const key=String(r['고사실코드']||r['고사실']||'').trim();if(key){roomAssigned[key]=Math.max(roomAssigned[key]||0,Number(r['배정인원']||0));}});
+    const sum=arr=>arr.reduce((a,b)=>a+Number(b||0),0);
+    const candidateUnique=set(candidate,'수험번호').size;
+    const invUnique=set(inv,'감독관ID').size;
+    const siteCount=set(all,'고사장').size;
+    const buildingCount=set(all,'건물').size;
+    const roomCodeCount=set(all,'고사실코드').size;
+    const roomNameCount=set(all,'고사실').size;
+    const examCount=set(all,'전형명').size;
+    const dateCount=set(all,'시험일').size;
+    const sessionCount=set(all,'교시').size;
+    const assignedTotal=sum(Object.values(roomAssigned));
+    const roleCount=role=>inv.filter(r=>String(r['감독관구분']||'').includes(role)).length;
+    const assignedInv=inv.filter(r=>String(r['고사실코드']||'').trim()).length;
+    const unassignedInv=Math.max(0,inv.length-assignedInv);
+    const normalPhoto=photos.filter(r=>String(r['매칭']||'')==='정상').length;
+    const issuePhoto=photos.length-normalPhoto;
+    const dataStat=(label,value,cls='')=>`<div class="v206-stat ${cls}"><span>${label}</span><b>${fmt(value)}</b></div>`;
+    const roomRows=rows.map(r=>`<tr><td>${esc(r.exam||'-')}</td><td>${esc(r.date||'-')}</td><td>${esc(r.session||'-')}</td><td>${esc((r.start||'')+(r.start||r.end?'~':'')+(r.end||''))}</td><td>${esc(r.site||'-')}</td><td>${esc(r.building||'-')}</td><td>${esc(r.roomCode||'-')}</td><td>${esc(r.room||'-')}</td><td>${fmt(r.assigned)}</td><td>${fmt(r.candidateCount)}</td><td>${esc(r.invigilators.join(', ')||'미배정')}</td></tr>`).join('')||'<tr><td colspan="11" class="text-center muted">수험생데이터 또는 감독관데이터를 업로드하면 고사실별 기초데이터가 표시됩니다.</td></tr>';
+    return `<section class="card v206-basic-data"><div class="card-header"><div><div class="card-title">업로드 기초데이터 정리</div><div class="card-sub">수험생데이터와 감독관데이터를 기준으로 전형·날짜·교시·고사장·고사실·인원 현황을 자동으로 정리합니다.</div></div><span class="v201-readonly-badge">🔒 업로드 원본 기준</span></div><div class="card-body"><div class="v206-summary-grid"><section class="v206-data-card"><h4>수험생데이터</h4><div class="sub">수험생 엑셀파일의 전형·시험일·고사실·배정 정보를 기준으로 정리합니다.</div><div class="v206-data-stats">${dataStat('수험생 행',candidate.length,'blue')}${dataStat('수험생 인원',candidateUnique,'green')}${dataStat('전형 수',examCount)}${dataStat('시험일 수',dateCount)}${dataStat('교시 수',sessionCount)}${dataStat('배정인원',assignedTotal,'orange')}</div></section><section class="v206-data-card"><h4>고사장·고사실데이터</h4><div class="sub">업로드된 기초데이터 안의 장소 정보를 기준으로 자동 집계합니다.</div><div class="v206-data-stats">${dataStat('고사장 수',siteCount,'blue')}${dataStat('건물 수',buildingCount)}${dataStat('고사실코드 수',roomCodeCount,'green')}${dataStat('고사실명 수',roomNameCount)}${dataStat('정리된 고사실 행',rows.length,'orange')}${dataStat('타고사장 포함',state.features.otherSiteCandidates?'사용':'미사용')}</div></section><section class="v206-data-card"><h4>감독관데이터</h4><div class="sub">감독관 엑셀파일의 역할·고사실 배정·서명 대상 정보를 기준으로 정리합니다.</div><div class="v206-data-stats">${dataStat('감독관 행',inv.length,'blue')}${dataStat('감독관 수',invUnique,'green')}${dataStat('정감독관',roleCount('정'))}${dataStat('부감독관',roleCount('부'))}${dataStat('예비감독관',roleCount('예비'),'orange')}${dataStat('무배정',unassignedInv,'red')}</div></section>${photos.length?`<section class="v206-data-card"><h4>사진데이터</h4><div class="sub">사진 ZIP 업로드 결과를 기준으로 정상 매칭과 확인필요 대상을 구분합니다.</div><div class="v206-data-stats">${dataStat('사진 파일',photos.length,'blue')}${dataStat('정상 매칭',normalPhoto,'green')}${dataStat('확인 필요',issuePhoto,issuePhoto?'red':'')}${dataStat('사진 비교 기능',state.features.photoCompare?'사용':'미사용')}</div></section>`:''}</div><div class="v206-summary-note">업로드된 기초데이터를 화면에서 직접 수정하지 않고, 수험생데이터·감독관데이터를 다시 업로드하면 아래 정리값이 자동으로 갱신됩니다.</div><div class="v201-query-toolbar" style="margin-top:14px"><div class="field"><label>전체 검색</label><input class="input" id="v201-upload-search" value="${esc(state.ui.uploadSearch||'')}" placeholder="전형명, 교시, 날짜, 고사장, 고사실, 감독관 검색"></div><span class="badge badge-green">수험생데이터 · 감독관데이터 정리</span></div><div class="table-wrap v206-room-table"><table id="v201-derived-table"><thead><tr><th>전형명</th><th>시험일</th><th>교시</th><th>시간</th><th>고사장</th><th>건물</th><th>고사실코드</th><th>고사실</th><th>배정인원</th><th>수험생데이터</th><th>감독관데이터</th></tr></thead><tbody>${roomRows}</tbody></table></div></div></section>`;
+  }
 
   menus=function(){
     if(isRole('developer'))return [['개발자 업무',[['developer-home','홈','home'],['developer-org','학교 등록','org'],['developer-accounts','학교별 조회계정','account']]],['운영 추적',[['audit','학교별 로그','log']]]];
@@ -2378,11 +2497,11 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
     const tabs=`<div class="tabs"><button class="tab ${type==='candidate'?'active':''}" data-upload-type="candidate">수험생</button><button class="tab ${type==='invigilator'?'active':''}" data-upload-type="invigilator">감독관</button><button class="tab ${type==='photos'?'active':''}" data-upload-type="photos">사진 ZIP</button></div>`;
     if(type==='photos'){
       const rows=state.uploadRows.photos||[],blocked=(state.uploadErrors.photos||[]).length>0;
-      return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-upload-exam-select')}</div><span class="badge badge-blue">3단계 · 사진</span></div><section class="card">${tabs}<div class="card-body"><div class="v202-upload-hero"><div class="dropzone"><div class="drop-icon">🖼️</div><div class="card-title">사진 ZIP 파일 선택</div><p class="muted">수험번호.jpg 기준으로 매칭하며 정상/오류 예시 ZIP을 실제 다운로드할 수 있습니다.</p><input type="file" id="photo-file" accept=".zip" hidden><button class="btn btn-primary" data-action="choose-photo">사진 ZIP 선택</button></div>${v202ExampleChoice('photos')}</div><div class="v202-result-block">${v202ResultPanel('photos')}</div>${rows.length?`<section class="v201-upload-query"><div class="card-header"><div><div class="card-title">사진 매칭 조회</div><div class="card-sub">파일명, 수험번호, 매칭상태를 확인합니다.</div></div><span class="v201-readonly-badge">🔒 조회 전용</span></div><div class="card-body">${v202CompactRowsTable('photos',rows)}</div></section>`:''}<div class="v201-step-block"><span class="small ${blocked?'text-red':'muted'}">${blocked?'오류내용을 수정해야 다음 단계로 이동할 수 있습니다.':'정상 검증 완료'}</span><button class="btn btn-primary" data-route="settings-features" ${blocked||!rows.length?'disabled':''}>다음 단계 · 설정값</button></div></div></section>`,'업로드·자동검증','사진 ZIP 정상/오류 예시와 실제 업로드 결과를 한 화면에서 확인합니다.','');
+      return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-upload-exam-select')}</div><span class="badge badge-blue">3단계 · 사진</span></div><section class="card">${tabs}<div class="card-body"><div class="v202-upload-hero"><div class="dropzone"><div class="drop-icon">🖼️</div><div class="card-title">사진 ZIP 파일 선택</div><p class="muted">수험번호.jpg 기준으로 매칭하며 정상/오류 예시 ZIP을 실제 다운로드할 수 있습니다.</p><input type="file" id="photo-file" accept=".zip" hidden><button class="btn btn-primary" data-action="choose-photo">사진 ZIP 선택</button></div>${v202ExampleChoice('photos')}</div><div class="v202-result-block">${v202ResultPanel('photos')}</div>${rows.length?`<section class="v201-upload-query"><div class="card-header"><div><div class="card-title">사진데이터 매칭</div><div class="card-sub">파일명, 수험번호, 매칭상태를 확인합니다.</div></div><span class="v201-readonly-badge">🔒 조회 전용</span></div><div class="card-body">${v202CompactRowsTable('photos',rows)}</div></section>`:''}<div class="v201-step-block"><span class="small ${blocked?'text-red':'muted'}">${blocked?'오류내용을 수정해야 다음 단계로 이동할 수 있습니다.':'정상 검증 완료'}</span><button class="btn btn-primary" data-route="settings-features" ${blocked||!rows.length?'disabled':''}>다음 단계 · 설정값</button></div></div></section>`,'업로드·자동검증','사진 ZIP 정상/오류 예시와 실제 업로드 결과를 한 화면에서 확인합니다.','');
     }
     const rows=state.uploadRows[type]||[],blocked=(state.uploadErrors[type]||[]).length>0,title=type==='candidate'?'수험생':'감독관';
     const auto=type==='invigilator'?`<section class="v201-auto-assign"><div class="head"><div><b>감독관 ID 자동생성 · 고사실 자동배정</b><div class="small muted">고사실코드 기준 ID 생성과 자동배정을 지원합니다.</div></div><div class="actions"><button class="btn" data-action="v201-generate-supervisor-id">ID 자동생성</button><button class="btn btn-primary" data-action="v201-auto-assign">감독관 자동배정</button><button class="btn" data-action="v201-download-assignment">배정리스트 다운로드</button></div></div></section>`:'';
-    return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-upload-exam-select')}</div><span class="badge badge-blue">${type==='candidate'?'1단계 · 수험생':'2단계 · 감독관'}</span></div><div class="v201-upload-tabs-note">파일을 선택하면 같은 화면에서 정상/오류 결과가 크게 표시되며, 오류가 있으면 다음 단계가 차단됩니다.</div><section class="card">${tabs}<div class="card-body"><div class="v202-upload-hero"><div class="dropzone"><div class="drop-icon">📄</div><div class="card-title">${title} 엑셀파일 선택</div><p class="muted">정상/오류 예시양식을 각각 내려받거나 예시화면을 바로 볼 수 있습니다.</p><input type="file" id="excel-file" accept=".xlsx,.xls,.csv" hidden><button class="btn btn-primary" data-action="choose-excel">파일 선택</button></div>${v202ExampleChoice(type)}</div><section class="v202-column-card"><div class="flex justify-between"><div><b>${title} 업로드 컬럼</b><div class="small muted">선택값 없이 실제 컬럼명만 간략하게 표시합니다.</div></div><span class="badge badge-gray">${type==='candidate'?13:13}개 컬럼</span></div>${v202ColumnChips(type)}</section>${auto}<div class="v202-result-block">${v202ResultPanel(type)}</div>${rows.length?`<section class="v201-upload-query"><div class="card-header"><div><div class="card-title">${title} 업로드 데이터 조회</div><div class="card-sub">컬럼별 필터·정렬 · 읽기 전용 · 변경 시 재업로드</div></div><span class="v201-readonly-badge">🔒 원본 수정 불가</span></div><div class="card-body"><div class="v201-query-toolbar"><div class="field"><label>전체 검색</label><input class="input v202-upload-search" data-target-type="${type}" placeholder="이름, 교시, 고사실, ID, 오류내용 검색"></div><span class="badge badge-green">${rows.length}행</span></div>${v202CompactRowsTable(type,rows)}</div></section>`:''}<div class="v201-step-block"><span class="small ${blocked?'text-red':'muted'}">${blocked?'오류내용을 수정해야 다음 단계로 이동할 수 있습니다.':'검증 완료 · 설정값으로 이동할 수 있습니다.'}</span><button class="btn btn-primary" data-route="settings-features" ${blocked||!rows.length?'disabled':''}>다음 단계 · 설정값</button></div></div></section>${v201DerivedPanel()}`,'업로드·자동검증',`${title} 정상/오류 데이터와 업로드 결과를 같은 화면에서 명확하게 확인합니다.`,'');
+    return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-upload-exam-select')}</div><span class="badge badge-blue">${type==='candidate'?'1단계 · 수험생':'2단계 · 감독관'}</span></div><div class="v201-upload-tabs-note">파일을 선택하면 같은 화면에서 정상/오류 결과가 크게 표시되며, 오류가 있으면 다음 단계가 차단됩니다.</div><section class="card">${tabs}<div class="card-body"><div class="v202-upload-hero"><div class="dropzone"><div class="drop-icon">📄</div><div class="card-title">${title} 엑셀파일 선택</div><p class="muted">정상/오류 예시양식을 각각 내려받거나 예시화면을 바로 볼 수 있습니다.</p><input type="file" id="excel-file" accept=".xlsx,.xls,.csv" hidden><button class="btn btn-primary" data-action="choose-excel">파일 선택</button></div>${v202ExampleChoice(type)}</div><section class="v202-column-card"><div class="flex justify-between"><div><b>${title} 업로드 컬럼</b><div class="small muted">선택값 없이 실제 컬럼명만 간략하게 표시합니다.</div></div><span class="badge badge-gray">${type==='candidate'?13:13}개 컬럼</span></div>${v202ColumnChips(type)}</section>${auto}<div class="v202-result-block">${v202ResultPanel(type)}</div>${rows.length?`<section class="v201-upload-query"><div class="card-header"><div><div class="card-title">${title} 업로드 데이터</div><div class="card-sub">컬럼별 필터·정렬 · 읽기 전용 · 변경 시 재업로드</div></div><span class="v201-readonly-badge">🔒 원본 수정 불가</span></div><div class="card-body"><div class="v201-query-toolbar"><div class="field"><label>전체 검색</label><input class="input v202-upload-search" data-target-type="${type}" placeholder="이름, 교시, 고사실, ID, 오류내용 검색"></div><span class="badge badge-green">${rows.length}행</span></div>${v202CompactRowsTable(type,rows)}</div></section>`:''}<div class="v201-step-block"><span class="small ${blocked?'text-red':'muted'}">${blocked?'오류내용을 수정해야 다음 단계로 이동할 수 있습니다.':'검증 완료 · 설정값으로 이동할 수 있습니다.'}</span><button class="btn btn-primary" data-route="settings-features" ${blocked||!rows.length?'disabled':''}>다음 단계 · 설정값</button></div></div></section>${v201DerivedPanel()}`,'업로드·자동검증',`${title} 정상/오류 데이터와 업로드 결과를 같은 화면에서 명확하게 확인합니다.`,'');
   };
 
   processExcel=async function(file){
@@ -2612,7 +2731,46 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
     try{const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});for(let i=0;i<rows.length;i++){const c=rows[i],wrap=document.createElement('div');wrap.style.cssText='width:780px;background:white;padding:20px;box-sizing:border-box';wrap.innerHTML=`<div style="font-family:Arial,sans-serif;margin-bottom:10px;font-size:14px"><b>${c.id} · ${c.name}</b> &nbsp; ${c.incident} &nbsp; ${c.site} / ${c.room}</div>`;wrap.appendChild(source.cloneNode(true));holder.appendChild(wrap);const canvas=await window.html2canvas(wrap,{scale:1.5,backgroundColor:'#fff',logging:false});const img=canvas.toDataURL('image/png'),pageW=210,pageH=297,margin=7,maxW=pageW-margin*2,maxH=pageH-margin*2;let w=maxW,h=canvas.height*w/canvas.width;if(h>maxH){h=maxH;w=canvas.width*h/canvas.height;}if(i>0)pdf.addPage();pdf.addImage(img,'PNG',(pageW-w)/2,margin,w,h,'','FAST');holder.removeChild(wrap);}pdf.save(`${state.school.code}_${state.selection.replace(/\s+/g,'_')}_${label}_각서.pdf`);toast('각서 PDF 다운로드를 시작했습니다.','success');}catch(e){console.warn(e);toast('PDF 생성 중 오류가 발생해 출력창을 엽니다.','warning');v203PrintPledgeBundle(rows);}finally{holder.remove();}
   }
   function v203PrintPledgeBundle(rows){
-    if(!rows.length){toast('출력할 대상을 선택해주세요.','warning');return;}const source=document.querySelector('#pledge-preview-host .pledge-paper');if(!source)return;const popup=window.open('','_blank','width=1000,height=900');if(!popup){toast('팝업 차단을 해제해주세요.','warning');return;}const pages=rows.map(c=>`<section class="bundle-page"><div class="bundle-head"><b>${c.id} · ${esc(c.name)}</b><span>${esc(c.incident)} · ${esc(c.site)} / ${esc(c.room)}</span></div>${source.outerHTML}</section>`).join('');popup.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>각서 출력</title><style>body{margin:0;background:#eee;font-family:Arial,sans-serif}.bundle-page{width:210mm;min-height:297mm;margin:0 auto 10mm;background:#fff;padding:8mm;box-sizing:border-box;page-break-after:always}.bundle-head{display:flex;justify-content:space-between;margin-bottom:6mm;font-size:13px}.pledge-paper{width:100%!important;box-shadow:none!important}@media print{body{background:#fff}.bundle-page{margin:0;page-break-after:always}}</style></head><body>${pages}</body></html>`);popup.document.close();setTimeout(()=>{popup.focus();popup.print();},500);
+    if(!rows.length){toast('출력할 대상을 선택해주세요.','warning');return;}const source=document.querySelector('#pledge-preview-host .pledge-paper');if(!source)return;const popup=window.open('','_blank','width=1000,height=900');if(!popup){toast('팝업 차단을 해제해주세요.','warning');return;}const pages=rows.map(c=>`<section class="bundle-page"><div class="bundle-head"><b>${c.id} · ${esc(c.name)}</b><span>${esc(c.incident)} · ${esc(c.site)} / ${esc(c.room)}</span></div>${source.outerHTML}</section>`).join('');popup.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>각서 출력</title><style>body{margin:0;background:#eee;font-family:Arial,sans-serif}.bundle-page{width:210mm;min-height:297mm;margin:0 auto 10mm;background:#fff;padding:8mm;box-sizing:border-box;page-break-after:always}.bundle-head{display:flex;justify-content:space-between;margin-bottom:6mm;font-size:13px}.pledge-paper{width:100%!important;box-shadow:none!important}@media print{body{background:#fff}.bundle-page{margin:0;page-break-after:always}}
+/* v2.0.6 업로드 기초데이터 정리 */
+.v206-data-summary{margin-top:14px}
+.v206-data-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;box-shadow:0 8px 22px rgba(15,35,75,.05)}
+.v206-data-card.candidate{border-left:5px solid var(--blue)}
+.v206-data-card.invigilator{border-left:5px solid var(--green)}
+.v206-data-card .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.v206-data-card .head b{font-size:15px;color:var(--navy)}
+.v206-data-card .head span{font-size:11px;color:var(--gray-600)}
+.v206-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.v206-metric{border:1px solid var(--gray-200);border-radius:11px;background:var(--gray-100);padding:9px 10px;min-height:58px}
+.v206-metric span{display:block;font-size:11px;color:var(--gray-600);font-weight:800;letter-spacing:-.2px}
+.v206-metric b{display:block;margin-top:4px;font-size:18px;color:var(--navy);line-height:1.1}
+.v206-room-summary{border:1px solid var(--gray-200);border-radius:16px;background:var(--white);padding:14px;margin-top:12px}
+.v206-room-summary .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.v206-room-summary .head b{font-size:15px;color:var(--navy)}
+.v206-room-summary table{min-width:1320px}
+.v206-room-summary th,.v206-room-summary td{padding:8px 9px!important;font-size:11.5px!important;white-space:nowrap}
+.v206-summary-note{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--blue-2);color:var(--blue);font-size:12px;font-weight:800}
+@media(max-width:900px){.v206-data-summary-grid{grid-template-columns:1fr}.v206-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* v2.0.6 — 업로드 기초데이터 요약 개선 */
+.v206-basic-data{margin-top:16px}
+.v206-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.v206-data-card{border:1px solid var(--gray-200);border-radius:14px;background:var(--white);padding:14px;min-height:150px}
+.v206-data-card h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.v206-data-card .sub{font-size:11px;color:var(--gray-600);margin-bottom:10px}
+.v206-data-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.v206-stat{border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-100);padding:8px 9px;min-height:48px}
+.v206-stat span{display:block;font-size:10.5px;color:var(--gray-600);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v206-stat b{display:block;margin-top:3px;font-size:18px;color:var(--navy)}
+.v206-stat.green b{color:var(--green)}.v206-stat.blue b{color:var(--blue)}.v206-stat.orange b{color:var(--orange)}.v206-stat.red b{color:var(--red)}
+.v206-summary-note{margin-top:12px;border:1px solid #c7d9f4;background:#f2f7ff;border-radius:12px;padding:11px 13px;font-size:12px;color:var(--blue);font-weight:800}
+.v206-room-table table{min-width:1300px}.v206-room-table th,.v206-room-table td{padding:7px 8px!important;font-size:11.5px;white-space:nowrap}.v206-room-table td:last-child{max-width:280px;white-space:normal}
+body.dark .v206-data-card{background:#111d2c;border-color:#2b3950}body.dark .v206-stat{background:#17233a;border-color:#30405d}body.dark .v206-summary-note{background:#14253e;border-color:#2c5283;color:#a8c7ff}
+@media(max-width:1100px){.v206-summary-grid{grid-template-columns:1fr}.v206-data-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+</style></head><body>${pages}</body></html>`);popup.document.close();setTimeout(()=>{popup.focus();popup.print();},500);
   }
 
   v201DeveloperAccounts=function(){
@@ -2655,6 +2813,174 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
   v203Normalize();
 
 
+
+
+
+
+  /* v2.0.5 — requested fixes without changing base v1.9.1/v2.0.x style */
+  function v205Normalize(){
+    state.ui=state.ui||{};
+    state.ui.pdfOutputExam=state.ui.pdfOutputExam||v201CurrentExamId();
+    const active=v201ExamList().filter(e=>e.useStatus!=='사용중지');
+    const current=state.exams.find(e=>e.id===v201CurrentExamId());
+    if(current&&current.useStatus==='사용중지'&&active.length){v201SetExam(active[0].id,false);}
+  }
+  v201ExamSelect=function(id='v201-exam-select'){
+    const list=v201ExamList(),current=v201CurrentExamId();
+    return `<select class="select v205-exam-select" id="${id}">${list.map(e=>{const disabled=e.useStatus==='사용중지';return `<option value="${esc(e.id)}" ${e.id===current?'selected':''} ${disabled?'disabled':''}>${esc(e.name)} · ${disabled?'사용중지':e.status}</option>`;}).join('')}</select>`;
+  };
+  v202ExampleChoice=function(type){
+    const title=type==='candidate'?'수험생':type==='invigilator'?'감독관':'사진 ZIP';
+    return `<div class="v205-upload-buttons"><button class="v205-sample-btn ok" data-action="v202-load-example" data-upload-type="${type}" data-mode="normal">정상데이터<small>${title} 예시화면</small></button><button class="v205-sample-btn err" data-action="v202-load-example" data-upload-type="${type}" data-mode="error">오류데이터<small>오류내용 예시화면</small></button></div>`;
+  };
+  const v205SettingsFeaturesBase=settingsFeatures;
+  settingsFeatures=function(){
+    let html=v205SettingsFeaturesBase();
+    html=html.replace('사고유형 · 명칭 편집','사고유형편집');
+    html=html.replace('전체 기능','전체선택');
+    html=html.replace('개별 ON/OFF','컬럼명 확인');
+    html=html.replace('파일 선택 시 켜진 항목만 자동검증합니다.','업로드 검증은 자동 실행되며, 주요 검증 컬럼명만 간략히 확인합니다.');
+    return html;
+  };
+  const v205TermsBase=terminologyPage;
+  terminologyPage=function(){
+    let html=v205TermsBase();
+    html=html.replace('실시간 적용 예시','명칭 변경 미리보기');
+    html=html.replace('저장하면 계정 역할, 로그인 후 계정명, 메뉴, 표 제목, 필터, PDF·각서 출력 문구에 적용됩니다.','입력 즉시 아래 미리보기에서 “기존 명칭 → 변경 명칭” 형태로 예상 화면을 확인합니다.');
+    return html;
+  };
+  function v205PdfPreview(){
+    const exam=(v201ExamList().find(e=>e.id===v201CurrentExamId())||currentExam()||{}).name||state.selection;
+    const session=closeSessionLabel(state.ui.pdfOutputSession||'s1'),site=state.ui.pdfOutputSite||`전체 ${term('examSite')}`;
+    return `<div class="v202-pdf-context-preview"><span>전형</span><b>${esc(exam)}</b><span>교시</span><b>${esc(session)}</b><span>${esc(term('examSite'))}</span><b>${esc(site)}</b></div>${pdfPreview()}`;
+  }
+  pdfOutputPage=function(){
+    state.ui.pdfOutputSession=state.ui.pdfOutputSession||'s1';state.ui.pdfOutputSite=state.ui.pdfOutputSite||`전체 ${term('examSite')}`;
+    const sessionOpts=state.basic.sessions.map((s,i)=>`<option value="s${i+1}" ${state.ui.pdfOutputSession===`s${i+1}`?'selected':''}>${esc(s.name)}</option>`).join('');
+    const sites=[`전체 ${term('examSite')}`,'본교 제1고사장','본교 제2고사장','예비고사장'];
+    return shell(`<div class="pdf-layout"><section class="card"><div class="card-header"><div><div class="card-title">출력 범위</div><div class="card-sub">전형·교시·고사장을 선택하면 우측 미리보기에 즉시 반영됩니다.</div></div></div><div class="card-body stack"><div class="field"><label>전형 선택</label>${v201ExamSelect('v205-pdf-exam-select')}</div><div class="field"><label>출력물</label><div class="v205-fixed-output"><span>감독관 명부</span><span class="badge badge-blue">고정</span></div></div><div class="v205-pdf-grid"><div class="field"><label>교시</label><select class="select" id="v202-pdf-session">${sessionOpts}</select></div><div class="field"><label>${term('examSite')}</label><select class="select" id="v202-pdf-site">${sites.map(x=>`<option value="${x}" ${state.ui.pdfOutputSite===x?'selected':''}>${x}</option>`).join('')}</select></div></div>${infoRows([['출력물','감독관 명부'],['페이지당 학생 수',state.pdf.pageSize+'명'],['서명 정책',signaturePolicyLabel()],['마감 상태',allSessionCloseSummary()]])}<div class="notice notice-info"><span>ⓘ</span><div><b>PDF 다운로드와 출력은 별도 기능입니다.</b><br>사용중지 전형은 전형 선택 목록에서 회색으로 비활성화됩니다.</div></div></div></section><div class="pdf-preview-panel"><div id="pdf-preview-host">${v205PdfPreview()}</div>${pdfActionButtons()}</div></div>`,'PDF·서명 출력','감독관 명부 출력 전형과 범위를 선택합니다.',`<button class="btn" data-route="settings-pdf">PDF 설정 보기</button>`);
+  };
+  incidentsPage=function(){
+    const configs=activeIncidentTypes();
+    const enabled=[['all','전체'],...configs.map(x=>[x.name,x.name])];
+    if(!enabled.some(([v])=>v===state.ui.incidentFilter))state.ui.incidentFilter='all';
+    let rows=[['21330061','김하늘','학림관 J411','1교시',configs[0]?.name||'신분증 미소지','사진 비교 필요','10:02'],['21410057','박서준','학림관 J409','1교시',configs[3]?.name||'부정행위','전형관리자 확인','10:18'],['21890862','이민지','혜화관 423','2교시',configs[1]?.name||'중도퇴실','처리 완료','13:42'],['21930211','최유나','학림관 J414','1교시',configs[0]?.name||'신분증 미소지','현장사진 등록','10:50'],['21950008','정서윤','혜화관 431','2교시',configs[2]?.name||'소음발생','현장 조치 완료','13:55']];
+    if(state.ui.incidentFilter!=='all')rows=rows.filter(r=>r[4]===state.ui.incidentFilter);
+    const countFor=x=>x==='all'?rows.length:(configs.find(c=>c.name===x)?.count||0);
+    const cards=enabled.slice(0,5).map(([v,l])=>`<button class="v205-incident-count-card ${state.ui.incidentFilter===v?'active':''}" data-action="v205-incident-count" data-incident-filter="${esc(v)}"><div class="top"><b>${esc(l)}</b><span class="badge badge-blue">조회</span></div><div class="count">${countFor(v)}</div><div class="hint">숫자를 누르면 해당 목록으로 이동</div></button>`).join('');
+    const manage=r=>`<button class="btn btn-sm" data-action="incident-detail">상세</button> <button class="btn btn-sm" data-action="open-photo-candidate" data-photo-candidate="${r[0]}">사진 비교</button>`;
+    return shell(`${isRole('pm','exam')?`<div class="photo-access-banner"><span>담당 PM과 ${term('examManager')}는 특이사항에서 사진 비교 화면을 함께 조회할 수 있습니다.</span><button class="btn btn-sm" data-route="photo-compare">사진 비교 화면</button></div>`:''}<div class="grid grid-5" style="margin-bottom:14px">${cards}</div><section class="card"><div class="card-header"><div><div class="card-title">특이사항 학생 모아보기</div><div class="card-sub">상단 건수 버튼 또는 유형 버튼으로 사고유형별 대상자를 필터링합니다.</div></div><button class="btn">집계 다운로드</button></div><div class="card-body"><div class="incident-filter-bar"><b class="small">유형</b>${enabled.map(([value,label])=>`<button class="incident-filter-btn ${state.ui.incidentFilter===value?'active':''}" data-incident-filter="${esc(value)}">${esc(label)}<span class="count">${countFor(value)}건</span></button>`).join('')}</div><div class="table-wrap"><table><thead><tr><th>수험번호</th><th>성명</th><th>${term('examRoom')}</th><th>교시</th><th>유형</th><th>처리상태</th><th>발생시각</th><th>관리</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map((v,j)=>`<td>${j===5?`<span class="badge ${v.includes('완료')?'badge-green':'badge-orange'}">${esc(v)}</span>`:esc(v)}</td>`).join('')}<td>${manage(r)}</td></tr>`).join('')||'<tr><td colspan="8" class="text-center muted">선택한 유형의 특이사항이 없습니다.</td></tr>'}</tbody></table></div></div></section>`,'특이사항','사고유형별 대상자를 건수 버튼과 목록에서 함께 확인합니다.',`<button class="btn" data-route="photo-compare">사진 비교</button>`);
+  };
+  const v205CloseBase=closePage;
+  closePage=function(){
+    let html=v205CloseBase();
+    html=html.replaceAll('선택 고사장 최종 마감 확인','교시마감 최종 확인');
+    html=html.replaceAll('선택 고사장을 마감합니다.','선택한 교시 기준으로 마감합니다.');
+    html=html.replaceAll('선택 고사장 마감','교시마감');
+    html=html.replaceAll('고사장별 마감현황','교시별 마감현황');
+    return html;
+  };
+  const v205DownloadsBase=downloadsPage;
+  downloadsPage=function(){
+    let html=v205DownloadsBase();
+    html=html.replace('통계를 상단으로 이동해 목록과 데이터를 먼저 확인합니다.','통계 표를 상단에 작게 배치해 페이지를 많이 내리지 않고 조회합니다.');
+    return html;
+  };
+  const v205PrevBindActions=bindActions;
+  bindActions=function(){
+    v205PrevBindActions();
+    document.querySelectorAll('[data-action="v205-incident-count"]').forEach(el=>el.addEventListener('click',()=>{state.ui.incidentFilter=el.dataset.incidentFilter||'all';save();render();setTimeout(()=>document.querySelector('.incident-filter-bar')?.scrollIntoView({behavior:'smooth',block:'start'}),0);}));
+  };
+  const v205PrevBindInputs=bindInputs;
+  bindInputs=function(){
+    v205PrevBindInputs();
+    document.querySelectorAll('.v205-exam-select').forEach(el=>el.addEventListener('change',()=>{const opt=el.options[el.selectedIndex];if(opt&&opt.disabled){return;}v201SetExam(el.value);}));
+    const exam=document.getElementById('v205-pdf-exam-select'),ps=document.getElementById('v202-pdf-session'),site=document.getElementById('v202-pdf-site');
+    const update=()=>{if(exam)v201SetExam(exam.value,false);if(ps)state.ui.pdfOutputSession=ps.value;if(site)state.ui.pdfOutputSite=site.value;save();const host=document.getElementById('pdf-preview-host');if(host)host.innerHTML=v205PdfPreview();};
+    if(exam)exam.addEventListener('change',update);if(ps)ps.addEventListener('change',update);if(site)site.addEventListener('change',update);
+  };
+
+  // v2.0.6 업로드 기초데이터 요약 개선
+  function v206Get(row, keys){
+    for(const k of keys){
+      const v=row?.[k];
+      if(v!==undefined && v!==null && String(v).trim()!=='') return String(v).trim();
+    }
+    return '';
+  }
+  function v206UniqueCount(rows, keys){return new Set((rows||[]).map(r=>v206Get(r, keys)).filter(Boolean)).size;}
+  function v206CandidateSummary(rows){
+    rows=rows||[];
+    const roomMap={};
+    rows.forEach(r=>{const code=v206Get(r,['고사실코드','고사실 코드','roomCode']);if(!code)return;roomMap[code]=Math.max(roomMap[code]||0, Number(v206Get(r,['배정인원','배정','assigned']))||0);});
+    return {
+      total:rows.length,
+      exams:v206UniqueCount(rows,['전형명','전형','모집전형']),
+      dates:v206UniqueCount(rows,['시험일','고사일','일자']),
+      sessions:v206UniqueCount(rows,['교시']),
+      sites:v206UniqueCount(rows,['고사장','시험장']),
+      buildings:v206UniqueCount(rows,['건물','건물명']),
+      rooms:v206UniqueCount(rows,['고사실코드','고사실 코드','고사실']),
+      departments:v206UniqueCount(rows,['모집단위','학과']),
+      photoCount:rows.filter(r=>v206Get(r,['사진파일명','사진 파일명','수험생사진'])).length,
+      assigned:Object.values(roomMap).reduce((a,b)=>a+b,0)
+    };
+  }
+  function v206InvigilatorSummary(rows){
+    rows=rows||[];
+    const role = v => rows.filter(r=>String(v206Get(r,['감독관구분','역할','감독관 역할'])).includes(v)).length;
+    return {
+      total:rows.length,
+      exams:v206UniqueCount(rows,['전형명','전형','모집전형']),
+      dates:v206UniqueCount(rows,['시험일','고사일','일자']),
+      sessions:v206UniqueCount(rows,['교시']),
+      sites:v206UniqueCount(rows,['고사장','시험장']),
+      rooms:v206UniqueCount(rows,['고사실코드','고사실 코드','고사실']),
+      lead:role('정감독관'),
+      sub:role('부감독관'),
+      reserve:role('예비감독관'),
+      signed:rows.filter(r=>['Y','사용','예','TRUE','true'].includes(v206Get(r,['서명사용여부','서명','서명대상']))).length,
+      unassigned:rows.filter(r=>!v206Get(r,['고사실코드','고사실 코드','고사실'])).length
+    };
+  }
+  function v206Metric(label,value,suffix=''){
+    return `<div class="v206-metric"><span>${esc(label)}</span><b>${fmt(value)}${suffix}</b></div>`;
+  }
+  function v206DataCard(kind,title,subtitle,metrics){
+    return `<section class="v206-data-card ${kind}"><div class="head"><div><b>${esc(title)}</b><span>${esc(subtitle)}</span></div><span class="badge ${kind==='candidate'?'badge-blue':'badge-green'}">${kind==='candidate'?'수험생':'감독관'}</span></div><div class="v206-metrics">${metrics.join('')}</div></section>`;
+  }
+  function v206DerivedRows(){return v201DerivedRows().sort((a,b)=>String(a.date+a.session+a.site+a.roomCode).localeCompare(String(b.date+b.session+b.site+b.roomCode),'ko'));}
+  v201DerivedPanel=function(){
+    const candidateRows=state.uploadRows.candidate||[];
+    const invigilatorRows=state.uploadRows.invigilator||[];
+    const rows=v206DerivedRows();
+    if(!candidateRows.length && !invigilatorRows.length && !rows.length) return '';
+    const c=v206CandidateSummary(candidateRows), i=v206InvigilatorSummary(invigilatorRows);
+    const candidateMetrics=[
+      v206Metric('수험생인원수',c.total,'명'), v206Metric('고사장갯수',c.sites,'개'), v206Metric('고사실갯수',c.rooms,'실'), v206Metric('교시갯수',c.sessions,'개'),
+      v206Metric('시험일수',c.dates,'일'), v206Metric('건물갯수',c.buildings,'개'), v206Metric('모집단위',c.departments,'개'), v206Metric('사진파일',c.photoCount,'건')
+    ];
+    const invigilatorMetrics=[
+      v206Metric('감독관수',i.total,'명'), v206Metric('고사장갯수',i.sites,'개'), v206Metric('고사실갯수',i.rooms,'실'), v206Metric('교시갯수',i.sessions,'개'),
+      v206Metric('정감독관',i.lead,'명'), v206Metric('부감독관',i.sub,'명'), v206Metric('예비감독관',i.reserve,'명'), v206Metric('무배정',i.unassigned,'명')
+    ];
+    const tableRows=rows.map(r=>`<tr><td>${esc(r.exam)}</td><td>${esc(r.date)}</td><td>${esc(r.session)}</td><td>${esc(r.start)}~${esc(r.end)}</td><td>${esc(r.site)}</td><td>${esc(r.building)}</td><td>${esc(r.roomCode)}</td><td>${esc(r.room)}</td><td>${fmt(r.assigned)}</td><td>${fmt(r.candidateCount)}</td><td>${esc(r.invigilators.join(', ')||'미배정')}</td></tr>`).join('');
+    return `<section class="card v201-upload-query v206-data-summary"><div class="card-header"><div><div class="card-title">업로드 기초데이터 정리</div><div class="card-sub">엑셀 업로드 후 기초데이터를 기준으로 수험생데이터와 감독관데이터를 자동으로 요약합니다.</div></div><span class="v201-readonly-badge">🔒 읽기 전용</span></div><div class="card-body"><div class="v206-data-summary-grid">${v206DataCard('candidate','수험생데이터','수험생 엑셀파일에서 집계한 기본 현황입니다.',candidateMetrics)}${v206DataCard('invigilator','감독관데이터','감독관 엑셀파일에서 집계한 기본 현황입니다.',invigilatorMetrics)}</div><div class="v206-summary-note">고사장갯수, 고사실갯수, 수험생인원수, 감독관수 등 업로드 파일의 주요 값을 운영현황에서 바로 확인할 수 있도록 정리합니다.</div>${rows.length?`<div class="v206-room-summary"><div class="head"><div><b>고사실별 기초데이터</b><div class="small muted">전형명, 날짜, 교시, 시간, 고사실, 배정인원, 감독관정보를 한 줄로 정리합니다.</div></div><span class="badge badge-green">컬럼별 필터·정렬 가능</span></div><div class="v201-query-toolbar"><div class="field"><label>전체 검색</label><input class="input" id="v201-upload-search" value="${esc(state.ui.uploadSearch||'')}" placeholder="전형명, 교시, 날짜, 고사장, 고사실, 감독관 검색"></div></div><div class="table-wrap"><table id="v201-derived-table"><thead><tr><th>전형명</th><th>시험일</th><th>교시</th><th>시간</th><th>고사장</th><th>건물</th><th>고사실코드</th><th>고사실</th><th>배정인원</th><th>수험생인원수</th><th>감독관정보</th></tr></thead><tbody>${tableRows}</tbody></table></div></div>`:''}</div></section>`;
+  };
+  const v206UploadPageBase=uploadPage;
+  uploadPage=function(){
+    let html=v206UploadPageBase();
+    html=html.replaceAll('수험생 업로드 데이터 조회','수험생데이터');
+    html=html.replaceAll('감독관 업로드 데이터 조회','감독관데이터');
+    html=html.replaceAll('수험생 업로드 데이터','수험생데이터');
+    html=html.replaceAll('감독관 업로드 데이터','감독관데이터');
+    html=html.replaceAll('업로드 데이터 조회','데이터');
+    html=html.replaceAll('피벗형 조회정보','기초데이터 정리정보');
+    html=html.replaceAll('조회정보','정리정보');
+    return html;
+  };
+
+  v205Normalize();
 
 
   window.addEventListener('hashchange',()=>{route=location.hash.replace(/^#\/?/,'')||'login';render();});
