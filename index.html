@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.2</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.4</title>
   <style>
 :root {
   --navy:#071d42;
@@ -678,6 +678,7 @@ body.dark .v202-current-exam,body.dark .v202-example-card,body.dark .v202-column
 
 
 /* v2.0.3 — targeted feedback, preserve v1.9.1 visual style */
+/* v2.0.4 — pledge output list/preview alignment fix */
 .v203-sample-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
 .v203-sample-button{min-height:92px;border:1px solid var(--gray-200);border-radius:14px;background:var(--white);padding:14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer;transition:.18s ease}
 .v203-sample-button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(22,67,130,.1)}
@@ -701,6 +702,92 @@ body.dark .v203-sample-button.normal{background:#153326}body.dark .v203-sample-b
 @media(max-width:1200px){.v203-pledge-preview-grid{grid-template-columns:1fr}.v203-sample-buttons{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.v203-sample-buttons{grid-template-columns:1fr}.v203-viewer-toolbar{align-items:stretch}.v203-viewer-toolbar .btn{width:100%}}
 
+
+/* v2.0.4 — pledge output layout alignment and two-column preview */
+.v204-pledge-filter-bar{
+  display:grid;
+  grid-template-columns:minmax(250px,.95fr) minmax(220px,.8fr) minmax(380px,1.45fr);
+  gap:10px;
+  align-items:end;
+  margin-bottom:14px;
+  padding:12px 14px;
+  border:1px solid var(--gray-200);
+  border-radius:14px;
+  background:var(--white);
+}
+.v204-pledge-filter-bar .field{margin:0;min-width:0}
+.v204-pledge-filter-bar label{display:block;margin-bottom:6px}
+.v204-pledge-search-control{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center}
+.v204-pledge-search-control .input{min-width:0;width:100%}
+.v204-pledge-search-control .btn{height:40px;min-width:68px;white-space:nowrap}
+.v204-pledge-main{
+  display:grid;
+  grid-template-columns:minmax(350px,420px) minmax(650px,1fr);
+  gap:16px;
+  align-items:start;
+}
+.v204-pledge-target-card,.v204-pledge-preview-card{min-width:0;overflow:hidden}
+.v204-pledge-target-card .card-header,.v204-pledge-preview-card .card-header{padding:14px 16px}
+.v204-pledge-target-card .card-body{padding:12px}
+.v204-pledge-preview-card .card-body{padding:12px 14px 18px}
+.v204-pledge-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.v204-pledge-summary>div{border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-100);padding:9px;text-align:center}
+.v204-pledge-summary b{display:block;font-size:20px;margin-top:2px;color:var(--navy-2)}
+.v204-pledge-select-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+.v204-pledge-select-tools .v203-pledge-count{margin-left:auto;white-space:nowrap}
+.v204-target-scroll{display:flex;flex-direction:column;gap:7px;max-height:560px;overflow:auto;padding:2px 3px 2px 0}
+.v204-target-item{
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+  border:1px solid var(--gray-200);
+  border-radius:10px;
+  padding:9px 10px;
+  background:var(--white);
+  cursor:pointer;
+  transition:.15s ease;
+}
+.v204-target-item:hover{border-color:#9dbde8;background:#f7fbff}
+.v204-target-item.selected{border-color:#7eade8;background:#eef6ff;box-shadow:inset 3px 0 0 var(--blue)}
+.v204-target-item input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:var(--blue)}
+.v204-target-main{min-width:0}
+.v204-target-title{display:flex;align-items:center;gap:7px;min-width:0}
+.v204-target-title b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v204-target-id{font-size:11px;color:var(--gray-600);white-space:nowrap}
+.v204-target-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:4px;font-size:11px;color:var(--gray-600)}
+.v204-target-room{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.v204-target-status{white-space:nowrap;align-self:center}
+.v204-pledge-output-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray-200)}
+.v204-pledge-output-actions .btn{width:100%;justify-content:center;white-space:nowrap}
+.v204-preview-subject{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:4px}
+.v204-preview-subject .subject-name{font-weight:850;color:var(--navy-2)}
+.v204-preview-note{font-size:11px;color:var(--gray-600)}
+.v204-pledge-preview-card .pledge-preview-panel{position:sticky;top:72px;min-width:0}
+.v204-pledge-preview-card .pledge-paper{width:min(100%,720px)!important;min-height:820px!important;margin:0 auto!important;box-sizing:border-box!important}
+body.dark .v204-pledge-filter-bar,body.dark .v204-pledge-target-card,body.dark .v204-pledge-preview-card,body.dark .v204-target-item{background:#111d2c;border-color:#2b3950}
+body.dark .v204-target-item:hover,body.dark .v204-target-item.selected{background:#17304d;border-color:#3979bf}
+body.dark .v204-pledge-summary>div{background:#142235;border-color:#30445f}
+@media(max-width:1250px){
+  .v204-pledge-filter-bar{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v204-pledge-filter-bar .v204-search-field{grid-column:1/-1}
+  .v204-pledge-main{grid-template-columns:minmax(320px,380px) minmax(560px,1fr)}
+}
+@media(max-width:1050px){
+  .v204-pledge-main{grid-template-columns:1fr}
+  .v204-pledge-preview-card .pledge-preview-panel{position:static}
+  .v204-target-scroll{max-height:420px}
+}
+@media(max-width:700px){
+  .v204-pledge-filter-bar{grid-template-columns:1fr}
+  .v204-pledge-filter-bar .v204-search-field{grid-column:auto}
+  .v204-pledge-search-control{grid-template-columns:1fr}
+  .v204-pledge-search-control .btn{width:100%}
+  .v204-pledge-output-actions{grid-template-columns:1fr}
+  .v204-target-item{grid-template-columns:22px minmax(0,1fr)}
+  .v204-target-status{grid-column:2;justify-self:start}
+}
+
 </style>
 
 </head>
@@ -714,8 +801,8 @@ body.dark .v203-sample-button.normal{background:#153326}body.dark .v203-sample-b
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.3';
-  const BUILD_ID = '20260810-203';
+  const APP_VERSION = '2.0.4';
+  const BUILD_ID = '20260810-204';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -2503,11 +2590,16 @@ body.dark .v201-exam-card,body.dark .v201-school-card,body.dark .v201-term-row,b
     const selected=new Set(state.ui.pledgeOutputSelected||[]);
     return `<div class="table-wrap"><table class="v203-pledge-table"><thead><tr><th>선택</th><th>수험번호</th><th>성명</th><th>사고유형</th><th>고사장</th><th>고사실</th><th>교시</th><th>상태</th></tr></thead><tbody>${rows.map(c=>`<tr class="${selected.has(c.id)?'selected':''}"><td><input type="checkbox" data-v203-pledge-id="${c.id}" ${selected.has(c.id)?'checked':''}></td><td><b>${c.id}</b></td><td>${esc(c.name)}</td><td><span class="badge badge-orange">${esc(c.incident)}</span></td><td>${esc(c.site)}</td><td>${esc(c.room)}</td><td>${esc(c.session)}</td><td><span class="badge ${c.status==='확인완료'?'badge-green':'badge-blue'}">${esc(c.status)}</span></td></tr>`).join('')||'<tr><td colspan="8" class="text-center muted">조건에 맞는 출력 대상이 없습니다.</td></tr>'}</tbody></table></div>`;
   }
+  function v204PledgeTargetList(rows){
+    const selected=new Set(state.ui.pledgeOutputSelected||[]);
+    return `<div class="v204-target-scroll">${rows.map(c=>`<label class="v204-target-item ${selected.has(c.id)?'selected':''}"><input type="checkbox" data-v203-pledge-id="${c.id}" ${selected.has(c.id)?'checked':''}><div class="v204-target-main"><div class="v204-target-title"><b>${esc(c.name)}</b><span class="v204-target-id">${c.id}</span></div><div class="v204-target-meta"><span class="badge badge-orange">${esc(c.incident)}</span><span class="v204-target-room">${esc(c.site)} · ${esc(c.room)}</span><span>${esc(c.session)}</span></div></div><span class="badge ${c.status==='확인완료'?'badge-green':'badge-blue'} v204-target-status">${esc(c.status)}</span></label>`).join('')||'<div class="notice notice-info">조건에 맞는 출력 대상이 없습니다.</div>'}</div>`;
+  }
   v201PledgeOutputPage=function(){
     const enabled=(state.incidentTypesConfig||[]).filter(x=>x.use!==false),selectedType=state.ui.pledgeOutputIncident||'all',rows=v203FilteredPledgeCandidates(),selected=v203SelectedPledgeCandidates(true);const preview=selected[0]||rows[0]||null;
     if(selectedType!=='all'){const cfg=enabled.find(x=>x.id===selectedType);if(cfg)state.ui.pledgeIncidentId=cfg.id;}
-    const summary=`<div class="v203-pledge-target-summary"><div><span class="small muted">조회 대상</span><b>${rows.length}명</b></div><div><span class="small muted">선택 대상</span><b>${selected.length}명</b></div></div>`;
-    return shell(`<div class="v201-context-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-output-exam-select')}</div><div class="field"><label>사고유형</label><select class="select" id="v202-pledge-output-type"><option value="all" ${selectedType==='all'?'selected':''}>전체 사고유형</option>${enabled.map(x=>`<option value="${x.id}" ${selectedType===x.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><div class="field wide"><label>수험생 검색</label><input class="input" id="v202-pledge-student-search" value="${esc(state.ui.pledgeStudentSearch||'')}" placeholder="수험번호, 성명, 고사장, 고사실"><button class="btn btn-sm" data-action="v203-pledge-search">검색</button></div></div><section class="card v203-pledge-output-list"><div class="card-header"><div><div class="card-title">각서 출력 대상 목록</div><div class="card-sub">전체 또는 체크한 대상만 PDF 생성·출력할 수 있습니다.</div></div><span class="badge badge-blue">${rows.length}명</span></div><div class="card-body"><div class="v203-pledge-output-toolbar"><button class="btn btn-sm" data-action="v203-pledge-select-all">전체 선택</button><button class="btn btn-sm" data-action="v203-pledge-clear">선택 해제</button><span class="v203-pledge-count">${selected.length}명 선택</span><span class="spacer"></span><button class="btn" data-action="v203-pledge-download-all">전체 PDF</button><button class="btn btn-primary" data-action="v203-pledge-download-selected">선택 PDF</button><button class="btn" data-action="v203-pledge-print-all">전체 출력</button><button class="btn btn-primary" data-action="v203-pledge-print-selected">선택 출력</button></div>${v203PledgeTable(rows)}</div></section><div class="v203-pledge-preview-grid"><section class="card"><div class="card-header"><div><div class="card-title">출력 요약</div><div class="card-sub">첫 번째 선택 대상 기준으로 미리보기를 표시합니다.</div></div></div><div class="card-body">${summary}${preview?infoRows([['수험번호',preview.id],['성명',preview.name],['사고유형',preview.incident],['고사실',preview.room]]):'<div class="notice notice-info">출력 대상을 선택해주세요.</div>'}</div></section><div class="pledge-preview-panel"><div id="pledge-preview-host">${pledgePreview()}</div></div></div>`,'각서 출력','담당 PM와 전형관리자가 전체 또는 선택 대상의 각서를 일괄 출력합니다.',`<button class="btn" data-route="settings-pledge">각서 편집 설정</button>`);
+    const summary=`<div class="v204-pledge-summary"><div><span class="small muted">조회 대상</span><b>${rows.length}명</b></div><div><span class="small muted">선택 대상</span><b>${selected.length}명</b></div></div>`;
+    const previewHead=preview?`<div class="v204-preview-subject"><span class="subject-name">${esc(preview.name)} · ${preview.id}</span><span class="badge badge-orange">${esc(preview.incident)}</span><span class="v204-preview-note">${esc(preview.site)} · ${esc(preview.room)} · ${esc(preview.session)}</span></div>`:'<div class="v204-preview-note">출력 대상을 선택하면 우측에 각서 미리보기가 표시됩니다.</div>';
+    return shell(`<div class="v204-pledge-filter-bar"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-output-exam-select')}</div><div class="field"><label>사고유형</label><select class="select" id="v202-pledge-output-type"><option value="all" ${selectedType==='all'?'selected':''}>전체 사고유형</option>${enabled.map(x=>`<option value="${x.id}" ${selectedType===x.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><div class="field v204-search-field"><label>수험생 검색</label><div class="v204-pledge-search-control"><input class="input" id="v202-pledge-student-search" value="${esc(state.ui.pledgeStudentSearch||'')}" placeholder="수험번호, 성명, 고사장, 고사실"><button class="btn" data-action="v203-pledge-search">검색</button></div></div></div><div class="v204-pledge-main"><section class="card v204-pledge-target-card"><div class="card-header"><div><div class="card-title">각서 출력 대상</div><div class="card-sub">목록에서 전체 또는 개별 대상을 선택합니다.</div></div><span class="badge badge-blue">${rows.length}명</span></div><div class="card-body">${summary}<div class="v204-pledge-select-tools"><button class="btn btn-sm" data-action="v203-pledge-select-all">전체 선택</button><button class="btn btn-sm" data-action="v203-pledge-clear">선택 해제</button><span class="v203-pledge-count">${selected.length}명 선택</span></div>${v204PledgeTargetList(rows)}<div class="v204-pledge-output-actions"><button class="btn" data-action="v203-pledge-download-all">전체 PDF</button><button class="btn btn-primary" data-action="v203-pledge-download-selected">선택 PDF</button><button class="btn" data-action="v203-pledge-print-all">전체 출력</button><button class="btn btn-primary" data-action="v203-pledge-print-selected">선택 출력</button></div></div></section><section class="card v204-pledge-preview-card"><div class="card-header"><div><div class="card-title">각서 미리보기</div>${previewHead}</div><span class="badge badge-green">실시간 미리보기</span></div><div class="card-body"><div class="pledge-preview-panel"><div id="pledge-preview-host">${pledgePreview()}</div></div></div></section></div>`,'각서 출력','대상 목록을 왼쪽에서 선택하고 오른쪽에서 각서를 미리본 뒤 전체 또는 선택 출력합니다.',`<button class="btn" data-route="settings-pledge">각서 편집 설정</button>`);
   };
 
   async function v203DownloadPledgeBundle(rows,label){
