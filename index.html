@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.11</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.12</title>
   <style>
 :root {
   --navy:#071d42;
@@ -975,8 +975,8 @@ body.dark .v209-selected-panel{background:#142238;border-color:#284c78}body.dark
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.11';
-  const BUILD_ID = '20260811-211';
+  const APP_VERSION = '2.0.12';
+  const BUILD_ID = '20260811-212';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -3639,6 +3639,7 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
 
 
   /* v2.0.11 */
+  /* v2.0.12 */
   function v211Normalize(){
     state.schemaVersion=15;DEFAULT_TERMS.close='마감';state.terms=state.terms||{};if(!state.terms.close)state.terms.close='마감';
     if(state.features.callMemo===undefined)state.features.callMemo=true;
@@ -3680,6 +3681,84 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
 
   v210Normalize();
 
+
+
+
+  /* v2.0.12 — answer sheet format from uploaded xlsx, compact statistics, remove viewer copy */
+  const v212Style=document.createElement('style');v212Style.id='v212-style';v212Style.textContent=`
+  .v212-answer-format-note{display:flex;gap:10px;align-items:flex-start;border:1px solid #b9d7ff;background:#f3f8ff;border-radius:12px;padding:12px;margin-bottom:12px}.v212-answer-format-note b{display:block;color:var(--navy-2);margin-bottom:4px}.v212-answer-format-note span{font-size:12px;color:var(--gray-600)}
+  .v212-answer-columns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.v212-answer-col{padding:8px 9px;border:1px solid var(--gray-200);border-radius:9px;background:var(--gray-100);font-size:11px}.v212-answer-col b{display:block;color:var(--navy-2);font-size:11.5px}.v212-answer-col span{font-size:10px;color:var(--gray-500)}
+  .v212-answer-result{margin-top:14px;border:2px solid var(--gray-200);border-radius:14px;padding:14px;background:var(--white)}.v212-answer-result.ok{border-color:#77c99d;background:#f3fff8}.v212-answer-result.error{border-color:#e69b9b;background:#fff7f7}.v212-answer-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}.v212-answer-summary>div{padding:10px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white)}.v212-answer-summary span{display:block;font-size:10px;color:var(--gray-500);margin-bottom:3px}.v212-answer-summary b{font-size:19px}.v212-answer-table{max-height:360px;overflow:auto}.v212-answer-table table{min-width:980px}.v212-answer-table th,.v212-answer-table td{padding:6px 7px!important;font-size:11px!important;white-space:nowrap}.v212-answer-image-btn{white-space:nowrap}
+  .v212-stat-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:12px}.v212-stat-list{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:10px;display:grid;gap:5px;align-self:start}.v212-stat-list-title{font-weight:900;color:var(--navy-2);font-size:13px;margin:2px 0 5px}.v212-stat-row{display:grid;grid-template-columns:22px minmax(0,1fr);gap:7px;align-items:center;border:1px solid var(--gray-200);background:var(--white);border-radius:8px;padding:7px 8px;cursor:pointer;font-size:11px;text-align:left}.v212-stat-row:hover{border-color:#9ec3ef;background:#f5f9ff}.v212-stat-row.active{border-color:var(--blue);background:#edf5ff;box-shadow:inset 3px 0 0 var(--blue);color:var(--blue)}.v212-stat-row .num{font-weight:900;color:var(--gray-500)}.v212-stat-row .name{font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.v212-download-compact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}.v212-download-compact label{border:1px solid var(--gray-200);border-radius:9px;background:var(--white);padding:7px 8px;font-size:11px;display:flex;gap:6px;align-items:center;min-width:0}.v212-download-compact span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.v212-stat-table{max-height:430px;overflow:auto;border-radius:10px}.v212-stat-table table{min-width:max-content}.v212-stat-table th,.v212-stat-table td{padding:5px 7px!important;font-size:10.5px!important;white-space:nowrap;line-height:1.25}.v212-viewer-actions{display:flex;gap:5px;flex-wrap:wrap}.v212-viewer-actions .btn{font-size:11px;padding:5px 8px}.v212-history-card .table-wrap{max-height:520px}.v212-history-card table th,.v212-history-card table td{font-size:11px;padding:6px 8px!important;white-space:nowrap}
+  body.dark .v212-answer-format-note,body.dark .v212-answer-col,body.dark .v212-answer-summary>div,body.dark .v212-answer-result,body.dark .v212-stat-list,body.dark .v212-stat-row,body.dark .v212-download-compact label{background:var(--gray-100);border-color:var(--gray-200)}
+  @media(max-width:1100px){.v212-answer-columns{grid-template-columns:repeat(2,minmax(0,1fr))}.v212-answer-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.v212-stat-layout{grid-template-columns:1fr}.v212-download-compact{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  `;document.head.appendChild(v212Style);
+
+  const V212_ANSWER_COLS=['답안지ID','전형코드','전형명','계열코드','계열명','과목코드','과목명','답안지장수'];
+  const V212_HISTORY_COLS=[...V212_ANSWER_COLS,'촬영이미지'];
+  v211Cols=function(){return [...V212_ANSWER_COLS];};
+  function v212AnswerRows(normal=true){
+    const base=[
+      {답안지ID:'10001',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10002',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10003',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10004',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10005',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10006',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''}
+    ];
+    if(normal)return base;
+    return [
+      {답안지ID:'10001',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10001',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'',전형코드:'1',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10009',전형코드:'',전형명:'논술우수자전형',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:''},
+      {답안지ID:'10010',전형코드:'1',전형명:'',계열코드:'',계열명:'',과목코드:'',과목명:'',답안지장수:'두장'}
+    ];
+  }
+  v211Rows=function(normal=true){return v212AnswerRows(normal);};
+  function v212HistoryObjects(){
+    const uploaded=state.answerSheetUpload?.rows?.length?state.answerSheetUpload.rows.slice(0,12):v212AnswerRows(true);
+    return uploaded.map((r,i)=>({...r,촬영이미지:`answer_${r.답안지ID||String(i+1).padStart(5,'0')}.jpg`}));
+  }
+  v211Errors=function(rows){
+    const errs=[],seen=new Map();
+    (rows||[]).forEach((r,i)=>{
+      const row=i+2,id=String(r.답안지ID??'').trim(),exam=String(r.전형코드??'').trim(),name=String(r.전형명??'').trim(),cnt=String(r.답안지장수??'').trim();
+      if(!id)errs.push({row,column:'답안지ID',value:id,message:'답안지ID가 비어 있습니다.',solution:'답안지ID 컬럼에 고유값을 입력하세요.'});
+      if(!exam)errs.push({row,column:'전형코드',value:exam,message:'전형코드가 비어 있습니다.',solution:'전형코드 값을 입력하세요.'});
+      if(!name)errs.push({row,column:'전형명',value:name,message:'전형명이 비어 있습니다.',solution:'전형명을 입력하세요.'});
+      if(id){if(seen.has(id))errs.push({row,column:'답안지ID',value:id,message:`${seen.get(id)}행과 중복된 답안지ID입니다.`,solution:'답안지ID는 중복 없이 입력해야 합니다.'});else seen.set(id,row);}
+      if(cnt&&isNaN(Number(cnt)))errs.push({row,column:'답안지장수',value:cnt,message:'답안지장수는 숫자여야 합니다.',solution:'숫자만 입력하거나 빈 값으로 두세요.'});
+    });
+    return errs;
+  };
+  v211Result=function(){
+    const u=state.answerSheetUpload;if(!u)return `<div class="v212-answer-result"><div class="notice notice-info"><span>ⓘ</span><div><b>아직 업로드된 답안지 데이터가 없습니다.</b><br>첨부 양식 기준의 엑셀 파일을 선택하면 이 영역에서 오류내용과 정상 데이터를 확인합니다.</div></div></div>`;
+    const errors=u.errors||[],rows=u.rows||[],valid=rows.length-errors.length,uniqueExam=new Set(rows.map(r=>String(r.전형코드||'').trim()).filter(Boolean)).size,uniqueName=new Set(rows.map(r=>String(r.전형명||'').trim()).filter(Boolean)).size;
+    const summary=`<div class="v212-answer-summary"><div><span>전체 행</span><b>${fmt(rows.length)}</b></div><div><span>정상 행</span><b style="color:var(--green)">${fmt(Math.max(0,valid))}</b></div><div><span>오류내용</span><b style="color:${errors.length?'var(--red)':'var(--green)'}">${fmt(errors.length)}</b></div><div><span>전형코드</span><b>${fmt(uniqueExam)}</b></div><div><span>전형명</span><b>${fmt(uniqueName)}</b></div></div>`;
+    const table=errors.length?`<div class="table-wrap v212-answer-table"><table><thead><tr><th>행</th><th>컬럼</th><th>입력값</th><th>오류내용</th><th>권장조치</th></tr></thead><tbody>${errors.map(e=>`<tr><td>${e.row}</td><td><b>${esc(e.column)}</b></td><td>${esc(e.value)}</td><td>${esc(e.message)}</td><td>${esc(e.solution)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="table-wrap v212-answer-table"><table><thead><tr>${V212_ANSWER_COLS.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.slice(0,80).map(r=>`<tr>${V212_ANSWER_COLS.map(c=>`<td>${esc(r[c]??'')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    return `<div class="v212-answer-result ${errors.length?'error':'ok'}"><div class="head"><div><b>${errors.length?'답안지 오류내용 확인':'답안지 데이터 정상 검증'}</b><div class="small muted">${esc(u.fileName||'답안지 업로드 파일')} · ${esc(u.uploadedAt||'')}</div></div><span class="badge ${errors.length?'badge-red':'badge-green'}">${errors.length?'수정 필요':'정상'}</span></div>${summary}${table}</div>`;
+  };
+  v211UploadPage=function(){
+    const tabs=`<div class="tabs"><button class="tab" data-upload-type="candidate">수험생</button><button class="tab" data-upload-type="invigilator">감독관</button><button class="tab" data-upload-type="photos">사진 ZIP</button><button class="tab active" data-upload-type="answerSheet">답안지</button></div>`;
+    const cols=V212_ANSWER_COLS.map((c,i)=>`<div class="v212-answer-col"><b>${esc(c)}</b><span>${i<3?'필수 검증':'양식 컬럼'}</span></div>`).join('');
+    return shell(`${stepper(1)}${tabs}<section class="card"><div class="card-body"><div class="v212-answer-format-note"><span class="badge badge-blue">양식 반영</span><div><b>첨부파일 「5. 답안지정보 업로드 양식.xlsx」 기준 컬럼을 사용합니다.</b><span>촬영이미지 칸은 답안지 이력 화면에 그대로 유지하며, 업로드 검증은 답안지ID·전형코드·전형명을 중심으로 확인합니다.</span></div></div><div class="v211-answer-layout"><div class="dropzone"><div class="drop-icon">🗂️</div><div class="card-title">답안지 엑셀파일 선택</div><p class="muted">파일 선택 즉시 첨부 양식 컬럼을 기준으로 필수값·중복·숫자 형식을 검증합니다.</p><input type="file" id="v211-answer-file" accept=".xlsx,.xls,.csv" hidden><div class="flex gap-8 justify-center"><button class="btn btn-primary" data-action="v211-choose-answer">파일 선택</button><button class="btn" data-action="v211-download-answer" data-mode="normal">정상 예시 양식</button><button class="btn" data-action="v211-download-answer" data-mode="error">오류 예시 양식</button></div></div><div><div class="card-title">답안지 업로드 검증 컬럼</div><div class="v212-answer-columns">${cols}</div></div></div>${v211Result()}</div></section>`,'업로드·자동검증','답안지 업로드는 첨부 엑셀 양식의 컬럼을 기준으로 검증합니다.','');
+  };
+  v211Process=async function(file){
+    let rows=[];try{const ok=await ensureXlsx();if(ok){const b=await file.arrayBuffer(),w=XLSX.read(b,{type:'array'}),s=w.Sheets[w.SheetNames[0]];rows=XLSX.utils.sheet_to_json(s,{defval:''});}}catch(e){console.warn(e)}
+    if(!rows.length)rows=/오류|error/i.test(file.name)?v212AnswerRows(false):v212AnswerRows(true);
+    const heads=rows.length?Object.keys(rows[0]):[],miss=V212_ANSWER_COLS.filter(c=>!heads.includes(c));let errs=miss.map(c=>({row:1,column:c,value:'',message:'첨부 양식의 컬럼이 없습니다.',solution:`${c} 컬럼을 추가하거나 양식을 다시 내려받으세요.`}));errs=errs.concat(v211Errors(rows));
+    state.answerSheetUpload={fileName:file.name,rows,errors:errs,uploadedAt:new Date().toLocaleString('ko-KR')};save();render();toast(errs.length?`답안지 오류내용 ${errs.length}건을 확인해주세요.`:'답안지 데이터가 정상 검증되었습니다.',errs.length?'warning':'success');
+  };
+  v211Download=async function(mode){const rows=v212AnswerRows(mode!=='error');try{const ok=await ensureXlsx();if(ok){const s=XLSX.utils.json_to_sheet(rows,{header:V212_ANSWER_COLS});const w=XLSX.utils.book_new();XLSX.utils.book_append_sheet(w,s,'답안지정보');XLSX.writeFile(w,`답안지정보_업로드_${mode==='error'?'오류':'정상'}예시_v${APP_VERSION}.xlsx`);return;}}catch(e){console.warn(e)}const csv=[V212_ANSWER_COLS.join(','),...rows.map(r=>V212_ANSWER_COLS.map(k=>`"${String(r[k]??'').replaceAll('"','""')}"`).join(','))].join('\n');downloadBlob(new Blob(['\ufeff'+csv],{type:'text/csv'}),`답안지정보_업로드_${mode}.csv`);};
+  v211Photo=function(row,i){const obj=Array.isArray(row)?Object.fromEntries(V212_HISTORY_COLS.map((h,idx)=>[h,row[idx]])):row;return `<div class="v211-answer-photo-wrap"><div class="v211-answer-photo"><h3>답안지 촬영이미지</h3><div class="v211-answer-photo-grid"><div><b>답안지ID</b><br>${esc(obj.답안지ID||'10001')}</div><div><b>전형</b><br>${esc(obj.전형명||state.selection)} (${esc(obj.전형코드||'1')})</div><div><b>계열</b><br>${esc(obj.계열명||obj.계열코드||'-')}</div><div><b>과목</b><br>${esc(obj.과목명||obj.과목코드||'-')}</div><div><b>답안지장수</b><br>${esc(obj.답안지장수||'-')}</div><div><b>촬영이미지</b><br>${esc(obj.촬영이미지||`answer_${obj.답안지ID||i+1}.jpg`)}</div></div><div class="v211-answer-lines">${Array.from({length:8},(_,n)=>`<div class="v211-answer-line">답안지 촬영 영역 ${n+1}</div>`).join('')}</div></div></div>`;};
+  const v212StatsBase=statisticsDatasets;
+  statisticsDatasets=function(){const d=v212StatsBase();const rows=v212HistoryObjects();d.answerSheet={name:'답안지 이력',headers:V212_HISTORY_COLS,rows:rows.map(r=>V212_HISTORY_COLS.map(c=>r[c]??''))};return d;};
+  answerSheetHistoryPage=function(){if(!state.features.answerSheet)return shell('<div class="notice notice-warning">답안지 기능이 꺼져 있습니다.</div>','답안지 이력','','');const rows=v212HistoryObjects();const table=`<div class="table-wrap"><table class="v211-answer-history"><thead><tr>${V212_ANSWER_COLS.map(h=>`<th>${esc(h)}</th>`).join('')}<th>촬영이미지</th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${V212_ANSWER_COLS.map(h=>`<td>${esc(r[h]??'')}</td>`).join('')}<td><button class="btn btn-sm v212-answer-image-btn" data-action="v211-answer-photo" data-index="${i}">촬영이미지 보기</button></td></tr>`).join('')}</tbody></table></div>`;return shell(`<div class="grid grid-4">${kpi('답안지ID',rows.length,'건','ID','var(--blue-2)','var(--blue)')}${kpi('전형코드',[...new Set(rows.map(r=>r.전형코드))].length,'개','▦','var(--green-soft)','var(--green)')}${kpi('촬영이미지',rows.length,'건','▣','var(--purple-soft)','var(--purple)')}${kpi('오류내용',state.answerSheetUpload?.errors?.length||0,'건','!','var(--orange-soft)','var(--orange)')}</div><section class="card v212-history-card" style="margin-top:14px"><div class="card-header"><div><div class="card-title">답안지 이력</div><div class="card-sub">첨부 양식 컬럼을 반영하고, 맨 오른쪽 촬영이미지 버튼은 그대로 유지합니다.</div></div></div><div class="card-body">${table}</div></section>`,'답안지 이력','답안지정보 업로드 양식 기준으로 답안지ID·전형코드·전형명 등 이력을 확인합니다.','');};
+  downloadsPage=function(){const files=[['00.전체 수험생 출결 목록_20251116.xlsx','전체 수험생 출결 목록','15,928행','allCandidates'],['01.계열별출결집계_20251116.xlsx','계열별 출결 집계','계열 기준','byTrack'],['02.사고자집계_20251116.xlsx','사고자 집계','60건','incidents'],['03.고사실별출결집계_20251116.xlsx',`${term('examRoom')}별 출결 집계`,'271실','byRoom'],['04.과목별출결집계_20251116.xlsx','과목별 출결 집계','과목 기준','bySubject'],['05.교시별출결집계_20251116.xlsx','교시별 출결 집계','4교시','bySession'],['06.모집단위별출결집계_20251116.xlsx','모집단위별 출결 집계','모집단위 기준','byDepartment'],['07.타고사장 수험생 목록_20251116.xlsx','타고사장 수험생 목록','대상자 목록','otherSite'],['08.답안지이력_20251116.xlsx','답안지 이력','답안지ID·전형 기준','answerSheet'],['__signature__','감독관 서명 확인 목록','서명 상태','signatures']];const datasets=statisticsDatasets();if(!datasets[state.ui.statsFile])state.ui.statsFile='allCandidates';const selected=datasets[state.ui.statsFile];const list=files.map(([,n,,key],i)=>`<button class="v212-stat-row ${state.ui.statsFile===key?'active':''}" data-action="show-stat-file" data-stat-file="${key}"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="name">${esc(n)}</span></button>`).join('');const table=`<div class="table-wrap v212-stat-table"><table><thead><tr>${selected.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${selected.rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;const downloads=files.map(([f,n,d])=>`<label><input class="download-check" type="checkbox" data-result-file="${esc(f)}" data-result-name="${esc(n)}"><span>${esc(n)}</span></label>`).join('');return shell(`<div class="v201-result-exam"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-result-exam-select')}</div><span class="badge badge-blue">선택 전형 전체파일</span><div class="flex gap-8" style="margin-left:auto"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP</button></div></div><section class="card stats-panel"><div class="card-header"><div><div class="card-title">결과파일 통계</div><div class="card-sub">왼쪽 목록에서 파일을 선택하면 오른쪽 엑셀형 표가 즉시 변경됩니다.</div></div><span class="badge badge-blue">${esc(selected.name)}</span></div><div class="card-body"><div class="v212-stat-layout"><div class="v212-stat-list"><div class="v212-stat-list-title">통계 파일 목록</div>${list}</div><div>${table}</div></div></div></section><section class="card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">결과파일 다운로드</div><div class="card-sub">필요한 파일만 체크해 선택 파일 ZIP으로 받을 수 있습니다.</div></div><div class="flex gap-8"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span></div></div><div class="card-body"><div class="v212-download-compact">${downloads}</div></div></section>`,'결과파일·통계','통계 파일을 목록형으로 선택하고 다운로드 대상도 간단한 체크 목록으로 관리합니다.','');};
+  v201DeveloperAccounts=function(){const rows=state.schoolAccounts.map(a=>{const sc=schoolById(a.schoolId);return `<tr><td><b class="v201-school-id">${esc(a.id)}</b></td><td>${esc(a.label||'학교 조회계정')}</td><td>${esc(sc?.name||'')}</td><td>${esc(sc?.code||'')}</td><td class="v203-viewer-password">${esc(a.password||'1234')}</td><td><span class="badge ${a.status==='사용'?'badge-green':'badge-gray'}">${esc(a.status)}</span></td><td>${esc(a.created||'-')}</td><td><div class="v212-viewer-actions"><button class="btn btn-sm" data-action="v203-edit-viewer" data-viewer-id="${esc(a.id)}">수정</button><button class="btn btn-sm" data-action="v201-toggle-viewer" data-viewer-id="${esc(a.id)}">${a.status==='사용'?'사용중지':'사용재개'}</button><button class="btn btn-sm btn-red" data-action="v203-delete-viewer" data-viewer-id="${esc(a.id)}">삭제</button></div></td></tr>`}).join('');return shell(`<div class="notice notice-info v201-viewer-note"><span>ID</span><div><b>학교코드 자동생성과 수동 계정 관리를 함께 지원합니다.</b><br>학교 조회계정은 사람이나 담당범위를 배정하지 않는 공용 조회용 계정입니다. 관리 영역에서 접속정보 복사 기능은 제공하지 않습니다.</div></div><section class="card"><div class="card-header"><div><div class="card-title">학교별 조회계정</div><div class="card-sub">자동 생성 또는 수동으로 개별 ID를 생성·수정·삭제합니다.</div></div><div class="v203-viewer-toolbar"><button class="btn" data-action="v201-open-viewer-modal">자동생성</button><button class="btn btn-primary" data-action="v203-open-viewer-manual">+ 수동생성</button></div></div><div class="card-body"><div class="table-wrap"><table style="min-width:1120px"><thead><tr><th>조회ID</th><th>계정명</th><th>학교</th><th>학교코드</th><th>비밀번호</th><th>상태</th><th>생성일</th><th>관리</th></tr></thead><tbody>${rows}</tbody></table></div></div></section>`,'학교별 조회계정','입학처·학교 담당자가 공용으로 사용할 수 있는 조회계정을 자동 또는 수동으로 관리합니다.','');};
+  function v212Normalize(){if(!state.answerSheetUpload){state.answerSheetUpload={fileName:'5. 답안지정보 업로드 양식.xlsx',rows:v212AnswerRows(true),errors:[],uploadedAt:new Date().toLocaleString('ko-KR')}}}
+  v212Normalize();
 
   window.addEventListener('hashchange',()=>{route=location.hash.replace(/^#\/?/,'')||'login';render();});
   render();
