@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.13</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.14</title>
   <style>
 :root {
   --navy:#071d42;
@@ -964,6 +964,42 @@ body.dark .v209-selected-panel{background:#142238;border-color:#284c78}body.dark
 <style id="v211-style">
 .v211-call-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.v211-call-card{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:12px;display:grid;gap:8px}.v211-call-card.unread{border-color:#8eb9ee;box-shadow:inset 4px 0 0 var(--blue);background:#f4f9ff}.v211-call-card .site{font-weight:900;color:var(--navy-2)}.v211-call-card .message{font-size:12px;line-height:1.5}.v211-answer-layout{display:grid;grid-template-columns:minmax(350px,.8fr) minmax(560px,1.2fr);gap:14px}.v211-answer-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.v211-answer-col{padding:8px;border:1px solid var(--gray-200);border-radius:9px;background:var(--gray-100);font-size:11px}.v211-answer-col b{display:block;color:var(--navy-2)}.v211-answer-result{margin-top:14px;border:2px solid var(--gray-200);border-radius:14px;padding:14px}.v211-answer-result.ok{border-color:#79caa0;background:#f3fff8}.v211-answer-result.error{border-color:#e69b9b;background:#fff7f7}.v211-answer-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}.v211-answer-summary>div{padding:10px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white)}.v211-answer-summary span{display:block;font-size:10px;color:var(--gray-500)}.v211-answer-summary b{font-size:20px}.v211-answer-history th:last-child,.v211-answer-history td:last-child{position:sticky;right:0;background:var(--white);min-width:130px;text-align:center}.v211-answer-photo-wrap{background:#eef1f5;padding:18px;border-radius:12px}.v211-answer-photo{max-width:700px;margin:auto;background:#fff;padding:26px;border:1px solid #ccd2db}.v211-answer-photo h3{text-align:center;margin:0 0 18px}.v211-answer-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px}.v211-answer-photo-grid>div{border:1px solid #d7dce4;padding:9px}.v211-answer-lines{display:grid;gap:10px;margin-top:14px}.v211-answer-line{height:32px;border-bottom:1px solid #c7ccd4;font-size:11px;color:#6b7280}.v211-stat-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:12px}.v211-stat-selector .btn{justify-content:flex-start;text-align:left;padding:9px 11px;height:auto}.v211-stat-selector .btn.active{background:var(--blue);color:#fff}.v211-stat-table{max-height:440px;overflow:auto}.v211-stat-table table{font-size:10px;min-width:980px}.v211-stat-table th,.v211-stat-table td{padding:6px 7px;white-space:nowrap}.v211-term-close{border-color:#9ebce8!important;background:#f4f8ff!important}body.dark .v211-call-card,body.dark .v211-answer-result,body.dark .v211-answer-summary>div,body.dark .v211-answer-history th:last-child,body.dark .v211-answer-history td:last-child{background:var(--gray-100)}@media(max-width:1100px){.v211-call-grid{grid-template-columns:1fr 1fr}.v211-answer-layout{grid-template-columns:1fr}.v211-stat-selector{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+
+<style id="v214-style">
+/* v2.0.14 — previous results layout restore, print history, scoped reset, upload list actions */
+.v214-print-current{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #bfd4ee;border-radius:12px;background:#f3f8ff;padding:10px 12px;margin-top:10px;font-size:11px}
+.v214-print-current.printed{background:#eceff3;border-color:#c7cdd5;color:#667085}
+.v214-print-status{margin-top:12px;border:1px solid var(--gray-200);border-radius:13px;background:var(--white);padding:12px}
+.v214-print-status .title{font-size:12px;font-weight:900;color:var(--navy-2);margin-bottom:8px}
+.v214-print-group{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;align-items:start;margin-top:8px}
+.v214-print-group-label{font-size:11px;font-weight:900;color:var(--gray-600);padding-top:8px}
+.v214-print-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.v214-print-chip{border:1px solid var(--gray-200);background:var(--white);border-radius:9px;padding:8px 9px;text-align:left;cursor:pointer;min-height:48px;color:var(--gray-800)}
+.v214-print-chip b{display:block;font-size:11px}.v214-print-chip span{display:block;font-size:9.5px;color:var(--gray-500);margin-top:3px}
+.v214-print-chip.active{border-color:var(--blue);box-shadow:inset 3px 0 0 var(--blue);background:#f1f7ff}
+.v214-print-chip.printed{background:#e7e9ed;border-color:#c5cad2;color:#6b7280}
+.v214-print-chip.printed span{color:#7a828d}.v214-print-chip.printed.active{box-shadow:inset 3px 0 0 #7c8795}
+.v214-reset-target{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.v214-reset-target .field{margin:0}.v214-reset-scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.v214-reset-option{display:flex;align-items:flex-start;gap:8px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white);padding:10px}
+.v214-reset-option input{margin-top:3px}.v214-reset-option b{display:block;font-size:12px}.v214-reset-option span{display:block;font-size:10px;color:var(--gray-500);margin-top:3px;line-height:1.4}
+.v214-upload-actionbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid #bdd3ef;background:#f3f8ff;border-radius:12px;padding:10px 12px;margin:14px 0}
+.v214-upload-actionbar .info{min-width:220px;flex:1}.v214-upload-actionbar .info b{font-size:13px;color:var(--navy-2)}.v214-upload-actionbar .info span{display:block;font-size:10px;color:var(--gray-500);margin-top:3px}
+.v214-upload-detail{margin-top:14px;border:1px solid var(--gray-200);border-radius:14px;background:var(--white);overflow:hidden}
+.v214-upload-detail .head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--gray-200)}
+.v214-upload-detail .head b{font-size:14px;color:var(--navy-2)}.v214-upload-detail .body{padding:10px}
+.v214-upload-detail .table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:auto;max-height:520px;border:1px solid var(--gray-200);border-radius:10px}
+.v214-upload-detail table{min-width:1680px!important;width:max-content!important;font-size:10.5px}
+.v214-upload-detail th,.v214-upload-detail td{padding:6px 8px!important;white-space:nowrap!important;max-width:none!important;overflow:visible!important;text-overflow:clip!important}
+.v214-upload-detail th{position:sticky;top:0;background:var(--gray-100);z-index:2}
+.v214-stat-row{display:block;width:100%;border:1px solid var(--gray-200);background:var(--white);border-radius:8px;padding:8px 9px;cursor:pointer;text-align:left;font-size:11px;font-weight:850;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v214-stat-row:hover{border-color:#9ec3ef;background:#f5f9ff}.v214-stat-row.active{border-color:var(--blue);background:#edf5ff;box-shadow:inset 3px 0 0 var(--blue);color:var(--blue)}
+.v208-dependency-flow:before{display:none!important;content:''!important}
+body.dark .v214-print-status,body.dark .v214-print-chip,body.dark .v214-reset-option,body.dark .v214-upload-detail,body.dark .v214-stat-row{background:var(--gray-100);border-color:var(--gray-200)}
+body.dark .v214-print-chip.printed{background:#303745;color:#aeb7c4}body.dark .v214-print-current.printed{background:#303745}
+@media(max-width:1100px){.v214-print-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v214-print-group{grid-template-columns:1fr}.v214-reset-target,.v214-reset-scope{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
   <noscript><div style="padding:24px;font-family:Arial,sans-serif">이 테스트 페이지는 JavaScript를 사용합니다. 브라우저에서 JavaScript를 허용해 주세요.</div></noscript>
@@ -975,8 +1011,8 @@ body.dark .v209-selected-panel{background:#142238;border-color:#284c78}body.dark
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.13';
-  const BUILD_ID = '20260811-213';
+  const APP_VERSION = '2.0.14';
+  const BUILD_ID = '20260811-214';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -3898,6 +3934,148 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
   };
   function v213Normalize(){if(!['attendanceLog','pdfOutputLog','pledgeOutputLog','answerSheet'].includes(state.ui.statsFile)&&!statisticsDatasets()[state.ui.statsFile])state.ui.statsFile='attendanceLog';}
   v213Normalize();
+
+
+
+  /* v2.0.14 — restore prior results layout and add requested operational controls */
+  function v214Normalize(){
+    state.schemaVersion=Math.max(Number(state.schemaVersion||0),20);
+    state.ui=state.ui||{};
+    if(!Array.isArray(state.pdfPrintHistory))state.pdfPrintHistory=[];
+    if(!state.ui.uploadDetailType)state.ui.uploadDetailType='';
+    if(['pdfOutputLog','pledgeOutputLog'].includes(state.ui.statsFile))state.ui.statsFile='attendanceLog';
+  }
+  v214Normalize();
+
+  function v214ResultsFiles(){return [
+    ['00.전체 수험생 출결 목록_20251116.xlsx','전체 수험생 출결 목록','15,928행','allCandidates'],
+    ['01.계열별출결집계_20251116.xlsx','계열별 출결 집계','계열 기준','byTrack'],
+    ['02.사고자집계_20251116.xlsx','사고자 집계','60건','incidents'],
+    ['03.고사실별출결집계_20251116.xlsx',`${term('examRoom')}별 출결 집계`,'271실','byRoom'],
+    ['04.과목별출결집계_20251116.xlsx','과목별 출결 집계','과목 기준','bySubject'],
+    ['05.교시별출결집계_20251116.xlsx','교시별 출결 집계','4교시','bySession'],
+    ['06.모집단위별출결집계_20251116.xlsx','모집단위별 출결 집계','모집단위 기준','byDepartment'],
+    ['07.타고사장 수험생 목록_20251116.xlsx','타고사장 수험생 목록','대상자 목록','otherSite'],
+    ['08.출결로그_20260504.csv','출결 로그','12건 예시','attendanceLog'],
+    ['09.답안지이력_20251116.xlsx','답안지 이력','답안지ID·전형 기준','answerSheet'],
+    ['__signature__','감독관 서명 확인 목록','서명 상태','signatures']
+  ];}
+
+  downloadsPage=function(){
+    const files=v214ResultsFiles(),datasets=statisticsDatasets();
+    if(!files.some(([, , ,key])=>key===state.ui.statsFile)||!datasets[state.ui.statsFile])state.ui.statsFile='allCandidates';
+    const selected=datasets[state.ui.statsFile];
+    const list=files.map(([,name,,key])=>`<button class="v214-stat-row ${state.ui.statsFile===key?'active':''}" data-action="show-stat-file" data-stat-file="${key}" title="${esc(name)}">${esc(name)}</button>`).join('');
+    const table=`<div class="table-wrap v212-stat-table"><table><thead><tr>${selected.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${selected.rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    const downloads=files.map(([file,name,,key])=>`<label><input class="download-check" type="checkbox" data-result-file="${esc(file)}" data-result-name="${esc(name)}" ${key==='attendanceLog'?'data-result-dataset="attendanceLog"':''}><span>${esc(name)}</span></label>`).join('');
+    return shell(`<div class="v201-result-exam"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-result-exam-select')}</div><span class="badge badge-blue">선택 전형 전체파일</span><div class="flex gap-8" style="margin-left:auto"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP</button></div></div><section class="card stats-panel"><div class="card-header"><div><div class="card-title">결과파일 통계</div><div class="card-sub">이전 버전의 목록형 레이아웃을 유지하고 출결 로그만 추가했습니다.</div></div><span class="badge badge-blue">${esc(selected.name)}</span></div><div class="card-body"><div class="v212-stat-layout"><div class="v212-stat-list"><div class="v212-stat-list-title">통계 파일 목록</div>${list}</div><div>${table}<div class="stats-table-note">표 전체 검색과 컬럼별 정렬·필터를 함께 사용할 수 있습니다.</div></div></div></div></section><section class="card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">결과파일 다운로드</div><div class="card-sub">필요한 파일만 체크해 선택 파일 ZIP으로 받을 수 있습니다.</div></div><div class="flex gap-8"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span></div></div><div class="card-body"><div class="v212-download-compact">${downloads}</div></div></section>`,'결과파일·통계','이전 목록형 레이아웃을 유지하면서 출결 로그를 함께 조회합니다.','');
+  };
+
+  function v214PrintKey(examId,session,site){return `${examId||''}|${session||''}|${site||''}`;}
+  function v214CurrentPrintContext(){return {examId:v201CurrentExamId(),session:state.ui.pdfOutputSession||'s1',site:state.ui.pdfOutputSite||`전체 ${term('examSite')}`};}
+  function v214IsPrinted(session,site,examId=v201CurrentExamId()){const key=v214PrintKey(examId,session,site);return state.pdfPrintHistory.some(h=>h.key===key);}
+  function v214RecordPrint(method){
+    const c=v214CurrentPrintContext(),key=v214PrintKey(c.examId,c.session,c.site),at=new Date().toLocaleString('ko-KR');
+    const old=state.pdfPrintHistory.find(h=>h.key===key);
+    if(old){old.at=at;old.method=method;old.count=Number(old.count||1)+1;}else state.pdfPrintHistory.unshift({key,...c,at,method,count:1});
+    save();
+  }
+  function v214PrintStatusHtml(sessions,sites){
+    const current=v214CurrentPrintContext(),currentDone=v214IsPrinted(current.session,current.site,current.examId);
+    const sessionButtons=sessions.map((s,i)=>{const id=`s${i+1}`,done=state.pdfPrintHistory.some(h=>h.examId===current.examId&&h.session===id);return `<button type="button" class="v214-print-chip ${done?'printed':''} ${current.session===id?'active':''}" data-action="v214-pdf-session" data-session="${id}"><b>${esc(s.name)}</b><span>${done?'출력 이력 있음 · 재출력 가능':'미출력'}</span></button>`}).join('');
+    const siteButtons=sites.map(site=>{const done=state.pdfPrintHistory.some(h=>h.examId===current.examId&&h.site===site);return `<button type="button" class="v214-print-chip ${done?'printed':''} ${current.site===site?'active':''}" data-action="v214-pdf-site" data-site="${esc(site)}"><b>${esc(site)}</b><span>${done?'출력 이력 있음 · 재출력 가능':'미출력'}</span></button>`}).join('');
+    return `<div class="v214-print-current ${currentDone?'printed':''}"><div><b>현재 선택</b><div class="small">${esc(closeSessionLabel(current.session))} · ${esc(current.site)}</div></div><span class="badge ${currentDone?'badge-gray':'badge-blue'}">${currentDone?'출력됨 · 재출력 가능':'미출력'}</span></div><div class="v214-print-status"><div class="title">출력 이력 확인</div><div class="v214-print-group"><div class="v214-print-group-label">교시별 상태</div><div class="v214-print-grid">${sessionButtons}</div></div><div class="v214-print-group"><div class="v214-print-group-label">고사장별 상태</div><div class="v214-print-grid">${siteButtons}</div></div></div>`;
+  }
+  pdfOutputPage=function(){
+    v214Normalize();state.ui.pdfOutputSession=state.ui.pdfOutputSession||'s1';state.ui.pdfOutputSite=state.ui.pdfOutputSite||`전체 ${term('examSite')}`;
+    const sessions=state.basic.sessions.filter(s=>s.use!==false),sites=[`전체 ${term('examSite')}`,'본교 제1고사장','본교 제2고사장','예비고사장'];
+    const currentExam=v201CurrentExamId();
+    const sessionOpts=sessions.map((s,i)=>{const id=`s${i+1}`,done=state.pdfPrintHistory.some(h=>h.examId===currentExam&&h.session===id);return `<option value="${id}" ${state.ui.pdfOutputSession===id?'selected':''} style="${done?'background:#e5e7eb;color:#6b7280':''}">${esc(s.name)}${done?' · 출력 이력':''}</option>`}).join('');
+    const siteOpts=sites.map(site=>{const done=state.pdfPrintHistory.some(h=>h.examId===currentExam&&h.site===site);return `<option value="${esc(site)}" ${state.ui.pdfOutputSite===site?'selected':''} style="${done?'background:#e5e7eb;color:#6b7280':''}">${esc(site)}${done?' · 출력 이력':''}</option>`}).join('');
+    return shell(`<div class="pdf-layout"><section class="card"><div class="card-header"><div><div class="card-title">출력 범위</div><div class="card-sub">출력 이력이 있는 교시·고사장은 회색으로 표시하지만 언제든 다시 출력할 수 있습니다.</div></div></div><div class="card-body stack"><div class="field"><label>전형 선택</label>${v201ExamSelect('v205-pdf-exam-select')}</div><div class="field"><label>출력물</label><div class="v205-fixed-output"><span>감독관 명부</span><span class="badge badge-blue">고정</span></div></div><div class="v205-pdf-grid"><div class="field"><label>교시</label><select class="select" id="v202-pdf-session">${sessionOpts}</select></div><div class="field"><label>${term('examSite')}</label><select class="select" id="v202-pdf-site">${siteOpts}</select></div></div>${infoRows([['출력물','감독관 명부'],['페이지당 학생 수',state.pdf.pageSize+'명'],['서명 정책',signaturePolicyLabel()],['마감 상태',allSessionCloseSummary()]])}${v214PrintStatusHtml(sessions,sites)}<div class="notice notice-info"><span>ⓘ</span><div><b>출력 이력은 확인용이며 재출력을 차단하지 않습니다.</b><br>PDF 다운로드 또는 출력 버튼을 누르면 현재 교시·고사장 조합이 출력됨 상태로 기록됩니다.</div></div></div></section><div class="pdf-preview-panel"><div id="pdf-preview-host">${v205PdfPreview()}</div>${pdfActionButtons()}</div></div>`,'PDF·서명 출력','출력한 교시·고사장을 음영 상태로 확인하고 필요 시 재출력합니다.',`<button class="btn" data-route="settings-pdf">PDF 설정 보기</button>`);
+  };
+
+  const v214DownloadPdfBase=downloadPdfPreview;
+  downloadPdfPreview=async function(){v214RecordPrint('PDF 다운로드');const result=await v214DownloadPdfBase();setTimeout(()=>{if(route==='pdf-output')render();},1800);return result;};
+  const v214PrintPdfBase=printPdfPreview;
+  printPdfPreview=function(){v214RecordPrint('출력');const result=v214PrintPdfBase();setTimeout(()=>{if(route==='pdf-output')render();},1200);return result;};
+
+  const v214SettingsFeaturesBase=settingsFeatures;
+  settingsFeatures=function(){
+    let html=v214SettingsFeaturesBase();
+    return html.replaceAll(' ','').replaceAll('Â·','·').replaceAll('â†’','→').replaceAll('â€¢','·').replaceAll('ðŸ','').replace(/\s{3,}/g,'  ');
+  };
+
+  function v214ResetScopeOptions(includeAccounts=true){
+    const items=[['settings','설정값','기능, PDF, 각서, 사고유형 설정을 초기화'],['terms','학교별 명칭','선택 전형의 명칭 변경값 초기화'],['uploads','업로드 데이터','수험생, 감독관, 사진 ZIP, 오류 및 목록 데이터 삭제'],['operations','운영·마감 데이터','사진 확인, 현장 메모, 마감 상태 초기화']];
+    if(includeAccounts)items.push(['accounts','관리자 계정 편집값','선택 학교의 대학관리자 예시 계정 초기화']);
+    return `<div class="v214-reset-scope">${items.map(([key,name,desc])=>`<label class="v214-reset-option"><input type="checkbox" data-v214-reset="${key}"><div><b>${name}</b><span>${desc}</span></div></label>`).join('')}</div>`;
+  }
+  function v214ApplyReset(examId,scopes,schoolId){
+    if(!examId)return false;
+    const ex=state.exams.find(e=>e.id===examId);if(!ex)return false;
+    if(scopes.includes('settings')){delete state.examConfigs?.[examId];if(examId===v201CurrentExamId()){state.features=Object.assign({},defaultState.features,{pdfUse:true,allowUnassignedInvigilator:false});state.pdf=v201Deep(defaultState.pdf);state.pledgeTemplates=v201Deep(defaultState.pledgeTemplates||state.pledgeTemplates);}}
+    if(scopes.includes('terms')){delete state.examTerms?.[examId];if(examId===v201CurrentExamId())state.terms=v201Deep(DEFAULT_TERMS);}
+    if(scopes.includes('uploads')){state.uploadRows={candidate:[],invigilator:[],photos:[],answerSheet:[]};state.uploadErrors={candidate:[],invigilator:[],photos:[],answerSheet:[]};state.uploadFileNames={};state.invigilatorAssignments=[];state.ui.dataDetail='';}
+    if(scopes.includes('operations')){state.photoAdmissionStatus={};state.photoMemos={};state.closeBySite=state.closeBySite||{};['s1','s2','s3','s4'].forEach(s=>state.closeBySite[s]={'본교 제1고사장':'마감 전','본교 제2고사장':'마감 전','예비고사장':'마감 전'});state.pdfPrintHistory=state.pdfPrintHistory.filter(h=>h.examId!==examId);}
+    if(scopes.includes('accounts')&&schoolId)state.accounts=state.accounts.filter(a=>a.role==='pm'||!a.schoolId||a.schoolId!==schoolId);
+    state.auditLogs.unshift({at:new Date().toLocaleString('ko-KR'),schoolId:schoolId||ex.schoolId,examId,account:state.session.id,feature:'초기화',target:ex.name,action:`선택 초기화 · ${scopes.join(', ')}`});
+    save();return true;
+  }
+  const v214ResetBase=openResetConfirm;
+  openResetConfirm=function(){
+    if(isRole('pm')){
+      const exams=v207ActiveExams();
+      modal('담당 PM 데이터 선택 초기화',`<div class="notice notice-warning"><span>!</span><div><b>초기화할 전형과 메뉴 데이터를 먼저 선택합니다.</b><br>선택하지 않은 전형과 메뉴 데이터는 유지됩니다.</div></div><div class="v214-reset-target"><div class="field"><label>전형 선택</label><select class="select" id="v214-pm-reset-exam">${exams.map(e=>`<option value="${e.id}" ${e.id===v201CurrentExamId()?'selected':''}>${esc(e.name)} · ${esc(e.status)}</option>`).join('')}</select></div><div class="field"><label>학교코드 확인</label><input class="input" id="v214-pm-reset-code" placeholder="${esc(state.school.code)}"></div></div>${v214ResetScopeOptions(true)}`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-red" id="v214-pm-reset-submit">선택 전형 데이터 초기화</button>`);
+      setTimeout(()=>document.getElementById('v214-pm-reset-submit')?.addEventListener('click',()=>{const examId=document.getElementById('v214-pm-reset-exam')?.value,scopes=[...document.querySelectorAll('[data-v214-reset]:checked')].map(x=>x.dataset.v214Reset);if(!examId){toast('초기화할 전형을 선택해주세요.','warning');return;}if(!scopes.length){toast('초기화할 메뉴를 선택해주세요.','warning');return;}if(document.getElementById('v214-pm-reset-code').value.trim().toUpperCase()!==state.school.code.toUpperCase()){toast('학교코드가 일치하지 않습니다.','error');return;}v201SetExam(examId,false);v214ApplyReset(examId,scopes,state.school.id);closeModal();render();toast('선택한 전형의 지정 데이터만 초기화했습니다.','success');}),0);return;
+    }
+    if(isRole('developer')){
+      const firstSchool=state.schools[0],schoolOpts=state.schools.map(s=>`<option value="${s.id}">${esc(s.name)} (${esc(s.code)})</option>`).join('');
+      modal('개발자 학교·전형 선택 초기화',`<div class="notice notice-danger"><span>!</span><div><b>학교와 전형을 선택한 뒤 필요한 데이터만 초기화합니다.</b><br>학교·전형 기준정보 자체는 삭제하지 않습니다.</div></div><div class="v214-reset-target"><div class="field"><label>대학 선택</label><select class="select" id="v214-dev-reset-school">${schoolOpts}</select></div><div class="field"><label>전형 선택</label><select class="select" id="v214-dev-reset-exam"></select></div></div>${v214ResetScopeOptions(false)}<label class="v214-reset-option"><input type="checkbox" data-v214-reset="viewer"><div><b>학교 조회계정</b><span>선택 대학에 발급된 조회계정만 초기화</span></div></label><label class="v214-reset-option"><input type="checkbox" data-v214-reset="logs"><div><b>감사 로그</b><span>선택 전형의 작업 로그만 초기화</span></div></label><div class="field" style="margin-top:12px"><label>선택 대학 학교코드 확인</label><input class="input" id="v214-dev-reset-code" placeholder="${esc(firstSchool?.code||'')}"></div>`,`<button class="btn" data-close-modal>취소</button><button class="btn btn-red" id="v214-dev-reset-submit">학교·전형 선택 초기화</button>`);
+      setTimeout(()=>{const school=document.getElementById('v214-dev-reset-school'),exam=document.getElementById('v214-dev-reset-exam'),code=document.getElementById('v214-dev-reset-code');const refresh=()=>{const sid=school.value,sc=state.schools.find(s=>s.id===sid),list=state.exams.filter(e=>e.schoolId===sid);exam.innerHTML=list.map(e=>`<option value="${e.id}">${esc(e.name)} · ${esc(e.status)}</option>`).join('')||'<option value="">등록 전형 없음</option>';code.placeholder=sc?.code||'';code.value='';};school.addEventListener('change',refresh);refresh();document.getElementById('v214-dev-reset-submit')?.addEventListener('click',()=>{const sid=school.value,examId=exam.value,sc=state.schools.find(s=>s.id===sid),scopes=[...document.querySelectorAll('[data-v214-reset]:checked')].map(x=>x.dataset.v214Reset);if(!examId){toast('초기화할 전형을 선택해주세요.','warning');return;}if(!scopes.length){toast('초기화할 항목을 선택해주세요.','warning');return;}if(code.value.trim().toUpperCase()!==(sc?.code||'').toUpperCase()){toast('선택 대학의 학교코드가 일치하지 않습니다.','error');return;}v214ApplyReset(examId,scopes.filter(x=>!['viewer','logs'].includes(x)),sid);if(scopes.includes('viewer'))state.schoolAccounts=state.schoolAccounts.filter(a=>a.schoolId!==sid);if(scopes.includes('logs'))state.auditLogs=state.auditLogs.filter(l=>l.examId!==examId);save();closeModal();render();toast('선택한 대학·전형 데이터만 초기화했습니다.','success');});},0);return;
+    }
+    return v214ResetBase();
+  };
+
+  function v214UploadActionBar(type,rows){
+    const label=type==='candidate'?'수험생':'감독관',file=state.uploadFileNames?.[type]||`${label} 업로드 파일`,errors=(state.uploadErrors?.[type]||[]).length;
+    return `<div class="v214-upload-actionbar"><div class="info"><b>${esc(label)}데이터 업로드 완료</b><span>${esc(file)} · ${rows.length}행 · 오류 ${errors}건</span></div><button class="btn btn-primary" data-action="v214-show-upload-list" data-upload-list="${type}">${label} 목록 보기</button><button class="btn" data-action="v214-download-upload-list" data-upload-list="${type}">엑셀형 다운로드</button></div>`;
+  }
+  const v214UploadBase=uploadPage;
+  uploadPage=function(){
+    let html=v214UploadBase();const type=state.ui.uploadType||'candidate',rows=state.uploadRows?.[type]||[];
+    if(['candidate','invigilator'].includes(type)&&rows.length){const bar=v214UploadActionBar(type,rows),anchor='<section class="card v201-upload-query v206-data-summary">';html=html.includes(anchor)?html.replace(anchor,bar+anchor):html.replace('</main>',bar+'</main>');}
+    return html;
+  };
+
+  function v214DataDetailConfig(label){
+    const isInv=label.includes('감독관')||['정감독관','부감독관','예비감독관','무배정','감독관데이터'].includes(label),isPhoto=label.includes('사진');
+    if(isPhoto)return {title:'사진 상세목록',rows:state.uploadRows.photos||[],headers:['파일명','수험번호','매칭','상태','오류내용'],keys:[['파일명','사진파일명'],['수험번호'],['매칭'],['상태'],['오류내용']]};
+    if(isInv){let rows=state.uploadRows.invigilator||[];if(['정감독관','부감독관','예비감독관'].includes(label))rows=rows.filter(r=>v206Get(r,['감독관구분']).includes(label.replace('감독관',''))||v206Get(r,['감독관구분'])===label);if(label==='무배정')rows=rows.filter(r=>!v206Get(r,['고사실코드','고사실']));return {title:'감독관 상세목록',rows,headers:['전형명','시험일','교시','고사장','건물','고사실코드','고사실','감독관ID','감독관명','감독관구분','연락처','서명사용여부','오류내용'],keys:[['전형명'],['시험일','고사일'],['교시'],['고사장'],['건물'],['고사실코드'],['고사실'],['감독관ID'],['감독관명','이름'],['감독관구분'],['연락처'],['서명사용여부'],['오류내용','오류예시']]};}
+    return {title:'수험생 상세목록',rows:state.uploadRows.candidate||[],headers:['전형명','시험일','교시','시작시간','종료시간','고사장','건물','고사실코드','고사실','수험번호','수험생명','생년월일','계열','모집단위','배정인원','사진파일명','오류내용'],keys:[['전형명'],['시험일','고사일'],['교시'],['시작시간'],['종료시간'],['고사장'],['건물'],['고사실코드'],['고사실'],['수험번호'],['수험생명','성명'],['생년월일'],['계열'],['모집단위'],['배정인원'],['사진파일명'],['오류내용','오류예시']]};
+  }
+  v207DataDetailPanel=function(){
+    const label=state.ui.dataDetail;if(!label)return '';const cfg=v214DataDetailConfig(label);
+    const rows=cfg.rows.map(r=>cfg.keys.map(keys=>v206Get(r,keys)));
+    return `<section class="v214-upload-detail v207-data-detail"><div class="head"><div><b>${esc(cfg.title)}</b><div class="small muted">업로드 원본을 읽기 전용으로 확인합니다. 가로 스크롤과 전체 검색을 사용할 수 있습니다.</div></div><div class="flex gap-8"><button class="btn btn-sm" data-action="v214-download-upload-list" data-upload-list="${cfg.title.startsWith('감독관')?'invigilator':cfg.title.startsWith('사진')?'photos':'candidate'}">다운로드</button><button class="btn btn-sm" data-action="v207-close-data-detail">닫기</button></div></div><div class="body"><div class="table-wrap"><table><thead><tr>${cfg.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(v=>`<td>${esc(v||'-')}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${cfg.headers.length}" class="text-center muted">데이터가 없습니다.</td></tr>`}</tbody></table></div></div></section>`;
+  };
+  async function v214DownloadUploadList(type){
+    const cfg=v214DataDetailConfig(type==='invigilator'?'감독관데이터':type==='photos'?'사진파일':'수험생데이터'),rows=cfg.rows,headers=cfg.headers;
+    const objects=rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,v206Get(r,cfg.keys[i])])))
+    try{const ready=await ensureXlsx();if(ready){const ws=XLSX.utils.json_to_sheet(objects,{header:headers}),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,type==='invigilator'?'감독관데이터':type==='photos'?'사진데이터':'수험생데이터');XLSX.writeFile(wb,`${type==='invigilator'?'감독관':type==='photos'?'사진':'수험생'}_업로드목록_v${APP_VERSION}.xlsx`);return;}}catch(e){console.warn(e)}
+    const q=v=>`"${String(v??'').replaceAll('"','""')}"`,csv='\ufeff'+[headers.map(q).join(','),...objects.map(o=>headers.map(h=>q(o[h])).join(','))].join('\n');downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`${type==='invigilator'?'감독관':type==='photos'?'사진':'수험생'}_업로드목록.csv`);
+  }
+
+  const v214BindActionsBase=bindActions;
+  bindActions=function(){
+    v214BindActionsBase();
+    document.querySelectorAll('[data-action="v214-pdf-session"]').forEach(el=>el.addEventListener('click',()=>{state.ui.pdfOutputSession=el.dataset.session;save();render();}));
+    document.querySelectorAll('[data-action="v214-pdf-site"]').forEach(el=>el.addEventListener('click',()=>{state.ui.pdfOutputSite=el.dataset.site;save();render();}));
+    document.querySelectorAll('[data-action="v214-show-upload-list"]').forEach(el=>el.addEventListener('click',()=>{const type=el.dataset.uploadList;state.ui.dataDetail=type==='invigilator'?'감독관데이터':'수험생데이터';save();render();setTimeout(()=>document.querySelector('.v214-upload-detail')?.scrollIntoView({behavior:'smooth',block:'start'}),0);}));
+    document.querySelectorAll('[data-action="v214-download-upload-list"]').forEach(el=>el.addEventListener('click',()=>v214DownloadUploadList(el.dataset.uploadList)));
+  };
+
+  v214Normalize();
 
   window.addEventListener('hashchange',()=>{route=location.hash.replace(/^#\/?/,'')||'login';render();});
   render();
