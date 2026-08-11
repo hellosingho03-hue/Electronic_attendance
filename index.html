@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.12</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.13</title>
   <style>
 :root {
   --navy:#071d42;
@@ -975,8 +975,8 @@ body.dark .v209-selected-panel{background:#142238;border-color:#284c78}body.dark
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.12';
-  const BUILD_ID = '20260811-212';
+  const APP_VERSION = '2.0.13';
+  const BUILD_ID = '20260811-213';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -3051,6 +3051,42 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
 
 <style id="v211-style">
 .v211-call-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.v211-call-card{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:12px;display:grid;gap:8px}.v211-call-card.unread{border-color:#8eb9ee;box-shadow:inset 4px 0 0 var(--blue);background:#f4f9ff}.v211-call-card .site{font-weight:900;color:var(--navy-2)}.v211-call-card .message{font-size:12px;line-height:1.5}.v211-answer-layout{display:grid;grid-template-columns:minmax(350px,.8fr) minmax(560px,1.2fr);gap:14px}.v211-answer-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.v211-answer-col{padding:8px;border:1px solid var(--gray-200);border-radius:9px;background:var(--gray-100);font-size:11px}.v211-answer-col b{display:block;color:var(--navy-2)}.v211-answer-result{margin-top:14px;border:2px solid var(--gray-200);border-radius:14px;padding:14px}.v211-answer-result.ok{border-color:#79caa0;background:#f3fff8}.v211-answer-result.error{border-color:#e69b9b;background:#fff7f7}.v211-answer-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}.v211-answer-summary>div{padding:10px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white)}.v211-answer-summary span{display:block;font-size:10px;color:var(--gray-500)}.v211-answer-summary b{font-size:20px}.v211-answer-history th:last-child,.v211-answer-history td:last-child{position:sticky;right:0;background:var(--white);min-width:130px;text-align:center}.v211-answer-photo-wrap{background:#eef1f5;padding:18px;border-radius:12px}.v211-answer-photo{max-width:700px;margin:auto;background:#fff;padding:26px;border:1px solid #ccd2db}.v211-answer-photo h3{text-align:center;margin:0 0 18px}.v211-answer-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px}.v211-answer-photo-grid>div{border:1px solid #d7dce4;padding:9px}.v211-answer-lines{display:grid;gap:10px;margin-top:14px}.v211-answer-line{height:32px;border-bottom:1px solid #c7ccd4;font-size:11px;color:#6b7280}.v211-stat-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:12px}.v211-stat-selector .btn{justify-content:flex-start;text-align:left;padding:9px 11px;height:auto}.v211-stat-selector .btn.active{background:var(--blue);color:#fff}.v211-stat-table{max-height:440px;overflow:auto}.v211-stat-table table{font-size:10px;min-width:980px}.v211-stat-table th,.v211-stat-table td{padding:6px 7px;white-space:nowrap}.v211-term-close{border-color:#9ebce8!important;background:#f4f8ff!important}body.dark .v211-call-card,body.dark .v211-answer-result,body.dark .v211-answer-summary>div,body.dark .v211-answer-history th:last-child,body.dark .v211-answer-history td:last-child{background:var(--gray-100)}@media(max-width:1100px){.v211-call-grid{grid-template-columns:1fr 1fr}.v211-answer-layout{grid-template-columns:1fr}.v211-stat-selector{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* v2.0.13 — attendance/output logs and answer-sheet recognition log */
+  .v213-log-notice{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid #b9d3f3;background:#f3f8ff;border-radius:11px;margin-bottom:12px;font-size:11px;line-height:1.5}
+  .v213-log-notice b{color:var(--navy-2)}
+  .v213-answer-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+  .v213-answer-kpi{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .v213-answer-kpi span{font-size:10px;color:var(--gray-500)}
+  .v213-answer-kpi b{display:block;font-size:22px;color:var(--navy-2);margin-top:3px}
+  .v213-answer-kpi .icon{width:34px;height:34px;border-radius:10px;background:var(--blue-2);color:var(--blue);display:grid;place-items:center;font-weight:900}
+  .v213-recognition-table{max-height:540px;overflow:auto}
+  .v213-recognition-table table{min-width:1500px;font-size:10.5px}
+  .v213-recognition-table th,.v213-recognition-table td{padding:5px 7px!important;white-space:nowrap;line-height:1.25}
+  .v213-recognition-table th:first-child,.v213-recognition-table td:first-child{position:sticky;left:0;background:var(--white);z-index:2;font-weight:900}
+  .v213-recognition-table th:last-child,.v213-recognition-table td:last-child{position:sticky;right:0;background:var(--white);z-index:2;min-width:116px;text-align:center}
+  .v213-stat-table{max-height:520px;overflow:auto;border:1px solid var(--gray-200);border-radius:10px}
+  .v213-stat-table table{min-width:max-content;font-size:10px}
+  .v213-stat-table th,.v213-stat-table td{padding:5px 7px!important;white-space:nowrap;line-height:1.2}
+  .v213-stat-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:12px;align-items:start}
+  .v213-stat-list{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:9px;display:grid;gap:4px;max-height:545px;overflow:auto;position:sticky;top:10px}
+  .v213-stat-title{font-size:12px;font-weight:900;color:var(--navy-2);padding:4px 5px 7px;border-bottom:1px solid var(--gray-200);margin-bottom:2px}
+  .v213-stat-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:6px;align-items:center;border:1px solid var(--gray-200);background:var(--white);border-radius:8px;padding:7px 8px;cursor:pointer;text-align:left;font-size:10.5px;color:var(--gray-800)}
+  .v213-stat-row:hover{border-color:#93bce8;background:#f4f9ff}
+  .v213-stat-row.active{border-color:var(--blue);background:#edf5ff;box-shadow:inset 3px 0 0 var(--blue);color:var(--blue)}
+  .v213-stat-row .no{font-weight:900;color:var(--gray-500)}
+  .v213-stat-row .name{font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .v213-stat-row .cnt{font-size:9px;color:var(--gray-500)}
+  .v213-output-type{display:inline-flex;padding:3px 7px;border-radius:999px;font-size:9.5px;font-weight:800}
+  .v213-output-type.pdf{background:#eaf3ff;color:#1d64c8}.v213-output-type.pledge{background:#fff3e7;color:#b8670b}
+  .v213-image-preview{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .v213-image-sheet{background:#fff;border:1px solid #ccd3df;border-radius:10px;padding:18px;min-height:270px}
+  .v213-barcode{height:68px;background:repeating-linear-gradient(90deg,#111 0 2px,#fff 2px 4px,#111 4px 5px,#fff 5px 8px);margin:16px 0 8px;border:8px solid #fff;box-shadow:0 0 0 1px #d5d9df}
+  .v213-answer-photo-mock{height:180px;border:1px solid #d5dbe5;background:linear-gradient(145deg,#f7f8fa,#e6ebf2);display:grid;place-items:center;color:#667085;font-size:12px}
+  body.dark .v213-log-notice{background:#142b47;border-color:#31557c}
+  body.dark .v213-answer-kpi,body.dark .v213-stat-list,body.dark .v213-stat-row,body.dark .v213-recognition-table th:first-child,body.dark .v213-recognition-table td:first-child,body.dark .v213-recognition-table th:last-child,body.dark .v213-recognition-table td:last-child{background:var(--gray-100);border-color:var(--gray-200)}
+  @media(max-width:1100px){.v213-stat-layout{grid-template-columns:1fr}.v213-stat-list{position:static;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}.v213-stat-title{grid-column:1/-1}.v213-answer-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 </head><body>${pages}</body></html>`);popup.document.close();setTimeout(()=>{popup.focus();popup.print();},500);
   }
@@ -3759,6 +3795,109 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
   v201DeveloperAccounts=function(){const rows=state.schoolAccounts.map(a=>{const sc=schoolById(a.schoolId);return `<tr><td><b class="v201-school-id">${esc(a.id)}</b></td><td>${esc(a.label||'학교 조회계정')}</td><td>${esc(sc?.name||'')}</td><td>${esc(sc?.code||'')}</td><td class="v203-viewer-password">${esc(a.password||'1234')}</td><td><span class="badge ${a.status==='사용'?'badge-green':'badge-gray'}">${esc(a.status)}</span></td><td>${esc(a.created||'-')}</td><td><div class="v212-viewer-actions"><button class="btn btn-sm" data-action="v203-edit-viewer" data-viewer-id="${esc(a.id)}">수정</button><button class="btn btn-sm" data-action="v201-toggle-viewer" data-viewer-id="${esc(a.id)}">${a.status==='사용'?'사용중지':'사용재개'}</button><button class="btn btn-sm btn-red" data-action="v203-delete-viewer" data-viewer-id="${esc(a.id)}">삭제</button></div></td></tr>`}).join('');return shell(`<div class="notice notice-info v201-viewer-note"><span>ID</span><div><b>학교코드 자동생성과 수동 계정 관리를 함께 지원합니다.</b><br>학교 조회계정은 사람이나 담당범위를 배정하지 않는 공용 조회용 계정입니다. 관리 영역에서 접속정보 복사 기능은 제공하지 않습니다.</div></div><section class="card"><div class="card-header"><div><div class="card-title">학교별 조회계정</div><div class="card-sub">자동 생성 또는 수동으로 개별 ID를 생성·수정·삭제합니다.</div></div><div class="v203-viewer-toolbar"><button class="btn" data-action="v201-open-viewer-modal">자동생성</button><button class="btn btn-primary" data-action="v203-open-viewer-manual">+ 수동생성</button></div></div><div class="card-body"><div class="table-wrap"><table style="min-width:1120px"><thead><tr><th>조회ID</th><th>계정명</th><th>학교</th><th>학교코드</th><th>비밀번호</th><th>상태</th><th>생성일</th><th>관리</th></tr></thead><tbody>${rows}</tbody></table></div></div></section>`,'학교별 조회계정','입학처·학교 담당자가 공용으로 사용할 수 있는 조회계정을 자동 또는 수동으로 관리합니다.','');};
   function v212Normalize(){if(!state.answerSheetUpload){state.answerSheetUpload={fileName:'5. 답안지정보 업로드 양식.xlsx',rows:v212AnswerRows(true),errors:[],uploadedAt:new Date().toLocaleString('ko-KR')}}}
   v212Normalize();
+
+
+
+  /* v2.0.13 — attendance/output logs and answer-sheet recognition log */
+  function v213AttendanceLogObjects(){
+    return [
+      {No:1,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020001',수험생이름:'자연1',응시여부:'응시',응시시각:'2026-05-04 13:01:12',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1000',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:01:18',입력방식:'바코드',사진:''},
+      {No:2,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020002',수험생이름:'자연2',응시여부:'응시',응시시각:'2026-05-04 13:02:25',신분증미소지:'정상',부정행위:'부정행위',중도퇴실:'중도퇴실',답안지:'1001',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:02:31',입력방식:'직접입력',사진:''},
+      {No:3,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020003',수험생이름:'자연3',응시여부:'미확인',응시시각:'-',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1002',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:05:03',입력방식:'리스트',사진:''},
+      {No:4,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020004',수험생이름:'자연4',응시여부:'응시',응시시각:'2026-05-04 13:04:17',신분증미소지:'미지참',부정행위:'정상',중도퇴실:'정상',답안지:'1003',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:04:20',입력방식:'리스트',사진:'44020004.jpg'},
+      {No:5,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-2',원고사실명:'첨단과학관 202호',응시고사실코드:'2-2',응시고사실명:'첨단과학관 202호',수험번호:'44020009',수험생이름:'자연9',응시여부:'응시(타)',응시시각:'2026-05-04 13:06:41',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1004',감독관:'자연2-2(자연9)',전송시각:'2026-05-04 13:06:46',입력방식:'바코드',사진:''},
+      {No:6,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-2',원고사실명:'첨단과학관 202호',응시고사실코드:'2-2',응시고사실명:'첨단과학관 202호',수험번호:'44020013',수험생이름:'자연13',응시여부:'응시(타)',응시시각:'2026-05-04 13:07:18',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1005',감독관:'자연2-2(자연9)',전송시각:'2026-05-04 13:07:23',입력방식:'바코드',사진:''},
+      {No:7,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020012',수험생이름:'자연12',응시여부:'응시',응시시각:'2026-05-04 13:08:02',신분증미소지:'정상',부정행위:'부정행위',중도퇴실:'정상',답안지:'1006',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:08:10',입력방식:'리스트',사진:''},
+      {No:8,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020015',수험생이름:'자연15',응시여부:'미확인',응시시각:'-',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1007',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:09:05',입력방식:'리스트',사진:''},
+      {No:9,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020018',수험생이름:'자연18',응시여부:'미확인',응시시각:'-',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1008',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:10:12',입력방식:'리스트',사진:''},
+      {No:10,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020024',수험생이름:'자연24',응시여부:'미확인',응시시각:'-',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1009',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:11:01',입력방식:'리스트',사진:''},
+      {No:11,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-1',원고사실명:'첨단과학관 201호',응시고사실코드:'2-1',응시고사실명:'첨단과학관 201호',수험번호:'44020030',수험생이름:'자연30',응시여부:'미확인',응시시각:'-',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1010',감독관:'자연2-1(자연1)',전송시각:'2026-05-04 13:12:44',입력방식:'리스트',사진:''},
+      {No:12,고사일:'2026-05-04',교시:'2교시',원고사실코드:'2-2',원고사실명:'첨단과학관 202호',응시고사실코드:'2-2',응시고사실명:'첨단과학관 202호',수험번호:'44020008',수험생이름:'자연8',응시여부:'응시(타)',응시시각:'2026-05-04 13:14:21',신분증미소지:'정상',부정행위:'정상',중도퇴실:'정상',답안지:'1011',감독관:'자연2-2(자연9)',전송시각:'2026-05-04 13:14:28',입력방식:'직접입력',사진:''}
+    ];
+  }
+  function v213PdfOutputLogObjects(){return [
+    {No:1,출력일시:'2026-05-04 08:10:12',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',교시:'1교시',고사장:'본교 제1고사장',고사실:'학림관 J411',출력물:'감독관 명부',대상건수:'53명',파일명:'감독관명부_1교시_J411.pdf',출력자:'담당PM 박상호',처리방식:'PDF 다운로드',상태:'완료'},
+    {No:2,출력일시:'2026-05-04 08:12:45',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',교시:'1교시',고사장:'본교 제1고사장',고사실:'학림관 J409',출력물:'감독관 명부',대상건수:'52명',파일명:'감독관명부_1교시_J409.pdf',출력자:'전형관리자 김민수',처리방식:'출력',상태:'완료'},
+    {No:3,출력일시:'2026-05-04 12:08:05',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',교시:'2교시',고사장:'본교 제2고사장',고사실:'첨단과학관 201호',출력물:'감독관 명부',대상건수:'45명',파일명:'감독관명부_2교시_201호.pdf',출력자:'담당PM 박상호',처리방식:'PDF 다운로드',상태:'완료'},
+    {No:4,출력일시:'2026-05-04 12:09:17',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',교시:'2교시',고사장:'본교 제2고사장',고사실:'첨단과학관 202호',출력물:'감독관 명부',대상건수:'43명',파일명:'감독관명부_2교시_202호.pdf',출력자:'전형관리자 김민수',처리방식:'출력',상태:'완료'},
+    {No:5,출력일시:'2026-05-04 15:41:33',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',교시:'3교시',고사장:'본교 제1고사장',고사실:'혜화관 423',출력물:'감독관 명부',대상건수:'42명',파일명:'감독관명부_3교시_423호.pdf',출력자:'담당PM 박상호',처리방식:'PDF 다운로드',상태:'완료'}
+  ];}
+  function v213PledgeOutputLogObjects(){return [
+    {No:1,출력일시:'2026-05-04 13:18:02',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',사고유형:'신분증 미소지',수험번호:'44020004',성명:'자연4',고사장:'본교 제2고사장',고사실:'첨단과학관 201호',파일명:'신분증미소지_44020004.pdf',출력자:'전형관리자 김민수',처리방식:'PDF 다운로드',상태:'완료'},
+    {No:2,출력일시:'2026-05-04 13:22:17',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',사고유형:'부정행위',수험번호:'44020002',성명:'자연2',고사장:'본교 제2고사장',고사실:'첨단과학관 201호',파일명:'부정행위각서_44020002.pdf',출력자:'담당PM 박상호',처리방식:'출력',상태:'완료'},
+    {No:3,출력일시:'2026-05-04 13:23:44',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',사고유형:'중도퇴실',수험번호:'44020002',성명:'자연2',고사장:'본교 제2고사장',고사실:'첨단과학관 201호',파일명:'중도퇴실각서_44020002.pdf',출력자:'전형관리자 김민수',처리방식:'PDF 다운로드',상태:'완료'},
+    {No:4,출력일시:'2026-05-04 16:02:10',전형명:'2026학년도 수시 논술',시험일:'2026-05-04',사고유형:'소음발생',수험번호:'44030017',성명:'인문17',고사장:'본교 제1고사장',고사실:'혜화관 423',파일명:'소음발생확인서_44030017.pdf',출력자:'담당PM 박상호',처리방식:'출력',상태:'완료'}
+  ];}
+  function v213AnswerRecognitionObjects(){
+    const names=['자연1','자연2','자연3','자연4','자연5','자연6','자연7','자연8','자연9','자연10','자연11','자연12'];
+    return Array.from({length:20},(_,i)=>({
+      답안지:String(1000+i),전형:i<12?'수시논술':'수시실기-연극',계열:i<12?'인문':'예체능',과목:i<12?'영어':'연극실기',고사실코드:i<10?'2-1':'2-2',고사실명:i<10?'첨단과학관 201호':'첨단과학관 202호',수험번호:i<12?`44020${String(i+1).padStart(3,'0')}`:'',수험생:i<12?names[i]:'',분배상태:i<9?'분배완료':'미분배',분배일시:i<9?`2026-05-04 12:${String(40+i).padStart(2,'0')}`:'미분배',교체일시:i===3?'2026-05-04 13:20':'미교체',전송담당자:i<9?`자연2-${i<5?'1':'2'}(감독관)`:'',바코드이미지:`barcode_${1000+i}.png`,촬영이미지:i<9?`answer_${1000+i}.jpg`:''
+    }));
+  }
+  function v213Dataset(name,rows,headers){return {name,headers,rows:rows.map(o=>headers.map(h=>o[h]??''))};}
+  const v213StatsBase=statisticsDatasets;
+  statisticsDatasets=function(){
+    const d=v213StatsBase();
+    const attendance=v213AttendanceLogObjects(),pdf=v213PdfOutputLogObjects(),pledge=v213PledgeOutputLogObjects(),answer=v213AnswerRecognitionObjects();
+    d.attendanceLog=v213Dataset('출결 로그',attendance,['No','고사일','교시','원고사실코드','원고사실명','응시고사실코드','응시고사실명','수험번호','수험생이름','응시여부','응시시각','신분증미소지','부정행위','중도퇴실','답안지','감독관','전송시각','입력방식','사진']);
+    d.pdfOutputLog=v213Dataset('PDF 출력 로그',pdf,['No','출력일시','전형명','시험일','교시','고사장','고사실','출력물','대상건수','파일명','출력자','처리방식','상태']);
+    d.pledgeOutputLog=v213Dataset('각서 출력 로그',pledge,['No','출력일시','전형명','시험일','사고유형','수험번호','성명','고사장','고사실','파일명','출력자','처리방식','상태']);
+    d.answerSheet=v213Dataset('답안지 인식로그',answer,['답안지','전형','계열','과목','고사실코드','고사실명','수험번호','수험생','분배상태','분배일시','교체일시','전송담당자','바코드이미지','촬영이미지']);
+    return d;
+  };
+  function v213DatasetCsv(key){
+    const d=statisticsDatasets()[key];if(!d)return null;
+    const q=v=>`"${String(v??'').replaceAll('"','""')}"`;
+    return '\ufeff'+[d.headers.map(q).join(','),...d.rows.map(r=>r.map(q).join(','))].join('\n');
+  }
+  function v213AnswerImage(index){
+    const row=v213AnswerRecognitionObjects()[index]||v213AnswerRecognitionObjects()[0];
+    return `<div class="v213-image-preview"><div class="v213-image-sheet"><h3 style="margin:0 0 8px">바코드 이미지</h3><div class="small muted">${esc(row.바코드이미지)}</div><div class="v213-barcode"></div><div class="text-center strong">${esc(row.답안지)}</div></div><div class="v213-image-sheet"><h3 style="margin:0 0 8px">답안지 촬영이미지</h3><div class="small muted">${esc(row.촬영이미지||'촬영 전')}</div><div class="v213-answer-photo-mock">${row.촬영이미지?`답안지 촬영 이미지 예시<br>${esc(row.고사실명)} · ${esc(row.수험생||'-')}`:'촬영이미지가 없습니다.'}</div></div></div>`;
+  }
+  answerSheetHistoryPage=function(){
+    if(!state.features.answerSheet)return shell('<div class="notice notice-warning">답안지 기능이 꺼져 있습니다.</div>','답안지 이력','','');
+    const rows=v213AnswerRecognitionObjects(),distributed=rows.filter(r=>r.분배상태==='분배완료').length,undistributed=rows.length-distributed,photos=rows.filter(r=>r.촬영이미지).length;
+    const headers=['답안지','전형','계열','과목','고사실코드','고사실명','수험번호','수험생','분배상태','분배일시','교체일시','전송담당자','바코드이미지'];
+    const table=`<div class="table-wrap v213-recognition-table"><table class="v211-answer-history"><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}<th>촬영이미지</th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${headers.map(h=>`<td>${h==='분배상태'?`<span class="badge ${r[h]==='분배완료'?'badge-green':'badge-gray'}">${esc(r[h])}</span>`:esc(r[h]||'-')}</td>`).join('')}<td><button class="btn btn-sm" data-action="v213-answer-image" data-index="${i}" ${r.촬영이미지?'':'disabled'}>${r.촬영이미지?'촬영이미지 보기':'촬영 전'}</button></td></tr>`).join('')}</tbody></table></div>`;
+    return shell(`<div class="v213-log-notice"><span>ⓘ</span><div><b>답안지 인식로그</b><br>첨부 화면의 답안지·전형·계열·과목·고사실·분배/교체 정보 구조를 반영했습니다. 표 전체 검색과 컬럼별 필터·정렬을 사용할 수 있습니다.</div></div><div class="v213-answer-kpis"><div class="v213-answer-kpi"><div><span>전체 답안지</span><b>${rows.length}</b></div><div class="icon">ID</div></div><div class="v213-answer-kpi"><div><span>분배완료</span><b>${distributed}</b></div><div class="icon">✓</div></div><div class="v213-answer-kpi"><div><span>미분배</span><b>${undistributed}</b></div><div class="icon">–</div></div><div class="v213-answer-kpi"><div><span>촬영이미지</span><b>${photos}</b></div><div class="icon">▣</div></div></div><section class="card"><div class="card-header"><div><div class="card-title">답안지 인식로그</div><div class="card-sub">바코드 인식·분배·교체·촬영 이력을 답안지 단위로 조회합니다.</div></div><button class="btn" data-action="v213-download-dataset" data-dataset="answerSheet">엑셀형 CSV 다운로드</button></div><div class="card-body">${table}</div></section>`,'답안지 이력','답안지 인식·분배·교체·촬영 로그를 검색·조회·필터링합니다.','<button class="btn" data-route="downloads">결과파일 통계</button>');
+  };
+  function v213Files(){return [
+    ['00.전체 수험생 출결 목록_20251116.xlsx','전체 수험생 출결 목록','15,928행','allCandidates'],
+    ['01.계열별출결집계_20251116.xlsx','계열별 출결 집계','계열 기준','byTrack'],
+    ['02.사고자집계_20251116.xlsx','사고자 집계','60건','incidents'],
+    ['03.고사실별출결집계_20251116.xlsx',`${term('examRoom')}별 출결 집계`,'271실','byRoom'],
+    ['04.과목별출결집계_20251116.xlsx','과목별 출결 집계','과목 기준','bySubject'],
+    ['05.교시별출결집계_20251116.xlsx','교시별 출결 집계','4교시','bySession'],
+    ['06.모집단위별출결집계_20251116.xlsx','모집단위별 출결 집계','모집단위 기준','byDepartment'],
+    ['07.타고사장 수험생 목록_20251116.xlsx','타고사장 수험생 목록','대상자 목록','otherSite'],
+    ['08.출결로그_20260504.csv','출결 로그','12건 예시','attendanceLog'],
+    ['09.답안지인식로그_20260504.csv','답안지 인식로그','20건 예시','answerSheet'],
+    ['10.PDF출력로그_20260504.csv','PDF 출력 로그','5건 예시','pdfOutputLog'],
+    ['11.각서출력로그_20260504.csv','각서 출력 로그','4건 예시','pledgeOutputLog'],
+    ['__signature__','감독관 서명 확인 목록','서명 상태','signatures']
+  ];}
+  downloadsPage=function(){
+    const files=v213Files(),datasets=statisticsDatasets();if(!datasets[state.ui.statsFile])state.ui.statsFile='allCandidates';const selected=datasets[state.ui.statsFile];
+    const list=files.map(([,n,d,key],i)=>`<button class="v213-stat-row ${state.ui.statsFile===key?'active':''}" data-action="show-stat-file" data-stat-file="${key}"><span class="no">${String(i+1).padStart(2,'0')}</span><span class="name">${esc(n)}</span><span class="cnt">${esc(d)}</span></button>`).join('');
+    const table=`<div class="table-wrap v213-stat-table"><table><thead><tr>${selected.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${selected.rows.map(r=>`<tr>${r.map((v,i)=>`<td>${['PDF 출력 로그','각서 출력 로그'].includes(selected.name)&&selected.headers[i]==='출력물'?`<span class="v213-output-type ${selected.name.startsWith('PDF')?'pdf':'pledge'}">${esc(v)}</span>`:esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    const downloads=files.map(([f,n,,key])=>`<label><input class="download-check" type="checkbox" data-result-file="${esc(f)}" data-result-name="${esc(n)}" ${['attendanceLog','answerSheet','pdfOutputLog','pledgeOutputLog'].includes(key)?`data-result-dataset="${key}"`:''}><span>${esc(n)}</span></label>`).join('');
+    return shell(`<div class="v201-result-exam"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-result-exam-select')}</div><span class="badge badge-blue">선택 전형 전체파일</span><div class="flex gap-8" style="margin-left:auto"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP</button></div></div><section class="card stats-panel"><div class="card-header"><div><div class="card-title">결과파일 통계</div><div class="card-sub">출결 로그, 답안지 인식로그, PDF·각서 출력 이력까지 검색·필터링합니다.</div></div><span class="badge badge-blue">${esc(selected.name)}</span></div><div class="card-body"><div class="v213-stat-layout"><div class="v213-stat-list"><div class="v213-stat-title">통계 파일 목록</div>${list}</div><div>${table}<div class="stats-table-note">표 전체 검색과 컬럼별 정렬·필터를 함께 사용할 수 있습니다.</div></div></div></div></section><section class="card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">결과파일 다운로드</div><div class="card-sub">로그 파일도 선택해 ZIP 또는 CSV로 받을 수 있습니다.</div></div><div class="flex gap-8"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span></div></div><div class="card-body"><div class="v212-download-compact">${downloads}</div></div></section>`,'결과파일·통계','출결·답안지 인식·PDF·각서 출력 로그를 포함한 결과 통계를 조회합니다.','');
+  };
+  const v213DownloadBase=downloadResultFiles;
+  downloadResultFiles=async function(all=false){
+    const boxes=[...document.querySelectorAll('[data-result-file]')],selected=all?boxes:boxes.filter(x=>x.checked);if(!selected.length){toast('다운로드할 파일을 선택해주세요.','warning');return;}
+    const special=selected.filter(x=>x.dataset.resultDataset);if(!special.length)return v213DownloadBase(all);
+    const ready=await ensureJsZip();if(!ready){special.forEach((box,i)=>setTimeout(()=>{const csv=v213DatasetCsv(box.dataset.resultDataset);if(csv)downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),box.dataset.resultFile);},i*250));toast('로그 파일을 CSV로 개별 다운로드합니다.','warning');return;}
+    const zip=new JSZip();for(const box of selected){const key=box.dataset.resultDataset,f=box.dataset.resultFile;if(key){zip.file(f,v213DatasetCsv(key));continue;}if(f==='__signature__'){zip.file('감독관_서명_확인_목록.csv',signatureCsvBlob());continue;}try{const res=await fetch(`sample-data/${encodeURIComponent(f)}`);if(!res.ok)throw new Error();zip.file(f,await res.blob());}catch(e){zip.file(f.replace(/\.xlsx$/i,'.txt'),`${box.dataset.resultName} 샘플 파일은 배포본의 sample-data 폴더에서 확인하세요.`);}}
+    const blob=await zip.generateAsync({type:'blob'});downloadBlob(blob,`전자출결_결과로그_${new Date().toISOString().slice(0,10)}.zip`);toast(`${selected.length}개 파일을 ZIP으로 생성했습니다.`,'success');
+  };
+  const v213BindActionsBase=bindActions;
+  bindActions=function(){v213BindActionsBase();
+    document.querySelectorAll('[data-action="v213-answer-image"]').forEach(el=>el.addEventListener('click',()=>modal('답안지 인식·촬영 이미지',v213AnswerImage(Number(el.dataset.index)),`<button class="btn" data-close-modal>닫기</button>`)));
+    document.querySelectorAll('[data-action="v213-download-dataset"]').forEach(el=>el.addEventListener('click',()=>{const key=el.dataset.dataset,csv=v213DatasetCsv(key),d=statisticsDatasets()[key];if(!csv||!d)return;downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`${d.name}_${new Date().toISOString().slice(0,10)}.csv`);toast(`${d.name} 파일을 생성했습니다.`,'success');}));
+  };
+  function v213Normalize(){if(!['attendanceLog','pdfOutputLog','pledgeOutputLog','answerSheet'].includes(state.ui.statsFile)&&!statisticsDatasets()[state.ui.statsFile])state.ui.statsFile='attendanceLog';}
+  v213Normalize();
 
   window.addEventListener('hashchange',()=>{route=location.hash.replace(/^#\/?/,'')||'login';render();});
   render();
