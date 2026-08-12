@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>전자출결시스템 관리자 테스트 페이지 v2.0.14</title>
+  <title>전자출결시스템 관리자 테스트 페이지 v2.0.15</title>
   <style>
 :root {
   --navy:#071d42;
@@ -1000,6 +1000,24 @@ body.dark .v214-print-chip.printed{background:#303745;color:#aeb7c4}body.dark .v
 @media(max-width:1100px){.v214-print-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v214-print-group{grid-template-columns:1fr}.v214-reset-target,.v214-reset-scope{grid-template-columns:1fr}}
 </style>
 
+
+<style id="v215-style">
+/* v2.0.15 — 기능 복구, 통계 선택 상단화, 초기화 전체선택 */
+.v215-stat-top{display:flex;align-items:end;gap:10px;padding:12px 14px;margin-bottom:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-stat-top .field{flex:1;max-width:480px;margin:0}.v215-stat-top .select{height:38px}.v215-stat-top .btn{height:38px;padding:0 18px}
+.v215-stat-name{margin-left:auto;white-space:nowrap}.v215-stat-table{max-height:470px;overflow:auto}.v215-stat-table table{min-width:980px}
+.v215-stat-table th,.v215-stat-table td{padding:7px 9px;font-size:12px;white-space:nowrap}
+.v215-feature-restore{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v215-feature-card{display:grid;grid-template-columns:auto 145px 1fr;align-items:center;gap:10px;padding:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-feature-card.on{background:#eef6ff;border-color:#8db8ef;box-shadow:inset 4px 0 0 var(--blue)}
+.v215-feature-card .name{font-weight:700;color:var(--gray-900)}.v215-feature-card .desc{font-size:12px;color:var(--gray-600);line-height:1.45}
+.v215-reset-selectall{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0 8px;padding:10px 12px;border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-50)}
+.v215-reset-selectall .actions{display:flex;gap:6px}.v215-reset-selectall .btn{padding:6px 12px}
+body.dark .v215-stat-top,body.dark .v215-feature-card,body.dark .v215-reset-selectall{background:var(--gray-100);border-color:var(--gray-200)}
+body.dark .v215-feature-card.on{background:#17304d;border-color:#3979bf}
+@media(max-width:900px){.v215-feature-restore{grid-template-columns:1fr}.v215-stat-top{align-items:stretch;flex-direction:column}.v215-stat-name{margin-left:0}}
+</style>
+
 </head>
 <body>
   <noscript><div style="padding:24px;font-family:Arial,sans-serif">이 테스트 페이지는 JavaScript를 사용합니다. 브라우저에서 JavaScript를 허용해 주세요.</div></noscript>
@@ -1011,8 +1029,8 @@ body.dark .v214-print-chip.printed{background:#303745;color:#aeb7c4}body.dark .v
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0.14';
-  const BUILD_ID = '20260811-214';
+  const APP_VERSION = '2.0.15';
+  const BUILD_ID = '20260812-215';
 
 
   const EMBEDDED_TEMPLATES = {
@@ -2067,6 +2085,24 @@ body.dark .v209-selected-panel{background:#142238;border-color:#284c78}body.dark
 <style id="v211-style">
 .v211-call-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.v211-call-card{border:1px solid var(--gray-200);border-radius:12px;background:var(--white);padding:12px;display:grid;gap:8px}.v211-call-card.unread{border-color:#8eb9ee;box-shadow:inset 4px 0 0 var(--blue);background:#f4f9ff}.v211-call-card .site{font-weight:900;color:var(--navy-2)}.v211-call-card .message{font-size:12px;line-height:1.5}.v211-answer-layout{display:grid;grid-template-columns:minmax(350px,.8fr) minmax(560px,1.2fr);gap:14px}.v211-answer-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.v211-answer-col{padding:8px;border:1px solid var(--gray-200);border-radius:9px;background:var(--gray-100);font-size:11px}.v211-answer-col b{display:block;color:var(--navy-2)}.v211-answer-result{margin-top:14px;border:2px solid var(--gray-200);border-radius:14px;padding:14px}.v211-answer-result.ok{border-color:#79caa0;background:#f3fff8}.v211-answer-result.error{border-color:#e69b9b;background:#fff7f7}.v211-answer-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}.v211-answer-summary>div{padding:10px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white)}.v211-answer-summary span{display:block;font-size:10px;color:var(--gray-500)}.v211-answer-summary b{font-size:20px}.v211-answer-history th:last-child,.v211-answer-history td:last-child{position:sticky;right:0;background:var(--white);min-width:130px;text-align:center}.v211-answer-photo-wrap{background:#eef1f5;padding:18px;border-radius:12px}.v211-answer-photo{max-width:700px;margin:auto;background:#fff;padding:26px;border:1px solid #ccd2db}.v211-answer-photo h3{text-align:center;margin:0 0 18px}.v211-answer-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px}.v211-answer-photo-grid>div{border:1px solid #d7dce4;padding:9px}.v211-answer-lines{display:grid;gap:10px;margin-top:14px}.v211-answer-line{height:32px;border-bottom:1px solid #c7ccd4;font-size:11px;color:#6b7280}.v211-stat-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:12px}.v211-stat-selector .btn{justify-content:flex-start;text-align:left;padding:9px 11px;height:auto}.v211-stat-selector .btn.active{background:var(--blue);color:#fff}.v211-stat-table{max-height:440px;overflow:auto}.v211-stat-table table{font-size:10px;min-width:980px}.v211-stat-table th,.v211-stat-table td{padding:6px 7px;white-space:nowrap}.v211-term-close{border-color:#9ebce8!important;background:#f4f8ff!important}body.dark .v211-call-card,body.dark .v211-answer-result,body.dark .v211-answer-summary>div,body.dark .v211-answer-history th:last-child,body.dark .v211-answer-history td:last-child{background:var(--gray-100)}@media(max-width:1100px){.v211-call-grid{grid-template-columns:1fr 1fr}.v211-answer-layout{grid-template-columns:1fr}.v211-stat-selector{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+
+<style id="v215-style">
+/* v2.0.15 — 기능 복구, 통계 선택 상단화, 초기화 전체선택 */
+.v215-stat-top{display:flex;align-items:end;gap:10px;padding:12px 14px;margin-bottom:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-stat-top .field{flex:1;max-width:480px;margin:0}.v215-stat-top .select{height:38px}.v215-stat-top .btn{height:38px;padding:0 18px}
+.v215-stat-name{margin-left:auto;white-space:nowrap}.v215-stat-table{max-height:470px;overflow:auto}.v215-stat-table table{min-width:980px}
+.v215-stat-table th,.v215-stat-table td{padding:7px 9px;font-size:12px;white-space:nowrap}
+.v215-feature-restore{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v215-feature-card{display:grid;grid-template-columns:auto 145px 1fr;align-items:center;gap:10px;padding:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-feature-card.on{background:#eef6ff;border-color:#8db8ef;box-shadow:inset 4px 0 0 var(--blue)}
+.v215-feature-card .name{font-weight:700;color:var(--gray-900)}.v215-feature-card .desc{font-size:12px;color:var(--gray-600);line-height:1.45}
+.v215-reset-selectall{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0 8px;padding:10px 12px;border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-50)}
+.v215-reset-selectall .actions{display:flex;gap:6px}.v215-reset-selectall .btn{padding:6px 12px}
+body.dark .v215-stat-top,body.dark .v215-feature-card,body.dark .v215-reset-selectall{background:var(--gray-100);border-color:var(--gray-200)}
+body.dark .v215-feature-card.on{background:#17304d;border-color:#3979bf}
+@media(max-width:900px){.v215-feature-restore{grid-template-columns:1fr}.v215-stat-top{align-items:stretch;flex-direction:column}.v215-stat-name{margin-left:0}}
+</style>
+
 </head><body><div class="preview-sheet">${paper.outerHTML}</div></body></html>`);
     popup.document.close();
     setTimeout(()=>{popup.focus();popup.print();},350);
@@ -3124,6 +3160,24 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
   @media(max-width:1100px){.v213-stat-layout{grid-template-columns:1fr}.v213-stat-list{position:static;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}.v213-stat-title{grid-column:1/-1}.v213-answer-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 </style>
+
+<style id="v215-style">
+/* v2.0.15 — 기능 복구, 통계 선택 상단화, 초기화 전체선택 */
+.v215-stat-top{display:flex;align-items:end;gap:10px;padding:12px 14px;margin-bottom:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-stat-top .field{flex:1;max-width:480px;margin:0}.v215-stat-top .select{height:38px}.v215-stat-top .btn{height:38px;padding:0 18px}
+.v215-stat-name{margin-left:auto;white-space:nowrap}.v215-stat-table{max-height:470px;overflow:auto}.v215-stat-table table{min-width:980px}
+.v215-stat-table th,.v215-stat-table td{padding:7px 9px;font-size:12px;white-space:nowrap}
+.v215-feature-restore{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v215-feature-card{display:grid;grid-template-columns:auto 145px 1fr;align-items:center;gap:10px;padding:12px;border:1px solid var(--gray-200);border-radius:12px;background:var(--gray-50)}
+.v215-feature-card.on{background:#eef6ff;border-color:#8db8ef;box-shadow:inset 4px 0 0 var(--blue)}
+.v215-feature-card .name{font-weight:700;color:var(--gray-900)}.v215-feature-card .desc{font-size:12px;color:var(--gray-600);line-height:1.45}
+.v215-reset-selectall{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0 8px;padding:10px 12px;border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-50)}
+.v215-reset-selectall .actions{display:flex;gap:6px}.v215-reset-selectall .btn{padding:6px 12px}
+body.dark .v215-stat-top,body.dark .v215-feature-card,body.dark .v215-reset-selectall{background:var(--gray-100);border-color:var(--gray-200)}
+body.dark .v215-feature-card.on{background:#17304d;border-color:#3979bf}
+@media(max-width:900px){.v215-feature-restore{grid-template-columns:1fr}.v215-stat-top{align-items:stretch;flex-direction:column}.v215-stat-name{margin-left:0}}
+</style>
+
 </head><body>${pages}</body></html>`);popup.document.close();setTimeout(()=>{popup.focus();popup.print();},500);
   }
 
@@ -4074,6 +4128,74 @@ body.dark .v210-settings-tabs,body.dark .v210-account-exam-check,body.dark .v210
     document.querySelectorAll('[data-action="v214-show-upload-list"]').forEach(el=>el.addEventListener('click',()=>{const type=el.dataset.uploadList;state.ui.dataDetail=type==='invigilator'?'감독관데이터':'수험생데이터';save();render();setTimeout(()=>document.querySelector('.v214-upload-detail')?.scrollIntoView({behavior:'smooth',block:'start'}),0);}));
     document.querySelectorAll('[data-action="v214-download-upload-list"]').forEach(el=>el.addEventListener('click',()=>v214DownloadUploadList(el.dataset.uploadList)));
   };
+
+
+  /* v2.0.15 — restore full settings features, move statistics selector to top, add reset select-all */
+  const v215Style=document.createElement('style');v215Style.id='v215-style';v215Style.textContent=`
+  .v215-stat-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;border:1px solid var(--gray-200);background:var(--gray-100);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+  .v215-stat-toolbar .field{margin:0}.v215-stat-toolbar .field label{font-size:11px;margin-bottom:4px}.v215-stat-toolbar .select{height:38px;font-weight:800;background:var(--white)}
+  .v215-stat-toolbar .summary{display:flex;align-items:center;gap:8px;padding-bottom:2px;white-space:nowrap}
+  .v215-stat-table{max-height:520px;overflow:auto;border-radius:10px}.v215-stat-table table{min-width:max-content}.v215-stat-table th,.v215-stat-table td{padding:5px 7px!important;font-size:10.5px!important;white-space:nowrap;line-height:1.25}
+  .v215-reset-selectbar{display:flex;align-items:center;gap:7px;border:1px solid #bfd8fa;background:#f4f8ff;border-radius:11px;padding:8px 10px;margin:12px 0 8px}.v215-reset-selectbar b{font-size:12px;color:var(--navy-2);margin-right:auto}.v215-reset-selectbar .btn{padding:5px 10px;font-size:11px}
+  .v215-feature-restore-note{display:flex;align-items:center;gap:8px;border:1px solid #a7d6bd;background:#f2fff7;border-radius:10px;padding:9px 11px;margin-bottom:10px;font-size:11px;color:#11643a}.v215-feature-restore-note b{font-size:12px}
+  body.dark .v215-stat-toolbar,body.dark .v215-reset-selectbar,body.dark .v215-feature-restore-note{background:var(--gray-100);border-color:var(--gray-200)}
+  @media(max-width:900px){.v215-stat-toolbar{grid-template-columns:1fr}.v215-stat-toolbar .summary{justify-content:flex-start}}
+  `;document.head.appendChild(v215Style);
+
+  function v215Normalize(){
+    state.schemaVersion=Math.max(Number(state.schemaVersion||0),21);
+    state.features=state.features||{};
+    const featureDefaults={pdfUse:true,pledge:true,closing:true,splitInvigilator:true,answerSheet:true,remainingSeat:true,photoCompare:true,admissionPhotoConfirm:true,allowUnassignedInvigilator:false,reserveRoom:true,otherSiteCandidates:true,autoAssignInvigilator:true,callMemo:true};
+    Object.entries(featureDefaults).forEach(([k,v])=>{if(state.features[k]===undefined)state.features[k]=v;});
+    state.incidentTypesConfig=Array.isArray(state.incidentTypesConfig)?state.incidentTypesConfig:[];
+    if(!state.incidentTypesConfig.length)state.incidentTypesConfig=v201Deep(defaultState.incidentTypesConfig||[]);
+  }
+
+  const v215SettingsFeaturesBase=settingsFeatures;
+  settingsFeatures=function(){
+    v215Normalize();
+    const html=v215SettingsFeaturesBase();
+    return `<div class="v215-feature-restore-note"><span>✓</span><div><b>학교별 기능 전체 항목 복원</b><br>PDF·각서·마감·감독관·답안지·잔여좌석·사진·고사실 운영·호출 기능을 전형별로 관리합니다.</div></div>${html}`;
+  };
+
+  downloadsPage=function(){
+    v215Normalize();
+    const files=v214ResultsFiles(),datasets=statisticsDatasets();
+    if(!files.some(([, , ,key])=>key===state.ui.statsFile)||!datasets[state.ui.statsFile])state.ui.statsFile='allCandidates';
+    const selected=datasets[state.ui.statsFile];
+    const options=files.filter(([, , ,key])=>datasets[key]).map(([,name,,key])=>`<option value="${esc(key)}" ${state.ui.statsFile===key?'selected':''}>${esc(name)}</option>`).join('');
+    const table=`<div class="table-wrap v215-stat-table"><table><thead><tr>${selected.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${selected.rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    const downloads=files.map(([file,name,,key])=>`<label><input class="download-check" type="checkbox" data-result-file="${esc(file)}" data-result-name="${esc(name)}" ${key==='attendanceLog'?'data-result-dataset="attendanceLog"':''}><span>${esc(name)}</span></label>`).join('');
+    return shell(`<div class="v201-result-exam"><div class="field"><label>전형 선택</label>${v201ExamSelect('v201-result-exam-select')}</div><span class="badge badge-blue">선택 전형 전체파일</span><div class="flex gap-8" style="margin-left:auto"><button class="btn" data-action="download-all-results">전체 ZIP</button><button class="btn btn-primary" data-action="download-selected-results">선택 파일 ZIP</button></div></div><section class="card stats-panel"><div class="card-header"><div><div class="card-title">결과파일 통계</div><div class="card-sub">통계 파일 목록을 상단에서 선택하고 아래 엑셀형 데이터를 넓게 확인합니다.</div></div><span class="badge badge-blue">${esc(selected.name)}</span></div><div class="card-body"><div class="v215-stat-toolbar"><div class="field"><label>통계 파일 목록</label><select class="select" id="v215-stat-select">${options}</select></div><div class="summary"><span class="badge badge-gray">${fmt(selected.rows.length)}건</span><span class="small muted">선택 즉시 하단 표 변경</span></div></div>${table}<div class="stats-table-note">표 전체 검색과 컬럼별 정렬·필터를 함께 사용할 수 있습니다.</div></div></section><section class="card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">결과파일 다운로드</div><div class="card-sub">필요한 파일만 체크해 선택 파일 ZIP으로 받을 수 있습니다.</div></div><div class="flex gap-8"><label class="flex items-center gap-8 strong"><input type="checkbox" id="result-select-all"> 전체 선택</label><span id="result-selected-count" class="badge badge-blue">0개 선택</span></div></div><div class="card-body"><div class="v212-download-compact">${downloads}</div></div></section>`,'결과파일·통계','통계 목록을 상단에서 선택하고 출결 로그를 포함한 결과 데이터를 조회합니다.','');
+  };
+
+  const v215OpenResetBase=openResetConfirm;
+  openResetConfirm=function(){
+    v215OpenResetBase();
+    setTimeout(()=>{
+      const root=document.getElementById('modal-root'),body=root?.querySelector('.modal-body');
+      if(!body||body.querySelector('.v215-reset-selectbar'))return;
+      const checks=[...body.querySelectorAll('[data-v214-reset]')];
+      if(!checks.length)return;
+      const scope=body.querySelector('.v214-reset-scope')||checks[0].closest('label');
+      const bar=document.createElement('div');bar.className='v215-reset-selectbar';
+      bar.innerHTML='<b>초기화 항목 빠른 선택</b><button type="button" class="btn btn-primary" data-v215-reset-all>전체 선택</button><button type="button" class="btn" data-v215-reset-clear>전체 해제</button>';
+      if(scope?.parentNode)scope.parentNode.insertBefore(bar,scope);else body.appendChild(bar);
+      const examSelect=body.querySelector('#v214-pm-reset-exam,#v214-dev-reset-exam');
+      const refreshDisabled=()=>{const disabled=!!examSelect&&!examSelect.value;bar.querySelectorAll('button').forEach(b=>b.disabled=disabled);};
+      bar.querySelector('[data-v215-reset-all]').addEventListener('click',()=>{checks.forEach(c=>c.checked=true);toast('선택한 전형의 초기화 항목을 모두 선택했습니다.','success');});
+      bar.querySelector('[data-v215-reset-clear]').addEventListener('click',()=>{checks.forEach(c=>c.checked=false);});
+      examSelect?.addEventListener('change',refreshDisabled);refreshDisabled();
+    },40);
+  };
+
+  const v215BindInputsBase=bindInputs;
+  bindInputs=function(){
+    v215BindInputsBase();
+    const stat=document.getElementById('v215-stat-select');if(stat)stat.addEventListener('change',()=>{state.ui.statsFile=stat.value;save();render();setTimeout(()=>document.querySelector('.stats-panel')?.scrollIntoView({block:'start'}),0);});
+  };
+
+  v215Normalize();
 
   v214Normalize();
 
